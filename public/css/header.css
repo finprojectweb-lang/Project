@@ -1,5 +1,5 @@
 .header-wrapper {
-    margin-top: 20px; /* JARAK DARI ATAS */
+    margin-top: 35px; /* JARAK DARI ATAS */
     display: flex;
     justify-content: center;
     position: fixed;
@@ -9,11 +9,10 @@
 
 .custom-navbar {
     background: linear-gradient(to right, #00d26a, rgb(0, 78, 146, 0.5));
-    backdrop-filter: blur(8px);
-    height: 64px;
-    width: 90%; /* TIDAK FULL */
+    height: 82px;
+    width: 80%; /* TIDAK FULL */
     max-width: 1200px; /* TENGAH */
-    border-radius: 0px 30px 0 30px;
+    border-radius: 0px 35px 0 35px;
     padding: 10px 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
@@ -23,10 +22,14 @@
 
 .navbar-brand img {
     padding-top: 5px;
-    height: 150px; /* BESARKAN LOGO */
+    height: 200px; /* BESARKAN LOGO */
     width: auto;
     transform: scale(1.2); /* SCALE TANPA TAMBAH TINGGI */
     transform-origin: left center;
+}
+
+.nav-item {
+    font-size: 25px;
 }
 
 .custom-navbar .nav-link {

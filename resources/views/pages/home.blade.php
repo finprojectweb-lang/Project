@@ -14,7 +14,7 @@
 
                 <!-- Subtitle -->
                 <p class="hero-subtitle">
-                    Heal the earth and breathe easier knowing you are part of the solution.
+                    Heal the earth and breathe easier knowing you are part of the <br> solution.
                 </p>
 
                 <!-- Card Kutipan -->
@@ -24,6 +24,7 @@
                         better than we found it. Your contribution today is a promise of a cleaner,
                         brighter tomorrow for the ones you love.
                     </p>
+                    <br>
                     <small>
                         #NatureLovers #SustainableFuture #EarthGuardian
                     </small>
