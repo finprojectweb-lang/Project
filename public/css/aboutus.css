@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@400;600&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* HERO HARUS 1 LAYAR */
+.hero {
+    min-height: 100vh;              /* ⬅️ WAJIB */
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;                  /* ⬅️ CENTER PALING AMAN */
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+/* TEKS */
+.hero-text {
+    text-align: center;
+    max-width: 900px;
+    padding: 30px 40px;
+}
+
+/* JUDUL */
+.hero-text h1 {
+    font-family: 'Arima', cursive;
+    font-size: 40px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 16px;
+}
+
+/* WARNA HIJAU KHUSUS "RESTORE" */
+.hero-text .highlight {
+    color: #96FBDA;
+}
+
+/* PARAGRAF */
+.hero-text p {
+    font-family: 'Arima', cursive;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
