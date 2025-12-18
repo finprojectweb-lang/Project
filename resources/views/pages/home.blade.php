@@ -32,10 +32,10 @@
 
                 <!-- Tombol -->
                 <div class="hero-buttons d-flex justify-content-center gap-3 mt-4">
-                    <a href="#" class="btn btn-success btn-lg rounded-pill">
+                    <a href="#" class="btn-green">
                         Get Started
                     </a>
-                    <a href="#" class="btn btn-outline-light btn-lg rounded-pill">
+                    <a href="#" class="btn-outline-green">
                         Calculate Your Carbon
                     </a>
                 </div>
