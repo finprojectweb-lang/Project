@@ -38,10 +38,8 @@
 
                 <!-- Buttons -->
                 <div class="d-flex gap-2">
-                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">Sign up</a>
-                    <a href="#" class="btn btn-light btn-sm rounded-pill px-3 text-success fw-semibold">
-                        Contact
-                    </a>
+                    <a href="#" class="btn-navbar btn-signup">Sign up</a>
+                    <a href="#" class="btn-navbar btn-contact">Contact</a>
                 </div>
             </div>
         </div>

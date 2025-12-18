@@ -46,3 +46,37 @@
     font-size: 1.1rem;
     color: #ffffff;
 }
+
+.btn-navbar {
+    padding: 11px 18px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    line-height: 1;
+}
+
+.btn-signup {
+    color: #eafff1;
+    background: rgb(6, 78, 59, 0.8);
+}
+
+.btn-signup:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+.btn-contact {
+    color: #064e3b;
+    background: #96fbda;
+    border: none;
+}
+
+.btn-contact:hover {
+    background: linear-gradient(135deg, #4dff7a, #2ddf73);
+    color: #0f5132;
+}
