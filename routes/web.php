@@ -24,3 +24,7 @@ Route::get('/contactus', function () {
 Route::get('/aboutus', function () {
     return view('pages.aboutus');
 });
+
+Route::get('/mangrove', function () {
+    return view('pages.mangrove');
+});

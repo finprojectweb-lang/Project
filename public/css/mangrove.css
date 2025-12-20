@@ -1,0 +1,65 @@
+
+.mangrove-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('/images/home.png'); /* ganti sesuai path gambarmu */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    overflow: hidden;
+}
+
+/* Overlay hijau gelap transparan */
+.mangrove-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(10, 60, 45, 0.75),
+        rgba(10, 60, 45, 0.75)
+    );
+    z-index: 1;
+}
+
+/* Konten tengah */
+.mangrove-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+/* Judul utama */
+.mangrove-title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: #b7f7dc; /* hijau muda seperti screenshot */
+    margin-bottom: 24px;
+    line-height: 1.3;
+}
+
+/* Subtitle */
+.mangrove-subtitle {
+    font-size: 1.2rem;
+    color: #ffffff;
+    opacity: 0.9;
+    line-height: 1.7;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+    .mangrove-title {
+        font-size: 2.2rem;
+    }
+
+    .mangrove-subtitle {
+        font-size: 1.05rem;
+    }
+}

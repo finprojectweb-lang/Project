@@ -7,6 +7,10 @@
     z-index: 1000;
 }
 
+body{
+    font-family: "Arima", sans-serif !important;
+}
+
 .custom-navbar {
     background: linear-gradient(to right, #00d26a, rgb(0, 78, 146, 0.5));
     height: 82px;
@@ -34,7 +38,7 @@
 
 .custom-navbar .nav-link {
     color: #e0f6ec !important;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .custom-navbar .nav-link.active,
