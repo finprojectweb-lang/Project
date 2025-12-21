@@ -14,6 +14,10 @@ body {
 }
 
 /* NAVBAR */
+body{
+    font-family: "Arima", sans-serif;
+}
+
 .custom-navbar {
     background: linear-gradient(to right, #00d26a, rgba(0, 78, 146, 0.5));
     width: 70%;
@@ -45,6 +49,7 @@ body {
     font-weight: 500;
     font-size: clamp(13px, 1.2vw, 15px);
     white-space: nowrap;
+    font-weight: 400;
 }
 
 .nav-link:hover,
