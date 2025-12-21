@@ -31,8 +31,10 @@ body::-webkit-scrollbar {
 
 .hero-content {
     min-height: 100vh;
-    padding-top: 200px; /* jarak dari header */
+    padding-top: 150px; /* jarak dari header */
     padding-bottom: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .hero-inner {
@@ -40,7 +42,7 @@ body::-webkit-scrollbar {
 }
 
 .hero-title {
-    font-size: 35px;
+    font-size: clamp(24px, 4vw, 35px);
     font-weight: 700;
     color: #00e676;
     margin-bottom: 15px;
@@ -52,24 +54,26 @@ body::-webkit-scrollbar {
 .hero-subtitle {
     color: #e5fbe5;
     padding-top: 20px;
-    font-size: 20px;
+    font-size: clamp(16px, 3vw, 20px);
     margin-bottom: 25px;
 }
 
 .hero-quote {
     background: rgba(220, 255, 240, 0.9);
     font-family: "Arima", sans-serif !important;
-    border-radius: 40px;
+    border-radius: clamp(25px, 6vw, 40px);
     border: 2px solid #26e0a6;
     padding-top: 30px;
-    padding: 25px 30px;
+    padding: clamp(18px, 4vw, 30px);
+    width: 100%;
     max-width: 840px;
 }
 
 .hero-quote p {
     color: #155f3a;
-    width: 780px;
-    font-size: 20px;
+    width: 100%;
+    max-width: 780px;
+    font-size: clamp(15px, 2.8vw, 20px);
     margin-bottom: 10px;
 }
 
@@ -81,10 +85,10 @@ body::-webkit-scrollbar {
 .btn-green {
     background: #0d9489b6;
     color: #96fbda;
-    padding: 5px 20px;
+    font-size: 16px;
+    padding: 8px 20px;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 20px;
     text-decoration: none;
     border: 1px solid #26e0a6;
     display: inline-flex;
@@ -108,10 +112,10 @@ body::-webkit-scrollbar {
         rgb(150, 251, 218, 0.8)
     );
     color: #00695c;
-    padding: 5px 20px;
+    font-size: 16px;
+    padding: 8px 20px;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 20px;
     text-decoration: none;
     border: 1px solid #0d9488;
     display: inline-flex;
@@ -125,4 +129,222 @@ body::-webkit-scrollbar {
     border-color: #2ddf73;
     color: #ffffff;
     transform: translateY(-2px);
+}
+
+.about-nullicarbon {
+    background-color: #f4fbff;
+}
+
+/* Logo */
+.about-logo {
+    max-width: 600px; /* sesuai permintaan */
+    width: 100%;
+    height: auto;
+}
+
+/* Teks otomatis menyesuaikan layar */
+.about-title {
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+}
+
+.about-text {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.section-title {
+    color: #0a4f3c;
+}
+
+.text-green {
+    color: #1bbf73;
+}
+
+/* ===============================
+   STRATEGY CARD - FINAL VERSION
+   =============================== */
+
+/* Card */
+.strategy-card {
+    position: relative;
+    height: 400px; /* FIX tinggi card */
+    display: flex;
+    flex-direction: column;
+    background: #0a4f3c;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 3px solid #1bbf73;
+    transition: transform 0.3s ease;
+}
+
+.strategy-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Image */
+.strategy-img img {
+    width: 100%;
+    height: 180px; /* proporsional */
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Icon */
+.strategy-icon {
+    position: absolute;
+    top: 135px; /* sejajar bawah gambar */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 52px;
+    height: 52px;
+    background: #e9fff5;
+    border-radius: 50%;
+    border: 3px solid #1bbf73;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.strategy-icon i {
+    font-size: 22px;
+    color: #0a4f3c;
+}
+
+/* Body */
+.strategy-body {
+    flex: 1; /* isi sisa tinggi */
+    padding: 45px 20px 25px;
+    text-align: center;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.strategy-body h5 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+.strategy-body p {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.9;
+
+    /* Batasi teks agar tidak overflow */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+
+/* Tablet */
+@media (max-width: 991px) {
+    .strategy-card {
+        height: 380px;
+    }
+
+    .strategy-img img {
+        height: 150px;
+    }
+
+    .strategy-icon {
+        top: 125px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .strategy-card {
+        height: 360px;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .strategy-img img {
+        height: 140px;
+    }
+
+    .strategy-icon {
+        top: 115px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .strategy-icon i {
+        font-size: 20px;
+    }
+}
+
+/* Jaga jarak di layar kecil */
+@media (max-width: 576px) {
+    .about-logo {
+        max-width: 250px;
+    }
+}
+
+/* =========================
+   DESKTOP ONLY
+========================= */
+@media (min-width: 1200px) {
+    .btn-green,
+    .btn-outline-green {
+        font-size: 16px; /* sebelumnya 20px */
+        padding: 8px 20px; /* lebih ramping */
+        border-radius: 40px;
+    }
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 991px) {
+    .hero-inner {
+        max-width: 100%;
+    }
+
+    .hero-content {
+        padding-top: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .btn-green,
+    .btn-outline-green {
+        font-size: 15px;
+        padding: 7px 18px;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 576px) {
+    .hero-content {
+        padding-top: 100px;
+        text-align: center;
+    }
+
+    .hero-subtitle br {
+        display: none;
+    }
+
+    .hero-buttons {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .btn-green,
+    .btn-outline-green {
+        font-size: 14px;
+        padding: 6px 16px;
+        width: auto; /* ✅ PENTING */
+        max-width: none; /* ✅ PENTING */
+        margin: 0;
+    }
 }

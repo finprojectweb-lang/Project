@@ -1,5 +1,11 @@
+/* GLOBAL */
+body {
+    font-family: "Arima", sans-serif;
+}
+
+/* HEADER */
 .header-wrapper {
-    margin-top: 35px; /* JARAK DARI ATAS */
+    margin-top: 35px;
     display: flex;
     justify-content: center;
     position: fixed;
@@ -7,62 +13,86 @@
     z-index: 1000;
 }
 
+/* NAVBAR */
 .custom-navbar {
-    background: linear-gradient(to right, #00d26a, rgb(0, 78, 146, 0.5));
-    height: 82px;
-    width: 80%; /* TIDAK FULL */
-    max-width: 1200px; /* TENGAH */
-    border-radius: 0px 35px 0 35px;
-    padding: 10px 0;
+    background: linear-gradient(to right, #00d26a, rgba(0, 78, 146, 0.5));
+    width: 70%;
+    max-width: 1200px;
+    height: 60px;
+    border-radius: 0 35px 0 35px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-.navbar-brand {
-    position: relative;
+    display: flex;
+    align-items: center;
 }
 
+/* LOGO WRAPPER */
+.logo-wrap {
+    position: relative;
+    height: 60px;          /* sama dengan navbar */
+    display: flex;
+    align-items: center;
+}
+
+/* DESKTOP */
 .navbar-brand img {
     padding-top: 5px;
-    height: 200px; /* BESARKAN LOGO */
-    width: auto;
-    transform: scale(1.2); /* SCALE TANPA TAMBAH TINGGI */
-    transform-origin: left center;
+    height: 150px;
 }
 
-.nav-item {
-    font-size: 25px;
-}
-
-.custom-navbar .nav-link {
+/* MENU */
+.nav-link {
     color: #e0f6ec !important;
     font-weight: 500;
+    font-size: clamp(13px, 1.2vw, 15px);
+    white-space: nowrap;
 }
 
-.custom-navbar .nav-link.active,
-.custom-navbar .nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
     color: #ffffff !important;
 }
 
-.custom-navbar .navbar-brand span {
-    font-size: 1.1rem;
-    color: #ffffff;
+/* =====================
+   RIGHT SIDE CONTAINER
+===================== */
+.navbar-right {
+    position: relative;
+}
+
+/* BUTTON DESKTOP */
+.navbar-buttons {
+    display: flex;
+    gap: 8px;
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+/* HAMBURGER */
+.navbar-toggler {
+    opacity: 0;
+    transform: translateX(10px);
+    pointer-events: none;
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
 }
 
 .btn-navbar {
-    padding: 11px 18px;
-    font-size: 20px;
+    padding: clamp(6px, 0.8vw, 8px) clamp(10px, 1.2vw, 14px);
+    font-size: clamp(12px, 1.1vw, 14px);
     font-weight: 500;
-    border-radius: 50px;
+    border-radius: 999px;
+    white-space: nowrap;
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     transition: all 0.25s ease;
-    line-height: 1;
 }
 
 .btn-signup {
+    background: rgba(6, 78, 59, 0.8);
     color: #eafff1;
-    background: rgb(6, 78, 59, 0.8);
 }
 
 .btn-signup:hover {
@@ -71,12 +101,161 @@
 }
 
 .btn-contact {
-    color: #064e3b;
     background: #96fbda;
-    border: none;
+    color: #064e3b;
 }
 
 .btn-contact:hover {
     background: linear-gradient(135deg, #4dff7a, #2ddf73);
     color: #0f5132;
+}
+
+/* =====================
+   HAMBURGER ANIMATION
+===================== */
+.animated-toggler {
+    width: 30px;
+    height: 22px;
+    position: relative;
+    border: none;
+    background: none;
+}
+
+.animated-toggler span {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #ffffff;
+    border-radius: 3px;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.animated-toggler span:nth-child(1) {
+    top: 0;
+}
+.animated-toggler span:nth-child(2) {
+    top: 9px;
+}
+.animated-toggler span:nth-child(3) {
+    top: 18px;
+}
+
+.animated-toggler[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 9px;
+}
+
+.animated-toggler[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.animated-toggler[aria-expanded="true"] span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 9px;
+}
+
+/* ===== MULAI TRANSISI DI 1200px ===== */
+@media (max-width: 1115px) {
+    .navbar-buttons {
+        opacity: 0.85;
+        transform: translateX(8px);
+    }
+
+    .navbar-toggler {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+    }
+}
+
+/* =====================
+   MOBILE
+===================== */
+@media (max-width: 991px) {
+    /* Navbar tetap ramping */
+
+    .navbar-buttons {
+        opacity: 0;
+        transform: translateX(16px);
+        pointer-events: none;
+    }
+    .custom-navbar {
+        width: 95%;
+        height: 60px; /* KUNCI UTAMA */
+        padding: 0 15px; /* padding atas bawah dihilangkan */
+        align-items: center;
+    }
+
+    /* Collapse keluar dari alur navbar */
+    .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(to right, #00d26a, rgba(0, 78, 146, 0.95));
+        border-radius: 20px;
+        margin-top: 12px;
+        padding: 15px 0;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 0;
+        font-size: 16px;
+    }
+
+    .btn-navbar {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .navbar-brand img {
+        height: 150px;          /* UKURAN IDEAL */
+        position: absolute;
+        top: -45px;             /* KELUAR KE ATAS */
+        left: 0;
+        object-fit: contain;
+        z-index: 2000;
+    }
+
+    .animated-toggler {
+        width: 24px;
+        height: 18px;
+    }
+
+    .animated-toggler span {
+        height: 2px;
+    }
+
+    .animated-toggler span:nth-child(1) { top: 0; }
+    .animated-toggler span:nth-child(2) { top: 8px; }
+    .animated-toggler span:nth-child(3) { top: 16px; }
+
+    .btn-navbar {
+        padding: 6px 10px;
+        font-size: 12px;
+        border-radius: 999px;
+    }
+
+        .navbar-buttons {
+        opacity: 0;
+        transform: translateX(20px);
+        pointer-events: none;
+    }
+
+    .navbar-toggler {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+    }
+
+        .mobile-buttons {
+        padding-top: 10px;
+    }
+
+    .mobile-buttons .btn-navbar {
+        min-width: 110px; /* supaya seimbang */
+        text-align: center;
+    }
 }
