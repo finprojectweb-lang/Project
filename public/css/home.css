@@ -477,6 +477,115 @@ body::-webkit-scrollbar {
     text-decoration: underline;
 }
 
+
+.steps-section {
+    background: linear-gradient(135deg, #0aa86b, #2fb8a0);
+    border-radius: 0 0 120px 120px;
+    padding-bottom: 90px;
+}
+
+/* Wrapper */
+.steps-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+    align-items: center;
+    justify-items: center;
+}
+
+/* Images */
+.step-img img,
+.step-center-img img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 22px;
+    object-fit: cover;
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+
+/* Hover Animation */
+.step-img img:hover,
+.step-center-img img:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.25);
+}
+
+/* Center Content */
+.step-content {
+    max-width: 420px;
+}
+
+.step-title {
+    font-weight: 800;
+    color: #0b3e2c;
+}
+
+.step-text {
+    color: #f2f2f2;
+    font-size: 14.5px;
+}
+
+/* Button */
+.btn-step {
+    display: inline-block;
+    margin: 10px 0 16px;
+    padding: 10px 22px;
+    border-radius: 40px;
+    border: 2px solid #ffffff;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .3s ease;
+}
+
+.btn-step:hover {
+    background: #ffffff;
+    color: #0b3e2c;
+}
+
+/* Floating Animation (Subtle breathing effect) */
+.step-img img,
+.step-center-img img {
+    animation: floatSoft 6s ease-in-out infinite;
+}
+
+@keyframes floatSoft {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .steps-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .step-center-img {
+        grid-column: span 2;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .steps-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .step-section {
+        border-radius: 0 0 80px 80px;
+    }
+
+    .step-img img,
+    .step-center-img img {
+        max-width: 240px;
+    }
+
+    .step-content {
+        text-align: center;
+    }
+}
+
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
     .news-card {

@@ -389,4 +389,36 @@
         </div>
     </section>
 
+    <section class="steps-section py-5">
+    <div class="container steps-wrapper">
+
+        <!-- Left Image -->
+        <div class="step-img">
+        <img src="/images/steps/tanambawah.png" alt="Plant Tree">
+        </div>
+
+        <!-- Center Content -->
+        <div class="step-content text-center">
+        <h3 class="step-title">Start Your Small Steps</h3>
+        <p class="step-text">
+            One simple step today for a greener future for the earth. 
+            Count your footprint, choose your project, and make your impact.
+        </p>
+
+        <a href="#" class="btn-step">Get In Touch</a>
+
+        <div class="step-center-img">
+            <img src="/images/steps/daurbawah.jpeg" alt="Recycle">
+        </div>
+        </div>
+
+        <!-- Right Image -->
+        <div class="step-img">
+        <img src="/images/steps/selambawah.png" alt="Coral Reef">
+        </div>
+
+    </div>
+    </section>
+
+
 @endsection
