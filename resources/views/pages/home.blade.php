@@ -170,8 +170,223 @@
         </div>
     </section>
 
+    <section class="impact-section text-center">
+        <div class="overlay"></div>
+        <div class="container position-relative">
 
+            <h2 class="impact-title mb-5">Our Impact</h2>
 
+            <div class="row justify-content-center">
 
+                <!-- Item 1 -->
+                <div class="col-md-2 col-6 mb-4 wave-item">
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <img src="/images/impact1nb.png" alt="Seeds">
+                        </div>
+                        <h4>150K+</h4>
+                        <p>Seeds & Fragments Planted</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="col-md-2 col-6 mb-4 wave-item">
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <img src="/images/impact3nb.png" alt="Beneficiary">
+                        </div>
+                        <h4>250K+</h4>
+                        <p>Beneficiary</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="col-md-2 col-6 mb-4 wave-item">
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <img src="/images/impact2nb.png" alt="Conservation">
+                        </div>
+                        <h4>500Ha+</h4>
+                        <p>Conservation & Restoration Area</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="col-md-2 col-6 mb-4 wave-item">
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <img src="/images/impact4nb.png" alt="Waste">
+                        </div>
+                        <h4>90K+ Tons</h4>
+                        <p>Recyclable Waste</p>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="col-md-2 col-6 mb-4 wave-item">
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <img src="/images/impact5nb.png" alt="Carbon Credit">
+                        </div>
+                        <h4>50M+</h4>
+                        <p>tCO2e Potential Carbon Credit</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="partners-section text-center">
+        <h3 class="partners-title mb-4">Partners</h3>
+
+        <div class="partners-slider">
+            <div class="partners-track">
+
+<!-- Logo list (bebas ditambah) -->
+                <div class="partner-item">
+                    <img src="/images/partners/amazon.webp">
+                </div>
+
+                <div class="partner-item">
+                    <img src="/images/partners/astra.png">
+                </div>
+
+                <div class="partner-item">
+                    <img src="/images/partners/garuda.png">
+                </div>
+
+                <!-- Copy ulang untuk loop halus -->
+                <div class="partner-item">
+                    <img src="/images/partners/google.png">
+                </div>
+
+                <div class="partner-item">
+                    <img src="/images/partners/goto.png">
+                </div>
+
+                <div class="partner-item">
+                    <img src="/images/partners/microsoft.png">
+                </div>
+
+                <div class="partner-item">
+                    <img src="/images/partners/nestle.png">
+                </div>
+
+                <div class="partner-item">
+                    <img src="/images/partners/netflix.png">
+                </div>
+
+                <!-- Copy ulang untuk loop halus -->
+                <div class="partner-item">
+                    <img src="/images/partners/nike.png">
+                </div>
+
+                <div class="partner-item">
+                    <img src="/images/partners/pertamina.png">
+                </div>
+
+                <div class="partner-item">
+                    <img src="/images/partners/spotify.png">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+    document.querySelectorAll(".partners-track").forEach(track => {
+        track.innerHTML += track.innerHTML; // clone isi untuk loop halus
+    });
+    </script>
+
+    <section class="news-section py-5">
+        <div class="container">
+
+            <div class="text-center mb-4">
+                <h3 class="news-title">Environmental News Updates & Carbon Footprint</h3>
+                <p class="news-subtitle">
+                    Learn about the latest climate issues and find practical guides to understanding the world of sustainability.
+                </p>
+            </div>
+
+            <div class="news-list">
+
+                <!-- === NEWS ITEM 1 === -->
+                <div class="news-card">
+                    <div class="news-img">
+                        <img src="/images/news/berita1.png">
+                    </div>
+
+                    <div class="news-content">
+                        
+                        <h5 class="news-title-item">
+                            Eco-Friendly vs Biodegradable: Apa Sih Bedanya? Kok Labelnya Mirip Semua
+                        </h5>
+                        
+                        <span class="news-date">
+                            <i class="bi bi-calendar3 me-1"></i> 1 Januari 2025
+                        </span>
+
+                        <p class="news-desc">
+                            Lagi pilih sabun cuci piring atau kantong belanjaan di supermarket, 
+                            tiba-tiba lihat dua produk dengan label “eco-friendly” dan “biodegradable”.
+                        </p>
+
+                        <a href="#" class="news-link">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- === NEWS ITEM 2 === -->
+                <div class="news-card">
+                    <div class="news-img">
+                        <img src="/images/news/daurulang.jpg">
+                    </div>
+
+                    <div class="news-content">
+                        
+                        <h5 class="news-title-item">
+                            Jangan Asal Buang! Ini Arti 7 Simbol Segitiga Daur Ulang di Kemasan Plastik Kamu
+                        </h5>
+
+                        <span class="news-date">
+                            <i class="bi bi-calendar3 me-1"></i> 5 Januari 2025
+                        </span>
+
+                        <p class="news-desc">
+                            Sering lihat simbol segitiga dengan angka di bawah botol minum? Ternyata gak semua jenis plastik bisa didaur ulang dengan cara yang sama. Yuk, kenali kodenya biar gak salah pilah!
+                        </p>
+
+                        <a href="#" class="news-link">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- === NEWS ITEM 3 === -->
+                <div class="news-card">
+                    <div class="news-img">
+                        <img src="/images/news/bag.jpg">
+                    </div>
+
+                    <div class="news-content">
+                        
+                        <h5 class="news-title-item">
+                            Totebag Kain vs Kantong Kertas: Ternyata Gak Semuanya 'Suci' dari Jejak Karbon!
+                        </h5>
+
+                        <span class="news-date">
+                            <i class="bi bi-calendar3 me-1"></i> 7 Januari 2025
+                        </span>
+
+                        <p class="news-desc">
+                            Kamu pikir pakai totebag kain yang numpuk di lemari itu pasti lebih baik dari plastik? Tunggu dulu. Kita bedah faktanya berdasarkan riset terbaru soal emisi produksi tas belanja.
+                        </p>
+
+                        <a href="#" class="news-link">Read More →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
 @endsection
