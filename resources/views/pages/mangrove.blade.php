@@ -107,5 +107,97 @@
     </div>
 </section>
 
+<section class="technology-tools"
+    style="background-image: url('{{ asset('images/mangrovetech.png') }}');">
+
+    <!-- Center Title -->
+    <h2 class="tech-title">Technology & Tools</h2>
+
+    <!-- Bottom Overlay Content -->
+    <div class="tech-bottom">
+        <div class="tech-item">High Resolution</div>
+        <div class="tech-item">Lidar Sensor</div>
+        <div class="tech-item">Environmental Park</div>
+        <div class="tech-item">Machine Learning & AI Analytics</div>
+        <div class="tech-item">Ground-Truthing</div>
+    </div>
+
+</section>
+
+<section class="tech-details-section">
+    <div class="tech-details-container">
+
+        {{-- Satellite Imagery --}}
+        <div class="tech-row">
+            <div class="tech-image boxed">
+                <img src="{{ asset('images/alik.jpg') }}" alt="Satellite Imagery">
+            </div>
+            <div class="tech-text">
+                <h3>Satellite Imagery & Remote Sensing</h3>
+                <p>
+                    We don't just plant trees and leave them. We embed a
+                    "digital nervous system" into the ecosystem to monitor the
+                    forest's heartbeat in real time. Mangrove forests are
+                    highly sensitive to hydrological changes; even small
+                    changes in salinity or water circulation can be fatal for
+                    young seedlings.
+                </p>
+            </div>
+        </div>
+
+        {{-- LiDAR --}}
+        <div class="tech-row reverse">
+            <div class="tech-text">
+                <h3>Aerial Survey with LiDAR & Multispectral</h3>
+                <p>
+                    For precise carbon stock calculations, we fly Unmanned
+                    Aerial Vehicles (UAVs) equipped with LiDAR sensors and
+                    multispectral cameras. This technology scans the 3D
+                    structure of mangrove forests, measuring canopy height and
+                    biomass density down to the individual tree level.
+                </p>
+            </div>
+            <div class="tech-image boxed">
+                <img src="{{ asset('images/alik.jpg') }}" alt="LiDAR Drone">
+            </div>
+        </div>
+
+        {{-- IoT --}}
+        <div class="tech-row">
+            <div class="tech-image boxed">
+                <img src="{{ asset('images/alik.jpg') }}" alt="IoT Sensors">
+            </div>
+            <div class="tech-text">
+                <h3>IoT Environmental Sensors</h3>
+                <p>
+                    Healthy mangroves require the right environmental
+                    conditions. We deploy a network of Internet of Things (IoT)
+                    sensors to monitor water salinity, soil pH, tides, and
+                    temperature. This data is streamed directly to our
+                    dashboard for continuous monitoring.
+                </p>
+            </div>
+        </div>
+
+        {{-- AI --}}
+        <div class="tech-row reverse">
+            <div class="tech-text">
+                <h3>Artificial Intelligence (AI) Based Analysis</h3>
+                <p>
+                    Sustainable mangrove forests require proactive management.
+                    We utilize AI-driven image recognition and data analysis to
+                    detect early signs of stress, disease, or illegal logging,
+                    enabling rapid intervention when the ecosystem needs it
+                    most.
+                </p>
+            </div>
+            <div class="tech-image boxed">
+                <img src="{{ asset('images/alik.jpg') }}" alt="AI Analysis">
+            </div>
+        </div>
+
+    </div>
+</section>
+
 
 @endsection
