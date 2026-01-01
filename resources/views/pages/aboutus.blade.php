@@ -85,4 +85,96 @@
 
     </div>
 </section>
+
+<section class="future-section">
+    <div class="future-container">
+        <h2>NulliCarbon: Paving the Future, Transforming Indonesia's Climate</h2>
+
+        <div class="future-grid">
+            <div class="future-card">
+                <h4>Founded on Accessible Climate Action</h4>
+                <p>
+                    NulliCarbon was established with the core purpose of empowering every
+                    individual and institution by providing easy access to climate
+                    mitigation solutions, fulfilling our Mission.
+                </p>
+            </div>
+
+            <div class="future-card">
+                <h4>Driving Resilient Economic Growth</h4>
+                <p>
+                    Our solutions are designed to ensure that economic growth goes hand
+                    in hand with ecosystem sustainability, creating a pathway toward a
+                    more resilient planet (Vision).
+                </p>
+            </div>
+
+            <div class="future-card">
+                <h4>Integrating Reduction and Restoration</h4>
+                <p>
+                    We offer a comprehensive toolkit that enables clients not only to
+                    achieve carbon emission reduction but also to engage in active
+                    participation in global environmental restoration projects (Mission).
+                </p>
+            </div>
+
+            <div class="future-card">
+                <h4>Strategic Partnerships for Planetary Resilience</h4>
+                <p>
+                    Collaborating with key industry players to build climate-resilient
+                    business practices, directly supporting the Vision of a more
+                    resilient planet.
+                </p>
+            </div>
+
+            <div class="future-card">
+                <h4>Technology for Measurable Impact</h4>
+                <p>
+                    Utilizing advanced AI and data analytics to provide transparent and
+                    accurate measurement of carbon impact, ensuring every climate action
+                    is measurable as defined in our Mission.
+                </p>
+            </div>
+
+            <div class="future-card">
+                <h4>Empowering Every Individual and Institution</h4>
+                <p>
+                    Providing intuitive and powerful dashboards that put decision-making
+                    power in the hands of every individual and institution to drive
+                    meaningful change (Mission).
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="image-slider-section">
+    <div class="image-slider" id="slider">
+        <img src="{{ asset('images/tanemkarang.png') }}" alt="">
+        <img src="{{ asset('images/OIP (1).webp') }}" alt="">
+        <img src="{{ asset('images/mangroveijo.webp') }}" alt="">
+        <img src="{{ asset('images/terumbu.jpg') }}" alt="">
+        <img src="{{ asset('images/download (1).webp') }}" alt="">
+        <img src="{{ asset('images/state-of-the-art-recycle.jpeg') }}" alt="">
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.getElementById("slider");
+    let scrollAmount = 0;
+
+    function autoSlide() {
+        scrollAmount += 1; // kecepatan (besar = lebih cepat)
+        slider.scrollLeft = scrollAmount;
+
+        if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+            scrollAmount = 0;
+        }
+    }
+
+    setInterval(autoSlide, 25); // smooth
+});
+</script>
+
 @endsection
