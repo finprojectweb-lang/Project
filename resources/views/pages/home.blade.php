@@ -390,35 +390,66 @@
     </section>
 
     <section class="steps-section py-5">
-    <div class="container steps-wrapper">
+        <div class="container text-center">
 
-        <!-- Left Image -->
-        <div class="step-img">
-        <img src="/images/steps/tanambawah.png" alt="Plant Tree">
+            <div class="row justify-content-center align-items-center g-4">
+
+                <!-- Gambar Kiri -->
+                <div class="col-md-3 d-flex justify-content-center">
+                    <img src="/images/steps/tanambawah.png" class="steps-img-tall" alt="Planting Trees">
+                </div>
+
+                <!-- Teks Tengah -->
+                <div class="col-md-4">
+                    <h3 class="fw-bold mb-2">Start Your Small Steps</h3>
+                    <p class="steps-desc mb-3">
+                        One simple step today for a greener future for the earth.
+                        Count your footprint, choose your project, and make your impact.
+                    </p>
+                    <button class="btn btn-outline-dark steps-btn">Get In Touch</button>
+
+                    <!-- Gambar Tengah Bawah -->
+                    <div class="mt-4 d-flex justify-content-center">
+                        <img src="/images/steps/daurbawah.jpeg" class="steps-img-mid" alt="Recycling">
+                    </div>
+                </div>
+
+                <!-- Gambar Kanan -->
+                <div class="col-md-3 d-flex justify-content-center">
+                    <img src="/images/steps/selambawah.png" class="steps-img-tall" alt="Coral Planting">
+                </div>
+
+            </div>
         </div>
-
-        <!-- Center Content -->
-        <div class="step-content text-center">
-        <h3 class="step-title">Start Your Small Steps</h3>
-        <p class="step-text">
-            One simple step today for a greener future for the earth. 
-            Count your footprint, choose your project, and make your impact.
-        </p>
-
-        <a href="#" class="btn-step">Get In Touch</a>
-
-        <div class="step-center-img">
-            <img src="/images/steps/daurbawah.jpeg" alt="Recycle">
-        </div>
-        </div>
-
-        <!-- Right Image -->
-        <div class="step-img">
-        <img src="/images/steps/selambawah.png" alt="Coral Reef">
-        </div>
-
-    </div>
     </section>
+
+
+
+
+    <section class="talk-section text-center py-5">
+        <div class="container">
+
+            <!-- Icon -->
+            <div class="icon-wrapper mx-auto mb-3">
+                <i class="bi bi-chat-dots-fill"></i>
+            </div>
+
+            <!-- Title -->
+            <h3 class="talk-title mb-3">Talk to Us</h3>
+
+            <!-- Description -->
+            <p class="talk-desc mx-auto mb-4">
+                Whether you’d like to consult with our team of experts, inquire about carbon offset solutions,
+                or explore strategic partnership opportunities, we're ready to hear your needs.
+            </p>
+
+            <!-- Button -->
+            <a href="#contact" class="btn btn-talk">Let’s Talk</a>
+
+        </div>
+    </section>
+
+
 
 
 @endsection

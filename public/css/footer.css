@@ -1,0 +1,8 @@
+.footer-section {
+    background: url('/images/footer-bg.jpg') center/cover no-repeat;
+}
+
+.footer-wrapper {
+    background: #ffffff;
+    border-radius: 28px;
+}

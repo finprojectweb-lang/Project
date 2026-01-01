@@ -23,5 +23,20 @@
     </main>
 
     @include('partials.footer')
+
+<script>
+function runReveal() {
+  document.querySelectorAll(".reveal").forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 80) el.classList.add("show");
+  });
+}
+document.addEventListener("DOMContentLoaded", runReveal);
+document.addEventListener("scroll", runReveal);
+</script>
+
+
 </body>
+
+
 </html>
