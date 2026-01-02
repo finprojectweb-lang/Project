@@ -28,3 +28,7 @@ Route::get('/aboutus', function () {
 Route::get('/mangrove', function () {
     return view('pages.mangrove');
 });
+
+Route::get('/karangterumbu', function () {
+    return view('pages.karangterumbu');
+});

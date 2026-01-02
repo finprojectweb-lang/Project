@@ -3,7 +3,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url('/images/mangrovehero.jpeg'); /* ganti sesuai path gambarmu */
+    background-image: url('/images/terumbuhover.jpg'); /* ganti sesuai path gambarmu */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -339,6 +339,64 @@
 }
 
 
+.content-section {
+    background-image: url('/images/backgroundcontent.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 0;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 24px;
+}
+
+.content-item {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.content-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.content-item .text {
+    flex: 1;
+}
+
+.content-item h3 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.content-item p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.content-item .image {
+    flex: 1;
+}
+
+.content-item img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 768px) {
+    .content-item,
+    .content-item.reverse {
+        flex-direction: column;
+        text-align: center;
+    }
+}
 .content-section {
     background-image: url('/images/backgroundcontent.png');
     background-size: cover;

@@ -155,8 +155,43 @@
         <img src="{{ asset('images/mangroveijo.webp') }}" alt="">
         <img src="{{ asset('images/terumbu.jpg') }}" alt="">
         <img src="{{ asset('images/download (1).webp') }}" alt="">
-        <img src="{{ asset('images/state-of-the-art-recycle.jpeg') }}" alt="">
+        <img src="{{ asset('images/terumbu.jpg') }}" alt="">
     </div>
+</section>
+<section class="info-section">
+
+    <!-- ATAS: 2 CARD -->
+    <div class="info-top">
+        <div class="info-card text-card">
+            <h3>Mission Focused on Education and Engagement</h3>
+            <p>
+                Advocating environmental literacy and active participation
+                through hands-on education, empowering individuals and institutions
+                to take measurable climate action.
+            </p>
+        </div>
+
+        <div class="info-card image-card">
+            <img src="{{ asset('images/indonesia.png') }}" alt="Indonesia">
+        </div>
+    </div>
+
+    <!-- BAWAH: TALK TO US -->
+    <div class="talk-section">
+        <div class="talk-content">
+              <img 
+                src="{{ asset('images/image.png') }}" 
+                alt="Talk Icon" 
+                class="talk-icon">
+            <h3>Talk to us</h3>
+            <p>
+                Learn more about our initiatives and how you can contribute
+                to building a sustainable future together.
+            </p>
+            <a href="#" class="talk-btn">Contact Us</a>
+        </div>
+    </div>
+
 </section>
 
 <script>
@@ -176,5 +211,4 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(autoSlide, 25); // smooth
 });
 </script>
-
 @endsection

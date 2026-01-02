@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-<link rel="stylesheet" href="{{ asset('css/mangrove.css') }}">
+<link rel="stylesheet" href="{{ asset('css/terumbu.css') }}">
 
 @section('content')
 <section class="mangrove-hero">
@@ -23,26 +23,26 @@
 
         {{-- LEFT CONTENT --}}
         <div class="mangrove-shield-text">
-            <h2>Mangrove Shield</h2>
+            <h2>Coral Guardian</h2>
 
             <p>
-                Mangrove Shield acts as nature’s most efficient fortress against climate change. Known as 'Blue Carbon' powerhouses, these coastal forests have the unique ability to trap and store up to four times more carbon dioxide than terrestrial rainforests, locking it deep within their sediment for millennia. By focusing on the restoration of degraded coastal areas, this program ensures that vast amounts of greenhouse gases are absorbed from the atmosphere, making a direct and measurable impact on global temperature regulation.
+                The Coral Guardians program is dedicated to saving the 'rainforests of the sea' before they are lost forever. Coral reefs are vital to the ocean's health, supporting 25% of all marine biodiversity and playing a key role in the oceanic carbon cycle. However, rising sea temperatures and pollution threaten their survival. This initiative focuses on active reef restoration, utilizing resilient coral species to rebuild damaged structures and restore the vibrant underwater cities that are essential for oxygen production and marine food webs.
             </p>
 
             <p>
-                Beyond carbon sequestration, Mangrove Shield is about protecting life. The intricate root systems of these trees serve as a critical nursery for countless fish species and marine life, supporting the livelihoods of local fishermen. Furthermore, they provide a physical barrier that protects coastal communities from devastating erosion, high tides, and storm surges. Supporting this program means you are not just planting trees; you are safeguarding ecosystems and fortifying the shoreline for future generations.
+                Our approach combines scientific research with direct action. We deploy teams of divers to cultivate coral nurseries and transplant healthy fragments onto degraded reefs, effectively accelerating the natural recovery process. By joining Coral Guardians, you help create marine protected areas that allow biodiversity to flourish once again. A healthy reef means a healthy ocean, and a healthy ocean is crucial for stabilizing the Earth's climate and providing resources for millions of people worldwide.
             </p>
         </div>
 
         {{-- RIGHT IMAGE PANEL --}}
         <div class="mangrove-shield-gallery">
             <div class="gallery-large">
-                <img src="/images/mangrove1.jpeg" alt="Mangrove underwater">
+                <img src="/images/laut1.png" alt="Mangrove underwater">
             </div>
 
             <div class="gallery-small">
-                <img src="/images/mangrove2.jpeg" alt="Mangrove coast">
-                <img src="/images/mangrove3.jpeg" alt="Mangrove roots">
+                <img src="/images/laut2.png" alt="Mangrove coast">
+                <img src="/images/laut3.png" alt="Mangrove roots">
             </div>
         </div>
 
@@ -108,18 +108,18 @@
 </section>
 
 <section class="technology-tools"
-    style="background-image: url('{{ asset('images/mangrovetech.png') }}');">
+    style="background-image: url('{{ asset('images/4karang.png') }}');">
 
     <!-- Center Title -->
     <h2 class="tech-title">Technology & Tools</h2>
 
     <!-- Bottom Overlay Content -->
     <div class="tech-bottom">
-        <div class="tech-item">High Resolution</div>
-        <div class="tech-item">Lidar Sensor</div>
-        <div class="tech-item">Environmental Park</div>
-        <div class="tech-item">Machine Learning & AI Analytics</div>
-        <div class="tech-item">Ground-Truthing</div>
+        <div class="tech-item">Biorock / Mineral Accretion Technology</div>
+        <div class="tech-item">Coral Microfragmentation</div>
+        <div class="tech-item">Coral Nurseries (In-Situ and Ex-Situ)</div>
+        <div class="tech-item">3D-Printed Reef Structures</div>
+        <div class="tech-item">AI-Based Monitoring & MRV Systems</div>
     </div>
 
 </section>
@@ -128,7 +128,6 @@
 <section class="content-section">
     <div class="content-wrapper">
 
-        {{-- 1 --}}
         <div class="content-item">
             <div class="text">
                 <h3>Satellite Imagery & Remote Sensing</h3>
@@ -137,51 +136,49 @@
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/peta.png') }}" alt="Satellite Monitoring">
+                <img src="{{ asset('images/peta.png') }}" alt="Map">
             </div>
         </div>
 
-        {{-- 2 --}}
         <div class="content-item reverse">
             <div class="text">
-                <h3>Aerial Survey with LiDAR & Multispectral</h3>
+                <h3>AI-Based Monitoring & MRV Systems</h3>
                 <p>
-                    For precise carbon stock calculations, we fly Unmanned Aerial Vehicles (UAVs) equipped with LiDAR sensors and multispectral cameras. This technology scans the 3D structure of mangrove forests, measuring canopy height and biomass density down to the individual tree level, providing highly accurate data that far exceeds conventional manual survey methods.
+                    Coral planting is a restoration method where small coral fragments are attached to artificial bases, such as concrete plugs, and then placed back onto the ocean floor. Divers collect healthy fragments, secure them to the substrate, and position them in suitable areas with good light and stable water flow to support growth.
+Over time, these fragments grow into larger colonies and help restore damaged reef ecosystems. This method increases biodiversity, provides habitat for marine life, and supports long-term reef recovery in conservation and carbon-offset projects.
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/drone.png') }}" alt="AI Monitoring">
+                <img src="{{ asset('images/coral1.png') }}" alt="Coral AI">
             </div>
         </div>
 
-        {{-- 3 --}}
         <div class="content-item">
             <div class="text">
-                <h3>IoT Environmental Sensors</h3>
+                <h3>3D-Printed Reef Structures</h3>
                 <p>
-                   Healthy mangroves require the right environmental conditions. We deploy a network of Internet of Things (IoT) sensors at project sites to monitor critical parameters such as water salinity, soil pH, tides, and temperature. This data is sent directly to our dashboard to ensure the ecosystem remains conducive to maximum carbon sequestration.
+                     represent a cutting-edge approach to marine conservation, utilizing additive manufacturing to create highly intricate, customized artificial habitats that effectively mimic the complexity and porosity of natural coral reefs. These structures, often fabricated from sustainable materials like ceramic or limestone, are designed using digital models to provide an optimized, stable substrate for transplanted coral fragments. By offering textures and complexities superior to traditional artificial reefs, this technology significantly accelerates coral settlement, growth, and the recovery of damaged marine ecosystems, offering a scalable and precise solution to bolster biodiversity and coastal resilience against environmental threats.
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/iotmangrove.png') }}" alt="3D Reef">
+                <img src="{{ asset('images/coral2.png') }}" alt="3D Reef">
             </div>
         </div>
 
-        {{-- 4 --}}
-        <div class="content-item reverse">
+          <div class="content-item reverse">
             <div class="text">
-                <h3>Artificial Intelligence (AI) Based Analysis</h3>
+                <h3>Coral Microfragmentation</h3>
                 <p>
-                    Sustainable mangrove forests require proactive management. We utilize AI-driven image recognition and data analysis to continuously scan for signs of stress, disease, or illegal logging across our project sites. This automated monitoring transforms raw data into actionable intelligence, allowing us to intervene precisely when the ecosystem needs it most.
+                    Coral microfragmentation is a restoration technique where large coral colonies are cut into many small pieces to accelerate growth. These tiny fragments are placed on substrates or nursery grids, allowing each piece to grow rapidly and eventually merge into a larger, healthy colony.
+This method is especially effective for slow-growing massive corals, helping restoration projects rebuild reef structure faster and support biodiversity.
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/AI.png') }}" alt="Microfragmentation">
+                <img src="{{ asset('images/coral4.png') }}" alt="Microfragmentation">
             </div>
         </div>
 
     </div>
-</section> 
-
+</section>
 
 @endsection
