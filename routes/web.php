@@ -32,3 +32,7 @@ Route::get('/mangrove', function () {
 Route::get('/karangterumbu', function () {
     return view('pages.karangterumbu');
 });
+
+Route::get('/garbage', function () {
+    return view('pages.garbage');
+});

@@ -183,5 +183,27 @@
     </div>
 </section> 
 
+ <section class="talk-section text-center py-5">
+        <div class="container">
+
+            <!-- Icon -->
+            <div class="icon-wrapper mx-auto mb-3">
+                <i class="bi bi-chat-dots-fill"></i>
+            </div>
+
+            <!-- Title -->
+            <h3 class="talk-title mb-3">Talk to Us</h3>
+
+            <!-- Description -->
+            <p class="talk-desc mx-auto mb-4">
+                Whether you’d like to consult with our team of experts, inquire about carbon offset solutions,
+                or explore strategic partnership opportunities, we're ready to hear your needs.
+            </p>
+
+            <!-- Button -->
+            <a href="#contact" class="btn btn-talk">Let’s Talk</a>
+
+        </div>
+    </section>
 
 @endsection

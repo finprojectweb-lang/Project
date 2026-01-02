@@ -176,23 +176,28 @@
         </div>
     </div>
 
-    <!-- BAWAH: TALK TO US -->
-    <div class="talk-section">
-        <div class="talk-content">
-              <img 
-                src="{{ asset('images/image.png') }}" 
-                alt="Talk Icon" 
-                class="talk-icon">
-            <h3>Talk to us</h3>
-            <p>
-                Learn more about our initiatives and how you can contribute
-                to building a sustainable future together.
-            </p>
-            <a href="#" class="talk-btn">Contact Us</a>
-        </div>
-    </div>
+  <section class="talk-section text-center py-5">
+        <div class="container">
 
-</section>
+            <!-- Icon -->
+            <div class="icon-wrapper mx-auto mb-3">
+                <i class="bi bi-chat-dots-fill"></i>
+            </div>
+
+            <!-- Title -->
+            <h3 class="talk-title mb-3">Talk to Us</h3>
+
+            <!-- Description -->
+            <p class="talk-desc mx-auto mb-4">
+                Whether you’d like to consult with our team of experts, inquire about carbon offset solutions,
+                or explore strategic partnership opportunities, we're ready to hear your needs.
+            </p>
+
+            <!-- Button -->
+            <a href="#contact" class="btn btn-talk">Let’s Talk</a>
+
+        </div>
+    </section>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {

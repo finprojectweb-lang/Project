@@ -401,3 +401,73 @@
         max-width: 100%;
     }
 }
+
+.talk-section {
+    background: #064F40;
+    color: #e8fff5;
+
+     /* 🔹 Kurva lebih dalam di bagian atas */
+    border-radius: 90% 90% 0 0 / 45% 45% 0 0;
+
+    margin-top: 40px;   /* 🔹 Jarak dari section sebelumnya */
+    position: relative;
+}
+
+/* Icon */
+.icon-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #2fe39a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2fe39a;
+    font-size: 42px;
+}
+
+/* Title */
+.talk-title {
+    color: #7cf6c9;
+    font-weight: 700;
+}
+
+/* Description */
+.talk-desc {
+    max-width: 720px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Button */
+.btn-talk {
+    background: linear-gradient(180deg, #9cfcd9, #3bdc9c);
+    color: #064F40;
+    padding: 8px 22px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+}
+
+.btn-talk:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,.25);
+    color: #064F40;
+}
+
+/* 🌍 Responsive */
+@media (max-width: 768px) {
+    .talk-section {
+        border-radius: 60% 60% 0 0 / 18% 18% 0 0;
+        padding: 60px 0;
+        margin-top: 60px;
+    }
+    .icon-wrapper {
+        width: 75px;
+        height: 75px;
+        font-size: 34px;
+    }
+    .talk-desc {
+        font-size: 0.85rem;
+    }
+}
