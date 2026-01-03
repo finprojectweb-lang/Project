@@ -153,9 +153,9 @@
         <img src="{{ asset('images/tanemkarang.png') }}" alt="">
         <img src="{{ asset('images/OIP (1).webp') }}" alt="">
         <img src="{{ asset('images/mangroveijo.webp') }}" alt="">
-        <img src="{{ asset('images/terumbu.jpg') }}" alt="">
+        <img src="{{ asset('images/reduce3.png') }}" alt="">
         <img src="{{ asset('images/download (1).webp') }}" alt="">
-        <img src="{{ asset('images/terumbu.jpg') }}" alt="">
+        <img src="{{ asset('images/reduce2.png') }}" alt="">
     </div>
 </section>
 <section class="info-section">
