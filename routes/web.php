@@ -36,13 +36,26 @@ Route::get('/karangterumbu', function () {
 Route::get('/garbage', function () {
     return view('pages.garbage');
 });
-<<<<<<< HEAD
 
 Route::get('/turbin', function () {
     return view('pages.turbin');
 });
-=======
+
+
+// Halaman Home / Dashboard Kalkulator Utama
+Route::get('/housing', function () {
+    return view('calculator.housing');
+})->name('calc.housing');
+
+// (disiapkan untuk masa depan)
 Route::get('/calctrans', function () {
-    return view('pages.calctrans');
-});
->>>>>>> e87fc206a554651f4cb3ecab198808197200e9c5
+    return view('calculator.calctrans');
+})->name('calc.transport');
+
+Route::get('/food', function () {
+    return view('calculator.food');
+})->name('calc.food');
+
+Route::get('/expenditure', function () {
+    return view('calculator.expenditure');
+})->name('calc.expenditure');
