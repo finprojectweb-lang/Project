@@ -69,12 +69,12 @@
             </div>
 
             <div class="ft-card">
-                <img src="{{ asset('images/alik.jpg') }}" alt="Luthfi Ardhika Akbar">
+                <img src="{{ asset('images/lutpi.png') }}" alt="Luthfi Ardhika Akbar">
                 <p>Luthfi Ardhika Akbar</p>
             </div>
 
             <div class="ft-card">
-                <img src="{{ asset('images/alik.jpg') }}" alt="Dr. Ariela Raditya Fadlur Rahman">
+                <img src="{{ asset('images/ariel.png') }}" alt="Dr. Ariela Raditya Fadlur Rahman">
                 <p>
                     Dr. Ariela Raditya Fadlur Rahman<br>
                     <span>S.Kom, M.Kom</span>

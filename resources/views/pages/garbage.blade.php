@@ -109,18 +109,6 @@
 
 <section class="technology-tools"
     style="background-image: url('{{ asset('images/sampah4.png') }}');">
-
-    <!-- Center Title -->
-    <h2 class="tech-title">Technology & Tools</h2>
-
-    <!-- Bottom Overlay Content -->
-    <div class="tech-bottom">
-        <div class="tech-item">Reducing Waste at the Source</div>
-        <div class="tech-item">Sorting and Identifying Valuable Materials</div>
-        <div class="tech-item">Recycling and Processing</div>
-        <div class="tech-item">Creating New Products</div>
-    </div>
-
 </section>
 
 

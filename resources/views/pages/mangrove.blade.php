@@ -108,20 +108,7 @@
 </section>
 
 <section class="technology-tools"
-    style="background-image: url('{{ asset('images/mangrovetech.png') }}');">
-
-    <!-- Center Title -->
-    <h2 class="tech-title">Technology & Tools</h2>
-
-    <!-- Bottom Overlay Content -->
-    <div class="tech-bottom">
-        <div class="tech-item">High Resolution</div>
-        <div class="tech-item">Lidar Sensor</div>
-        <div class="tech-item">Environmental Park</div>
-        <div class="tech-item">Machine Learning & AI Analytics</div>
-        <div class="tech-item">Ground-Truthing</div>
-    </div>
-
+    style="background-image: url('{{ asset('images/mangrovebg.png') }}');">
 </section>
 
 
