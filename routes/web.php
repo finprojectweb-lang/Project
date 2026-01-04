@@ -36,3 +36,6 @@ Route::get('/karangterumbu', function () {
 Route::get('/garbage', function () {
     return view('pages.garbage');
 });
+Route::get('/calctrans', function () {
+    return view('pages.calctrans');
+});
