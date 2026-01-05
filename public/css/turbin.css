@@ -3,7 +3,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url('/images/terumbuhover.jpg'); /* ganti sesuai path gambarmu */
+    background-image: url('/images/turbinbg.png'); /* ganti sesuai path gambarmu */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -269,7 +269,7 @@
 
 .technology-tools {
     width: 100%;
-    background-image: url('/images/mangrovebg.png');
+    background-image: url('/images/turbinsolution.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

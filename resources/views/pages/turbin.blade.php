@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-<link rel="stylesheet" href="{{ asset('css/terumbu.css') }}">
+<link rel="stylesheet" href="{{ asset('css/turbin.css') }}">
 
 @section('content')
 <section class="mangrove-hero">
@@ -23,26 +23,26 @@
 
         {{-- LEFT CONTENT --}}
         <div class="mangrove-shield-text">
-            <h2>Coral Guardian</h2>
+            <h2>water turbin</h2>
 
             <p>
-                The Coral Guardians program is dedicated to saving the 'rainforests of the sea' before they are lost forever. Coral reefs are vital to the ocean's health, supporting 25% of all marine biodiversity and playing a key role in the oceanic carbon cycle. However, rising sea temperatures and pollution threaten their survival. This initiative focuses on active reef restoration, utilizing resilient coral species to rebuild damaged structures and restore the vibrant underwater cities that are essential for oxygen production and marine food webs.
+                A water turbine is a rotary machine that converts the kinetic and potential energy of moving water into mechanical work, serving as the critical heart of hydroelectric power generation. As water flows from a reservoir or river through the turbine’s blades, the force of the fluid pushes against them, causing the central rotor to spin at high speeds. This rotational motion is then transferred via a shaft to an electrical generator, where the mechanical energy is instantly transformed into clean, renewable electricity ready for distribution to the power grid.
             </p>
 
             <p>
-                Our approach combines scientific research with direct action. We deploy teams of divers to cultivate coral nurseries and transplant healthy fragments onto degraded reefs, effectively accelerating the natural recovery process. By joining Coral Guardians, you help create marine protected areas that allow biodiversity to flourish once again. A healthy reef means a healthy ocean, and a healthy ocean is crucial for stabilizing the Earth's climate and providing resources for millions of people worldwide.
+                The design of these turbines varies significantly to maximize efficiency across different water conditions, with common types including the Pelton wheel for high-pressure, low-volume flows and the Francis or Kaplan turbines for lower-pressure environments. Because water turbines operate with exceptional efficiency—often capturing over 90% of the available energy—they represent one of the most reliable and cost-effective sources of renewable energy. By harnessing the natural power of the water cycle without burning fossil fuels, they play an indispensable role in reducing global carbon emissions and stabilizing energy grids.
             </p>
         </div>
 
         {{-- RIGHT IMAGE PANEL --}}
         <div class="mangrove-shield-gallery">
             <div class="gallery-large">
-                <img src="/images/laut1.png" alt="Mangrove underwater">
+                <img src="/images/turbin1.webp" alt="Mangrove underwater">
             </div>
 
             <div class="gallery-small">
-                <img src="/images/laut2.png" alt="Mangrove coast">
-                <img src="/images/laut3.png" alt="Mangrove roots">
+                <img src="/images/turbin2.webp" alt="Mangrove coast">
+                <img src="/images/turbin3.webp" alt="Mangrove roots">
             </div>
         </div>
 
@@ -108,7 +108,7 @@
 </section>
 
 <section class="technology-tools"
-    style="background-image: url('{{ asset('images/4karang.png') }}');">
+    style="background-image: url('{{ asset('images/turbinsolution.png') }}');">
 </section>
 
 <section class="content-section">
@@ -128,39 +128,37 @@
 
         <div class="content-item reverse">
             <div class="text">
-                <h3>AI-Based Monitoring & MRV Systems</h3>
+                <h3>High-Resolution Hydro Map</h3>
                 <p>
-                    Coral planting is a restoration method where small coral fragments are attached to artificial bases, such as concrete plugs, and then placed back onto the ocean floor. Divers collect healthy fragments, secure them to the substrate, and position them in suitable areas with good light and stable water flow to support growth.
-Over time, these fragments grow into larger colonies and help restore damaged reef ecosystems. This method increases biodiversity, provides habitat for marine life, and supports long-term reef recovery in conservation and carbon-offset projects.
+                    A High-Resolution Hydro Map is a detailed digital representation of river topography and the surrounding landscape, generated from advanced aerial surveys. In hydro turbine projects, these maps are vital for identifying precise elevation differences (head) and optimal water flow paths, ensuring turbines are placed at coordinates that maximize electricity generation while minimizing construction impacts on the river ecosystem.
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/coral1.png') }}" alt="Coral AI">
+                <img src="{{ asset('images/bin1.png') }}" alt="Coral AI">
             </div>
         </div>
 
         <div class="content-item">
             <div class="text">
-                <h3>3D-Printed Reef Structures</h3>
+                <h3>LiDAR Sensor (Light Detection and Ranging)</h3>
                 <p>
-                     represent a cutting-edge approach to marine conservation, utilizing additive manufacturing to create highly intricate, customized artificial habitats that effectively mimic the complexity and porosity of natural coral reefs. These structures, often fabricated from sustainable materials like ceramic or limestone, are designed using digital models to provide an optimized, stable substrate for transplanted coral fragments. By offering textures and complexities superior to traditional artificial reefs, this technology significantly accelerates coral settlement, growth, and the recovery of damaged marine ecosystems, offering a scalable and precise solution to bolster biodiversity and coastal resilience against environmental threats.
+                     This laser-based sensor technology, often mounted on drones, can penetrate dense forest canopies to scan the ground surface and river contours with millimeter accuracy. LiDAR data allows designers to create accurate 3D terrain models to engineer the most efficient penstock routes, avoid landslide-prone areas, and calculate energy potential without the need for tree removal for manual surveys.
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/coral2.png') }}" alt="3D Reef">
+                <img src="{{ asset('images/bin2.png') }}" alt="3D Reef">
             </div>
         </div>
 
           <div class="content-item reverse">
             <div class="text">
-                <h3>Coral Microfragmentation</h3>
+                <h3>Machine Learning & AI Analytics</h3>
                 <p>
-                    Coral microfragmentation is a restoration technique where large coral colonies are cut into many small pieces to accelerate growth. These tiny fragments are placed on substrates or nursery grids, allowing each piece to grow rapidly and eventually merge into a larger, healthy colony.
-This method is especially effective for slow-growing massive corals, helping restoration projects rebuild reef structure faster and support biodiversity.
+                    This serves as the digital "brain" of the system, utilizing intelligent algorithms to analyze historical rainfall data and river flow patterns in real-time. This AI predicts water discharge fluctuations to automate turbine valve adjustments for consistent energy efficiency, and is capable of detecting early vibration or temperature anomalies as a preventative maintenance warning before failures occur.
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/coral4.png') }}" alt="Microfragmentation">
+                <img src="{{ asset('images/bin3.png') }}" alt="Microfragmentation">
             </div>
         </div>
 

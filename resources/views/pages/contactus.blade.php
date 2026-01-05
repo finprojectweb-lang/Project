@@ -3,44 +3,62 @@
 <link rel="stylesheet" href="{{ asset('css/contactus.css') }}">
 
 @section('content')
-    <section class="hero-section">
-        <div class="hero-content d-flex align-items-center justify-content-center text-center">
-                <div class="container hero-inner">
+<section class="contact-hero">
+    <div class="contact-hero-content">
+        <div class="contact-title-box">
+            <h1>Contact Us</h1>
+        </div>
+    </div>
+</section>
+<section class="contact-divider"></section>
+<section class="contact-form-section">
+    <div class="contact-form-container">
 
-                    <!-- Judul -->
-                    <h1 class="hero-title">
-                        Restore <span class="text-highlight">Nature</span>, One Offset at a Time.
-                    </h1>
+        <h2 class="contact-title">
+            Get in Touch <span>With Our Teams</span>
+        </h2>
 
-                    <!-- Subtitle -->
-                    <p class="hero-subtitle">
-                        Heal the earth and breathe easier knowing you are part of the <br> solution.
-                    </p>
+        <form class="contact-form" method="POST" action="#">
+            @csrf
 
-                    <!-- Card Kutipan -->
-                    <div class="hero-quote mx-auto">
-                        <p>
-                            We are borrowing this planet from our children. Let’s make sure we return it
-                            better than we found it. Your contribution today is a promise of a cleaner,
-                            brighter tomorrow for the ones you love.
-                        </p>
-                        <br>
-                        <small>
-                            #NatureLovers #SustainableFuture #EarthGuardian
-                        </small>
-                    </div>
-
-                    <!-- Tombol -->
-                    <div class="hero-buttons d-flex justify-content-center gap-3 mt-4">
-                        <a href="#" class="btn btn-success btn-lg rounded-pill">
-                            Get Started
-                        </a>
-                        <a href="#" class="btn btn-outline-light btn-lg rounded-pill">
-                            Calculate Your Carbon
-                        </a>
-                    </div>
-
-                </div>
+            <div class="form-group">
+                <label>Full Name<span>*</span></label>
+                <input type="text" name="full_name" required>
             </div>
-        </section>
+
+            <div class="form-group">
+                <label>Job Title / Position</label>
+                <input type="text" name="job_title">
+            </div>
+
+            <div class="form-group">
+                <label>Email Address<span>*</span></label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Company<span>*</span></label>
+                <input type="text" name="company" required>
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label>How can we help?<span>*</span></label>
+                <textarea name="message" rows="6" required></textarea>
+            </div>
+
+            <button type="submit" class="contact-submit">
+                Submit
+            </button>
+        </form>
+
+    </div>
+</section>
+
+
+
 @endsection
