@@ -77,7 +77,7 @@
             {{-- 🔹 APPROACH IMAGE --}}
             <div class="col-lg-6 mb-4 mb-lg-0">
                 <img
-                    src="{{ asset('images/impact.png') }}"
+                    src="{{ asset('images/community.png') }}"
                     class="img-fluid rounded-4 shadow"
                     alt="Mangrove Planting Process"
                 >
@@ -104,17 +104,18 @@
         <div class="row align-items-center mt-4">
             <div class="col-lg-6">
                 <p class="section-desc">
-                    Community participation is central to our restoration strategy.
-                    We collaborate with local residents through training programs,
-                    employment opportunities, and environmental education initiatives,
-                    ensuring long-term ecological and social sustainability.
+                     Our Coral Reef Restoration Project aims to rehabilitate damaged reef
+                    ecosystems using a combination of coral transplantation, artificial
+                    reef structures, and continuous marine monitoring. This initiative
+                    strengthens ocean resilience, restores marine habitats, and supports
+                    sustainable coastal economies.
                 </p>
             </div>
 
             {{-- 🔹 COMMUNITY IMAGE --}}
             <div class="col-lg-6 mt-4 mt-lg-0">
                 <img
-                    src="{{ asset('images/community.png') }}"
+                    src="{{ asset('images/coralreefs.png') }}"
                     class="img-fluid rounded-4 shadow"
                     alt="Community Mangrove Engagement"
                 >
@@ -182,17 +183,14 @@
         <div class="row align-items-center mt-4">
             <div class="col-lg-6">
                 <p class="section-desc">
-                    Building on this success, we plan to expand mangrove restoration
-                    initiatives across additional coastal regions, integrate blue carbon
-                    credit certification, and strengthen partnerships with corporate and
-                    institutional climate stakeholders.
+                   Building on this success, we plan to expand sustainable micro-hydro initiatives across additional remote river basins, integrate verified renewable energy carbon credits, and strengthen partnerships with corporate and institutional green energy stakeholders.
                 </p>
             </div>
 
             {{-- 🔹 FUTURE IMAGE --}}
             <div class="col-lg-6 mt-4 mt-lg-0">
                 <img
-                    src="{{ asset('images/future.png') }}"
+                    src="{{ asset('images/waterturbin.png') }}"
                     class="img-fluid rounded-4 shadow"
                     alt="Future Mangrove Development"
                 >
