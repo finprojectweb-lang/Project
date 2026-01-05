@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SocialAuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +92,10 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 // Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
+
+Route::get('/auth/google', [SocialAuthController::class, 'redirect']);
+Route::get('/auth/google/callback', [SocialAuthController::class, 'callback']);
 /*
 |--------------------------------------------------------------------------
 | Protected Routes (Harus login terlebih dahulu)
