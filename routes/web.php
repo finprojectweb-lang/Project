@@ -68,11 +68,20 @@ Route::get('/calculator/expenditure', function () {
     return view('calculator.expenditure');
 })->name('calc.expenditure');
 
-
 // Di web.php, tambahkan:
 Route::get('/calculator', function () {
     return view('calculator.index');
 })->name('calculator.index');
+
+
+Route::get('/discover-us/ourvalues', function () {
+    return view('discoverus.ourvalues');
+})->name('ourvalues');
+
+Route::get('/discover-us/partners', function () {
+    return view('discoverus.partcollab');
+})->name('partners');
+
 /*
 |--------------------------------------------------------------------------
 | Authentication Routes
