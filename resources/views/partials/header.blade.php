@@ -141,7 +141,7 @@
                 <ul class="navbar-nav mx-auto gap-lg-4">
                     <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/solutions">Solutions</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Our Project</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/projects">Our Project</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Discover Us</a></li>
                 </ul>
 

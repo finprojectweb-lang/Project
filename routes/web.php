@@ -47,6 +47,10 @@ Route::get('/turbin', function () {
     return view('pages.turbin');
 })->name('turbin');
 
+Route::get('/projects', function () {
+    return view('pages.ourproject');
+})->name('ourproject');
+
 // KALKULATOR - Bisa diakses tanpa login
 Route::get('/calculator/housing', function () {
     return view('calculator.housing');
