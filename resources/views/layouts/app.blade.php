@@ -21,6 +21,10 @@
             padding: 0;
                 background-color: #F0F8FF;
             overflow-x: hidden; /* Hilangkan scroll samping */
+            overflow-y: auto;
+        }
+        body::-webkit-scrollbar {
+            display: none;
         }
 
         /* Ini konten pura-pura supaya website bisa di-scroll panjang */
