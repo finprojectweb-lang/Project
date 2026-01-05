@@ -480,8 +480,8 @@ body::-webkit-scrollbar {
 
 .steps-section {
     background: linear-gradient(120deg, #0fb586, #1cc7b0);
-     /* 🔹 Kurva lebih dalam di bagian atas */
     border-radius: 0 0 90% 90% / 0 0 45% 45%;
+    padding-bottom: 4rem !important;
 }
 
 .steps-img-tall {
@@ -490,15 +490,17 @@ body::-webkit-scrollbar {
     height: 320px;
     object-fit: cover;
     border-radius: 24px;
+    transition: transform 0.3s ease;
 }
 
 .steps-img-mid {
     width: 100%;
-    transform: translateY(30px); /* geser ke bawah */
+    transform: translateY(30px);
     max-width: 260px;
     height: 170px;
     object-fit: cover;
     border-radius: 18px;
+    transition: transform 0.3s ease;
 }
 
 .steps-desc {
@@ -511,17 +513,97 @@ body::-webkit-scrollbar {
 .steps-btn {
     border-radius: 20px;
     padding: 6px 18px;
+    transition: all 0.3s ease;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+.steps-btn:hover {
+    background-color: #fff;
+    color: #0fb586;
+    transform: translateY(-2px);
+}
+
+/* 🔹 Responsive untuk Tablet */
+@media (max-width: 991px) {
+    .steps-section {
+        border-radius: 0 0 80% 80% / 0 0 40% 40%;
+    }
+    
     .steps-img-tall {
         max-width: 200px;
         height: 280px;
     }
+    
     .steps-img-mid {
         max-width: 220px;
         height: 150px;
+        transform: translateY(20px);
+    }
+}
+
+/* 🔹 Responsive untuk Mobile */
+@media (max-width: 768px) {
+    .steps-section {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+        border-radius: 0 0 60% 60% / 0 0 30% 30%;
+    }
+    
+    /* Gambar kiri dan kanan berdampingan */
+    .steps-img-tall {
+        max-width: 150px;
+        height: 200px;
+        margin-bottom: 0;
+    }
+    
+    /* Teks di tengah bawah */
+    h3 {
+        font-size: 1.3rem;
+        margin-top: 1.5rem;
+    }
+    
+    .steps-desc {
+        font-size: 0.85rem;
+        padding: 0 1rem;
+    }
+    
+    /* Gambar tengah lebih kecil */
+    .steps-img-mid {
+        max-width: 180px;
+        height: 120px;
+        transform: translateY(15px);
+    }
+    
+    .steps-btn {
+        font-size: 0.9rem;
+        padding: 5px 16px;
+    }
+}
+
+/* 🔹 Responsive untuk Mobile Kecil */
+@media (max-width: 576px) {
+    .steps-section {
+        padding-top: 2.5rem !important;
+        padding-bottom: 2.5rem !important;
+        border-radius: 0 0 50% 50% / 0 0 25% 25%;
+    }
+    
+    .steps-img-tall {
+        max-width: 130px;
+        height: 180px;
+    }
+    
+    .steps-img-mid {
+        max-width: 160px;
+        height: 100px;
+        transform: translateY(10px);
+    }
+    
+    h3 {
+        font-size: 1.1rem;
+    }
+    
+    .steps-desc {
+        font-size: 0.8rem;
     }
 }
 

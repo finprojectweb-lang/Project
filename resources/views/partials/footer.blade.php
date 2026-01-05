@@ -6,7 +6,7 @@
 
                 <!-- Logo + Address -->
                 <div class="col-md-5 mb-3">
-                    <img src="/images/nullicarbon.png" alt="NulliCarbon" class="mb-3" style="height:55px">
+                    <img src="/images/nullicarboncrop.png" alt="NulliCarbon" class="mb-3" style="max-height:75px; max-width:250px; height:auto; width:auto;">
 
                     <p class="mb-1 fw-semibold">Address</p>
                     <p class="small mb-2">
@@ -28,12 +28,41 @@
                         Heal The World, Make it Better Place.
                     </h6>
 
-                    <ul class="nav justify-content-center gap-3 mb-4 fw-semibold">
-                        <li><a href="#" class="text-dark text-decoration-none">Solutions</a></li>
-                        <li><a href="#" class="text-dark text-decoration-none">Our Projects</a></li>
-                        <li><a href="#" class="text-dark text-decoration-none">Discover Us</a></li>
-                        <li><a href="#" class="text-dark text-decoration-none">Resources</a></li>
-                    </ul>
+                    <div class="row">
+                        
+                        <!-- Home -->
+                        <div class="col-md-3 text-center mb-3">
+                            <a href="/" class="text-dark text-decoration-none fw-semibold d-block">Home</a>
+                        </div>
+
+                        <!-- Solutions -->
+                        <div class="col-md-3 text-center mb-3">
+                            <a href="#solutions" class="text-dark text-decoration-none fw-semibold d-block mb-2">Solutions</a>
+                            <ul class="list-unstyled small">
+                                <li class="mb-1"><a href="/magrove" class="text-secondary text-decoration-none">Mangrove Shield</a></li>
+                                <li class="mb-1"><a href="/garbage" class="text-secondary text-decoration-none">Garbage Recycle</a></li>
+                                <li class="mb-1"><a href="/turbin" class="text-secondary text-decoration-none">Water Turbine</a></li>
+                                <li class="mb-1"><a href="/coralreefs" class="text-secondary text-decoration-none">Coral Guardian</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Our Projects -->
+                        <div class="col-md-3 text-center mb-3">
+                            <a href="#our-projects" class="text-dark text-decoration-none fw-semibold d-block">Our Projects</a>
+                        </div>
+
+                        <!-- Discover Us -->
+                        <div class="col-md-3 text-center mb-3">
+                            <a href="#discover" class="text-dark text-decoration-none fw-semibold d-block mb-2">Discover Us</a>
+                            <ul class="list-unstyled small">
+                                <li class="mb-1"><a href="/aboutus" class="text-secondary text-decoration-none">About Us</a></li>
+                                <li class="mb-1"><a href="/discover-us/ourvalues" class="text-secondary text-decoration-none">Our Value</a></li>
+                                <li class="mb-1"><a href="/discover-us/partners" class="text-secondary text-decoration-none">Partners</a></li>
+                                <li class="mb-1"><a href="/contactus" class="text-secondary text-decoration-none">Contact</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

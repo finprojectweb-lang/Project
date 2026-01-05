@@ -6,3 +6,14 @@
     background: #ffffff;
     border-radius: 28px;
 }
+/* Hover effect untuk sub-menu */
+.list-unstyled a:hover {
+    color: #198754 !important;
+    text-decoration: underline !important;
+}
+
+/* Spacing untuk menu utama */
+.list-unstyled {
+    margin-top: 0.5rem;
+    line-height: 1.8;
+}

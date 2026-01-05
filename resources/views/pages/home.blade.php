@@ -449,16 +449,15 @@
 
     <section class="steps-section py-5">
         <div class="container text-center">
-
             <div class="row justify-content-center align-items-center g-4">
-
+                
                 <!-- Gambar Kiri -->
-                <div class="col-md-3 d-flex justify-content-center">
+                <div class="col-md-3 col-6 d-flex justify-content-center order-1 order-md-1">
                     <img src="/images/steps/tanambawah.png" class="steps-img-tall" alt="Planting Trees">
                 </div>
 
                 <!-- Teks Tengah -->
-                <div class="col-md-4">
+                <div class="col-md-4 col-12 order-3 order-md-2">
                     <h3 class="fw-bold mb-2">Start Your Small Steps</h3>
                     <p class="steps-desc mb-3">
                         One simple step today for a greener future for the earth.
@@ -473,16 +472,13 @@
                 </div>
 
                 <!-- Gambar Kanan -->
-                <div class="col-md-3 d-flex justify-content-center">
+                <div class="col-md-3 col-6 d-flex justify-content-center order-2 order-md-3">
                     <img src="/images/steps/selambawah.png" class="steps-img-tall" alt="Coral Planting">
                 </div>
 
             </div>
         </div>
     </section>
-
-
-
 
     <section class="talk-section text-center py-5">
         <div class="container">

@@ -635,7 +635,7 @@
         <div class="partners-grid">
             <!-- Amazon -->
             <div class="partner-card fade-up stagger-1">
-                <img src="{{ asset('images/partners/amazon-logo.png') }}" 
+                <img src="{{ asset('images/partners/amazon.webp') }}" 
                      alt="Amazon" 
                      class="partner-logo">
                 <h3 class="partner-name">Amazon</h3>
@@ -644,7 +644,7 @@
 
             <!-- Astra -->
             <div class="partner-card fade-up stagger-1">
-                <img src="{{ asset('images/partners/astra-logo.png') }}" 
+                <img src="{{ asset('images/partners/astra.png') }}" 
                      alt="Astra" 
                      class="partner-logo">
                 <h3 class="partner-name">Astra</h3>
@@ -653,7 +653,7 @@
 
             <!-- Garuda -->
             <div class="partner-card fade-up stagger-2">
-                <img src="{{ asset('images/partners/garuda-logo.png') }}" 
+                <img src="{{ asset('images/partners/garuda.png') }}" 
                      alt="Garuda Indonesia" 
                      class="partner-logo">
                 <h3 class="partner-name">Garuda Indonesia</h3>
@@ -662,7 +662,7 @@
 
             <!-- Google -->
             <div class="partner-card fade-up stagger-2">
-                <img src="{{ asset('images/partners/google-logo.png') }}" 
+                <img src="{{ asset('images/partners/google.png') }}" 
                      alt="Google" 
                      class="partner-logo">
                 <h3 class="partner-name">Google</h3>
@@ -671,7 +671,7 @@
 
             <!-- GoTo -->
             <div class="partner-card fade-up stagger-3">
-                <img src="{{ asset('images/partners/goto-logo.png') }}" 
+                <img src="{{ asset('images/partners/goto.png') }}" 
                      alt="GoTo" 
                      class="partner-logo">
                 <h3 class="partner-name">GoTo</h3>
@@ -680,7 +680,7 @@
 
             <!-- Microsoft -->
             <div class="partner-card fade-up stagger-3">
-                <img src="{{ asset('images/partners/microsoft-logo.png') }}" 
+                <img src="{{ asset('images/partners/microsoft.png') }}" 
                      alt="Microsoft" 
                      class="partner-logo">
                 <h3 class="partner-name">Microsoft</h3>
@@ -689,7 +689,7 @@
 
             <!-- Nestle -->
             <div class="partner-card fade-up stagger-4">
-                <img src="{{ asset('images/partners/nestle-logo.png') }}" 
+                <img src="{{ asset('images/partners/nestle.png') }}" 
                      alt="Nestle" 
                      class="partner-logo">
                 <h3 class="partner-name">Nestlé</h3>
@@ -698,7 +698,7 @@
 
             <!-- Netflix -->
             <div class="partner-card fade-up stagger-4">
-                <img src="{{ asset('images/partners/netflix-logo.png') }}" 
+                <img src="{{ asset('images/partners/netflix.png') }}" 
                      alt="Netflix" 
                      class="partner-logo">
                 <h3 class="partner-name">Netflix</h3>
@@ -707,7 +707,7 @@
 
             <!-- Nike -->
             <div class="partner-card fade-up stagger-1">
-                <img src="{{ asset('images/partners/nike-logo.png') }}" 
+                <img src="{{ asset('images/partners/nike.png') }}" 
                      alt="Nike" 
                      class="partner-logo">
                 <h3 class="partner-name">Nike</h3>
@@ -716,7 +716,7 @@
 
             <!-- Pertamina -->
             <div class="partner-card fade-up stagger-2">
-                <img src="{{ asset('images/partners/pertamina-logo.png') }}" 
+                <img src="{{ asset('images/partners/pertamina.png') }}" 
                      alt="Pertamina" 
                      class="partner-logo">
                 <h3 class="partner-name">Pertamina</h3>
@@ -725,7 +725,7 @@
 
             <!-- Spotify -->
             <div class="partner-card fade-up stagger-3">
-                <img src="{{ asset('images/partners/spotify-logo.png') }}" 
+                <img src="{{ asset('images/partners/spotify.png') }}" 
                      alt="Spotify" 
                      class="partner-logo">
                 <h3 class="partner-name">Spotify</h3>
