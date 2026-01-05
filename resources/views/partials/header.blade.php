@@ -140,7 +140,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto gap-lg-4">
                     <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/solutions">Solutions</a></li>
+                    <li class="nav-item dropdown"><a class="nav-link" href="/solutions">Solutions</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/mangrove">Mangrove Shield</a></li>
+                        <li><a href="/garbage">Garbage Recycle</a></li>
+                        <li><a href="/turbin">Water Turbine</a></li>
+                        <li><a href="/coralreefs">Coral Guardian</a></li>
+                    </ul></li>
                     <li class="nav-item"><a class="nav-link" href="/projects">Our Project</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Discover Us</a></li>
                 </ul>

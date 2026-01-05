@@ -23,7 +23,7 @@
 
         {{-- LEFT CONTENT --}}
         <div class="mangrove-shield-text">
-            <h2>water turbin</h2>
+            <h2>Water Turbine</h2>
 
             <p>
                 A water turbine is a rotary machine that converts the kinetic and potential energy of moving water into mechanical work, serving as the critical heart of hydroelectric power generation. As water flows from a reservoir or river through the turbine’s blades, the force of the fluid pushes against them, causing the central rotor to spin at high speeds. This rotational motion is then transferred via a shaft to an electrical generator, where the mechanical energy is instantly transformed into clean, renewable electricity ready for distribution to the power grid.
