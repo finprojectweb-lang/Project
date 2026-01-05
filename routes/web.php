@@ -25,11 +25,15 @@ Route::get('/contactus', function () {
 })->name('contactus');
 
 // Halaman Solutions
+Route::get('/solutions', function () {
+    return view('pages.solutions');
+})->name('solutions');
+
 Route::get('/mangrove', function () {
     return view('pages.mangrove');
 })->name('mangrove');
 
-Route::get('/karangterumbu', function () {
+Route::get('/coralreefs', function () {
     return view('pages.karangterumbu');
 })->name('karangterumbu');
 

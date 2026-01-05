@@ -1,0 +1,125 @@
+.solutions-hero {
+    position: relative;
+    height: 67%;
+    background: url("/images/solutions.png") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+}
+
+.solutions-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(6, 78, 59, 0.85),
+        rgba(6, 78, 59, 0.3)
+    );
+}
+
+.solutions-hero-content {
+    position: relative;
+    max-width: 1200px;
+    padding: 0 24px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.solutions-hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    font-family: 'Baloo Paaji 2', cursive;
+    text-align: center;
+}
+
+.solutions-intro {
+    background-color: #f3fbff;
+    padding: 100px 24px;
+    text-align: center;
+}
+
+.solutions-intro-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.solutions-intro h2 {
+    font-size: 36px;
+    color: #064e3b;
+    margin-bottom: 20px;
+    font-family: 'Baloo Paaji 2', cursive;
+}
+
+.solutions-intro p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.7;
+    font-family: 'Baloo Paaji 2', cursive;
+}
+.solutions-cards-section {
+    padding: 120px 24px;
+    background-color: #ffffff;
+}
+
+.solutions-cards-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+/* CARD */
+.solution-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    text-decoration: none;
+    height: 280px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    transition: transform 0.35s ease;
+}
+
+.solution-card:hover {
+    transform: translateY(-8px);
+}
+
+.solution-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* OVERLAY */
+.solution-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(6, 78, 59, 0.9),
+        rgba(6, 78, 59, 0.3)
+    );
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #fff;
+}
+
+.solution-overlay h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    font-family: 'Baloo Paaji 2', cursive;
+}
+
+.solution-overlay p {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .solutions-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
