@@ -19,7 +19,7 @@
         body {
             margin: 0;
             padding: 0;
-                background-color: #F0F8FF;
+                background-color: #F0F8FF !important; /* Warna latar belakang */
             overflow-x: hidden; /* Hilangkan scroll samping */
             overflow-y: auto;
         }

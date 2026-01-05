@@ -56,7 +56,7 @@ Route::get('/calculator/housing', function () {
     return view('calculator.housing');
 })->name('calc.housing');
 
-Route::get('/calculator/transport', function () {
+Route::get('/calculator/calctrans', function () {
     return view('calculator.calctrans');
 })->name('calc.transport');
 

@@ -112,6 +112,56 @@ body::-webkit-scrollbar {
     color: #555;
 }
 
+/* Back Button */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #6AD3CA, #39CD4A);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(106, 211, 202, 0.3);
+}
+
+.back-button:hover {
+    background: linear-gradient(135deg, #5BC4BB, #2EBD3F);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(106, 211, 202, 0.4);
+    color: white;
+}
+
+.back-button i {
+    font-size: 1rem;
+}
+
+/* Header with Back Button */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.page-header h4 {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+}
+
+.payment-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
 /* Powered by */
 .powered-by{
     display: block;
@@ -140,12 +190,44 @@ body::-webkit-scrollbar {
 @media(max-width:768px){
     body{ padding-top: 95px; }
     .result-box h2{font-size:26px;}
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .page-header h4 {
+        text-align: left;
+        width: 100%;
+    }
+    
+    .payment-button-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .payment-button-container .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 </style>
 
 <div class="container py-4">
 
-    <h4 class="text-center mb-3 fw-bold">Calculate Your Carbon Footprint</h4>
+    <!-- Header with Back Button -->
+    <div class="page-header">
+        <a href="javascript:history.back()" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back</span>
+        </a>
+        
+        <h4 class="fw-bold">Calculate Your Carbon Footprint</h4>
+        
+        <!-- Empty div for spacing balance -->
+        <div style="width: 100px;"></div>
+    </div>
 
     <!-- RESULT PANEL -->
     <div class="result-box text-center p-4 rounded-4 mb-4">
@@ -276,19 +358,22 @@ body::-webkit-scrollbar {
     </div>
 
     <!-- BUTTONS AND POWERED BY -->
-    <div class="text-center mt-3">
-        @auth
-            <button id="proceedPayment" class="btn btn-success px-4 py-2">
-                <i class="fas fa-credit-card me-2"></i>Proceed to Payment
-            </button>
-        @endauth
+    <div class="text-center mt-4">
+        <div class="payment-button-container">
+            @auth
+                <button id="proceedPayment" class="btn btn-success px-4 py-2">
+                    <i class="fas fa-credit-card me-2"></i>Proceed to Payment
+                </button>
+            @endauth
 
-        @guest
-            <a href="{{ route('login') }}" class="btn btn-outline-success px-4 py-2">
-                <i class="fas fa-lock me-2"></i>Login to Proceed Payment
-            </a>
-        @endguest
+            @guest
+                <a href="{{ route('login') }}" class="btn btn-outline-success px-4 py-2">
+                    <i class="fas fa-lock me-2"></i>Login to Proceed Payment
+                </a>
+            @endguest
+        </div>
 
+        <!-- Powered By -->
         <div class="powered-by mt-3">
             <div class="powered-by-inner">
                 <span class="powered-text">Powered by</span>
