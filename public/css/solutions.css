@@ -53,11 +53,19 @@
     font-size: 18px;
     color: #555;
     line-height: 1.7;
+    text-align: justify;
     font-family: 'Baloo Paaji 2', cursive;
 }
+
 .solutions-cards-section {
-    padding: 120px 24px;
+    padding: 90px 24px;
     background-color: #ffffff;
+}
+
+.solutions-section-header {
+    margin: 0px 90px 50px;
+    font-family: 'Baloo Paaji 2', cursive;
+    color: #064e3b;
 }
 
 .solutions-cards-grid {
