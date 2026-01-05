@@ -8,11 +8,122 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        .user-dropdown .dropdown-toggle::after {
+            display: none;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .dropdown-menu {
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: none;
+            padding: 8px;
+            min-width: 220px;
+            margin-top: 8px;
+        }
+
+        .dropdown-item {
+            border-radius: 8px;
+            padding: 10px 15px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-item:hover {
+            background: #f3f4f6;
+            transform: translateX(3px);
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-divider {
+            margin: 8px 0;
+        }
+
+        .user-info {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 8px;
+        }
+
+        .user-info strong {
+            display: block;
+            font-size: 14px;
+            color: #1f2937;
+            margin-bottom: 2px;
+        }
+
+        .user-info small {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .logout-btn {
+            color: #dc2626 !important;
+        }
+
+        .logout-btn:hover {
+            background: #fee2e2 !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .user-dropdown {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            .user-avatar {
+                width: 100%;
+                height: 50px;
+                border-radius: 10px;
+                justify-content: flex-start;
+                padding: 0 15px;
+                gap: 10px;
+            }
+
+            .dropdown-menu {
+                width: 100%;
+                position: static !important;
+                transform: none !important;
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -21,7 +132,7 @@
         <div class="container-fluid px-4 d-flex align-items-center">
 
             <!-- LOGO (KIRI) -->
-            <a class="navbar-brand logo-wrap" href="#">
+            <a class="navbar-brand logo-wrap" href="/">
                 <img src="{{ asset('images/nullicarbon.png') }}" alt="Logo">
             </a>
 
@@ -35,17 +146,94 @@
                 </ul>
 
                 <!-- BUTTON MOBILE -->
-                <div class="mobile-buttons d-flex justify-content-center gap-2 mt-3 d-lg-none">
-                    <a href="#" class="btn-navbar btn-signup">Sign up</a>
-                    <a href="#" class="btn-navbar btn-contact">Contact</a>
+                <div class="mobile-buttons d-flex flex-column gap-2 mt-3 d-lg-none">
+                    @auth
+                        <!-- User Dropdown Mobile -->
+                        <div class="user-dropdown dropdown">
+                            <div class="user-avatar" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                                <span style="margin-left: auto;">{{ Auth::user()->name }}</span>
+                                <i class="fas fa-chevron-down" style="margin-left: auto; font-size: 12px;"></i>
+                            </div>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li class="user-info">
+                                    <strong>{{ Auth::user()->name }}</strong>
+                                    <small>{{ Auth::user()->email }}</small>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user"></i>
+                                        <span>Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cog"></i>
+                                        <span>Settings</span>
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item logout-btn">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            <span>Logout</span>
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <a href="/login" class="btn-navbar btn-signup">Sign up</a>
+                        <a href="#" class="btn-navbar btn-contact">Contact</a>
+                    @endauth
                 </div>
             </div>
 
-            <div class="navbar-right ms-auto d-flex align-items-center gap-2">
-                <div class="navbar-buttons">
-                    <a href="#" class="btn-navbar btn-signup">Sign up</a>
-                    <a href="#" class="btn-navbar btn-contact">Contact</a>
-                </div>
+            <div class="navbar-right ms-auto d-flex align-items-center gap-3">
+                @auth
+                    <!-- User Dropdown Desktop -->
+                    <div class="user-dropdown dropdown d-none d-lg-block">
+                        <div class="user-avatar" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                        </div>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li class="user-info">
+                                <strong>{{ Auth::user()->name }}</strong>
+                                <small>{{ Auth::user()->email }}</small>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user"></i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Settings</span>
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item logout-btn">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                        <span>Logout</span>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <!-- Button jika belum login -->
+                    <div class="navbar-buttons d-none d-lg-flex">
+                        <a href="/login" class="btn-navbar btn-signup">Sign up</a>
+                        <a href="#" class="btn-navbar btn-contact">Contact</a>
+                    </div>
+                @endauth
 
                 <button class="navbar-toggler animated-toggler"
                         type="button"

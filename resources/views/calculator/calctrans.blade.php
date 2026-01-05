@@ -65,12 +65,12 @@ body::-webkit-scrollbar {
 
 /* Row Gap */
 .transport-section .row {
-    row-gap: 20px; /* jarak vertikal antar baris */
+    row-gap: 20px;
 }
 
 /* Column padding */
 .transport-section .row .col-md-4 {
-    padding: 0 8px; /* jarak horizontal antar kolom */
+    padding: 0 8px;
 }
 
 /* Vehicle Box */
@@ -90,7 +90,7 @@ body::-webkit-scrollbar {
 /* Label with icon left and text right */
 .vehicle-box label {
     display: flex;
-    flex-direction: column; /* container utama kolom */
+    flex-direction: column;
     align-items: flex-start;
     cursor: pointer;
 }
@@ -98,8 +98,8 @@ body::-webkit-scrollbar {
 .vehicle-box .icon-text {
     display: flex;
     align-items: center;
-    gap: 8px; /* jarak icon dan nama kendaraan */
-    margin-bottom: 4px; /* jarak nama dan avg distance */
+    gap: 8px;
+    margin-bottom: 4px;
 }
 
 .vehicle-box .icon-text img.vehicle-icon {
@@ -279,20 +279,14 @@ body::-webkit-scrollbar {
     <div class="text-center mt-3">
         @auth
             <button id="proceedPayment" class="btn btn-success px-4 py-2">
-                Proceed to Payment
+                <i class="fas fa-credit-card me-2"></i>Proceed to Payment
             </button>
         @endauth
 
         @guest
-            @if (Route::has('login'))
-                <a href="{{ route('login') }}" class="btn btn-outline-success px-4 py-2">
-                    Login to Proceed Payment
-                </a>
-            @else
-                <button class="btn btn-outline-secondary px-4 py-2" disabled>
-                    Login feature coming soon
-                </button>
-            @endif
+            <a href="{{ route('login') }}" class="btn btn-outline-success px-4 py-2">
+                <i class="fas fa-lock me-2"></i>Login to Proceed Payment
+            </a>
         @endguest
 
         <div class="powered-by mt-3">
@@ -306,58 +300,102 @@ body::-webkit-scrollbar {
 </div>
 
 <script>
-// Emission factors
-const factors = {
-    motorcycle: 0.103,
-    car: 0.153,
-    bus: 0.102,
-    train: 0.041,
-    taxi: 0.192,
-    plane: 0.255
-};
+    // Emission factors
+    const factors = {
+        motorcycle: 0.103,
+        car: 0.153,
+        bus: 0.102,
+        train: 0.041,
+        taxi: 0.192,
+        plane: 0.255
+    };
 
-// Predefined distances
-const trainRoutes = {
-    "GMR-BDG": 150,
-    "GMR-YK": 520,
-    "BDG-CMHI": 110,
-    "YK-SLO": 63
-};
+    // Predefined distances
+    const trainRoutes = {
+        "GMR-BDG": 150,
+        "GMR-YK": 520,
+        "BDG-CMHI": 110,
+        "YK-SLO": 63
+    };
 
-const planeRoutes = {
-    "CGK-SUB": 660,
-    "CGK-DPS": 983,
-    "SUB-BPN": 748,
-    "DPS-LOP": 116
-};
+    const planeRoutes = {
+        "CGK-SUB": 660,
+        "CGK-DPS": 983,
+        "SUB-BPN": 748,
+        "DPS-LOP": 116
+    };
 
-// Event listeners
-document.getElementById("trainRoute").addEventListener("change", e=>{
-    document.getElementById("train").value = trainRoutes[e.target.value] || 0;
-    calculateCarbon();
-});
+    // Store total carbon globally
+    let totalCarbonValue = 0;
 
-document.getElementById("planeRoute").addEventListener("change", e=>{
-    document.getElementById("plane").value = planeRoutes[e.target.value] || 0;
-    calculateCarbon();
-});
+    // Event listeners
+    document.getElementById("trainRoute").addEventListener("change", e=>{
+        document.getElementById("train").value = trainRoutes[e.target.value] || 0;
+        calculateCarbon();
+    });
 
-// Calculate carbon
-function calculateCarbon(){
-    let total = 0;
-    for(const id in factors){
-        const val = parseFloat(document.getElementById(id).value) || 0;
-        total += val * factors[id];
+    document.getElementById("planeRoute").addEventListener("change", e=>{
+        document.getElementById("plane").value = planeRoutes[e.target.value] || 0;
+        calculateCarbon();
+    });
+
+    // Calculate carbon
+    function calculateCarbon(){
+        let total = 0;
+        const details = {};
+        
+        for(const id in factors){
+            const val = parseFloat(document.getElementById(id).value) || 0;
+            const emission = val * factors[id];
+            total += emission;
+            
+            if(val > 0) {
+                details[id] = {
+                    distance: val,
+                    emission: emission.toFixed(2)
+                };
+            }
+        }
+        
+        totalCarbonValue = total;
+        
+        document.getElementById("totalCarbon").innerText = total.toFixed(2)+" kgCO₂e";
+        document.getElementById("plasticEq").innerText = (total/1.67).toFixed(1)+" Kg";
+        document.getElementById("treeEq").innerText   = (total/3.3).toFixed(2)+" Tree(s)";
+        document.getElementById("coralEq").innerText  = (total/10).toFixed(2)+" Fragment";
+        
+        // Store in sessionStorage for payment page
+        sessionStorage.setItem('carbonData', JSON.stringify({
+            type: 'transport',
+            total: total.toFixed(2),
+            details: details,
+            plasticEq: (total/1.67).toFixed(1),
+            treeEq: (total/3.3).toFixed(2),
+            coralEq: (total/10).toFixed(2),
+            calculatedAt: new Date().toISOString()
+        }));
     }
-    document.getElementById("totalCarbon").innerText = total.toFixed(2)+" kgCO₂e";
-    document.getElementById("plasticEq").innerText = (total/1.67).toFixed(1)+" Kg";
-    document.getElementById("treeEq").innerText   = (total/3.3).toFixed(2)+" Tree(s)";
-    document.getElementById("coralEq").innerText  = (total/10).toFixed(2)+" Fragment";
-}
 
-document.querySelectorAll(".calc").forEach(el=>{
-    el.addEventListener("input", calculateCarbon);
-});
+    document.querySelectorAll(".calc").forEach(el=>{
+        el.addEventListener("input", calculateCarbon);
+    });
 </script>
+
+@auth
+<script>
+    // Handle Proceed to Payment button
+    document.getElementById("proceedPayment").addEventListener("click", function() {
+        if(totalCarbonValue === 0) {
+            alert('Silakan isi data kalkulator terlebih dahulu!');
+            return;
+        }
+        
+        // Show confirmation
+        if(confirm(`Total emisi karbon Anda: ${totalCarbonValue.toFixed(2)} kgCO₂e\n\nLanjutkan ke pembayaran?`)) {
+            window.location.href = "{{ route('payment') }}";
+        }
+    });
+</script>
+@endauth
 
 @endsection

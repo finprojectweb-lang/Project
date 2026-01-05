@@ -3,6 +3,62 @@
 <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
 @section('content')
+
+<!-- Notifikasi Success (Login/Logout) -->
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" 
+         style="position: fixed; top: 80px; right: 20px; z-index: 9999; min-width: 350px; max-width: 500px; 
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2); border-left: 5px solid #10b981; 
+                background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); 
+                color: #065f46; border-radius: 12px; padding: 15px 20px; 
+                animation: slideInRight 0.4s ease-out;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-check-circle" style="font-size: 24px; color: #10b981;"></i>
+            <div style="flex: 1;">
+                <strong style="display: block; margin-bottom: 2px;">Berhasil!</strong>
+                <span>{{ session('success') }}</span>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    
+    <script>
+        setTimeout(function() {
+            let alert = document.querySelector('.alert-success');
+            if(alert) {
+                alert.style.animation = 'slideOutRight 0.4s ease-out';
+                setTimeout(() => {
+                    let bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 350);
+            }
+        }, 5000);
+    </script>
+@endif
+
+<style>
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+}
+</style>
     <section class="hero-section">
       <div class="hero-content d-flex align-items-center justify-content-center text-center">
             <div class="container hero-inner">
@@ -31,11 +87,13 @@
                 </div>
 
                 <!-- Tombol -->
+                <!-- Tombol -->
+                <!-- Tombol -->
                 <div class="hero-buttons d-flex justify-content-center gap-3 mt-4">
-                    <a href="#" class="btn-green">
+                    <a href="{{ route('calculator.index') }}" class="btn-green">
                         Get Started
                     </a>
-                    <a href="#" class="btn-outline-green">
+                    <a href="{{ route('calculator.index') }}" class="btn-outline-green">
                         Calculate Your Carbon
                     </a>
                 </div>
