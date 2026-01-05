@@ -4,211 +4,213 @@
 
 @section('content')
 
-{{-- ================= HERO SECTION ================= --}}
-<section
-    class="project-hero"
-    style="background-image: url('{{ asset('images/projects/mangrove/mangroveaja.png') }}');"
->
-    <div class="project-hero-overlay">
-        <div class="container text-center">
-            <h1 class="project-title">Mangrove Restoration Project</h1>
-            <p class="project-tagline">
-                Restoring coastal ecosystems while delivering measurable climate impact
+<section class="hero" style="background-image: url('{{ asset("images/tanem.png") }}');">
+ <div class="hero-text-wrapper">
+        <div class="hero-text-bg">
+            <h1>
+                <span class="green-text">Restore the Coast, Reduce Your Carbon Footprint</span>
+            </h1>
+
+            <p>
+                A transparent carbon offset platform focused on
+                mangrove forest rehabilitation in Indonesia.
             </p>
         </div>
     </div>
 </section>
 
+<section class="vision-mission">
+    <div class="vm-container">
 
-{{-- ================= PROJECT OVERVIEW ================= --}}
-<section class="project-section">
-    <div class="container">
-        <h2 class="section-title">Project Overview</h2>
+        <!-- LEFT IMAGE -->
+        <div class="vm-image">
+            <img src="{{ asset('images/nulli.png') }}" alt="Vision Image">
+        </div>
 
-        <div class="row align-items-center mt-4">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <p class="section-desc">
-                    Our Mangrove Restoration Project focuses on rehabilitating degraded
-                    coastal ecosystems through large-scale planting of native mangrove
-                    species. The initiative enhances biodiversity, strengthens coastal
-                    resilience, and contributes to long-term carbon sequestration.
-                </p>
-            </div>
+        <!-- RIGHT TEXT -->
+        <div class="vm-text">
+            <h3>Vision</h3>
+            <p>
+                Realizing a future where economic growth and ecosystem sustainability
+                go hand in hand for a more resilient planet.
+            </p>
 
-            <div class="col-lg-6">
-                <img
-                    src="{{ asset('images/projects/mangrove/mangrove-overview.jpg') }}"
-                    class="img-fluid rounded-4 shadow"
-                    alt="Mangrove Restoration Overview"
-                >
-            </div>
+            <h3>Mission</h3>
+            <p>
+                Empowering every individual and institution with easy access to
+                measurable climate action, from carbon emission reduction to
+                active participation in global environmental restoration projects.
+            </p>
         </div>
     </div>
 </section>
 
+<section class="founding-team">
+    <div class="ft-container">
 
-{{-- ================= PROJECT OBJECTIVES ================= --}}
-<section class="project-section bg-light">
-    <div class="container">
-        <h2 class="section-title">Project Objectives</h2>
-
-        <ul class="approach-list">
-            <li>Restore degraded coastal and estuarine ecosystems</li>
-            <li>Increase long-term carbon absorption capacity</li>
-            <li>Protect shorelines from erosion and extreme weather</li>
-            <li>Support sustainable livelihoods for coastal communities</li>
-        </ul>
-    </div>
-</section>
-
-
-{{-- ================= OUR APPROACH ================= --}}
-<section class="project-section">
-    <div class="container">
-        <h2 class="section-title">Our Approach</h2>
-
-        <div class="row align-items-center mt-4">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <img
-                    src="{{ asset('images/projects/mangrove/mangrove-approach.jpg') }}"
-                    class="img-fluid rounded-4 shadow"
-                    alt="Mangrove Planting Process"
-                >
-            </div>
-
-            <div class="col-lg-6">
-                <ul class="approach-list">
-                    <li>Environmental baseline assessment and site evaluation</li>
-                    <li>Planting native mangrove species adapted to local conditions</li>
-                    <li>Community-driven implementation and stewardship</li>
-                    <li>Continuous monitoring and impact verification</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-{{-- ================= COMMUNITY ENGAGEMENT ================= --}}
-<section class="project-section bg-light">
-    <div class="container">
-        <h2 class="section-title">Community Engagement</h2>
-
-        <div class="row align-items-center mt-4">
-            <div class="col-lg-6">
-                <p class="section-desc">
-                    Community engagement ensures long-term sustainability. Local
-                    residents are actively involved through training, employment,
-                    and environmental education programs, creating shared ecological
-                    and economic benefits.
-                </p>
-            </div>
-
-            <div class="col-lg-6 mt-4 mt-lg-0">
-                <img
-                    src="{{ asset('images/projects/mangrove/mangrove-community.jpg') }}"
-                    class="img-fluid rounded-4 shadow"
-                    alt="Community Engagement"
-                >
-            </div>
-        </div>
-    </div>
-</section>
-
-
-{{-- ================= IMPACT REPORT ================= --}}
-<section class="project-section">
-    <div class="container">
-        <h2 class="section-title">Impact Report</h2>
-
-        <div class="impact-grid">
-            <div class="impact-card">
-                <h3>12,000+</h3>
-                <p>Mangrove Trees Planted</p>
-            </div>
-
-            <div class="impact-card">
-                <h3>25 Hectares</h3>
-                <p>Coastal Area Restored</p>
-            </div>
-
-            <div class="impact-card">
-                <h3>1,500+ Tons</h3>
-                <p>CO₂ Sequestered</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-{{-- ================= CASE STUDY ================= --}}
-<section class="project-section bg-light">
-    <div class="container">
-        <h2 class="section-title">Case Study</h2>
-
-        <div class="case-study">
-            <img
-                src="{{ asset('images/projects/mangrove/mangrove-case.jpg') }}"
-                alt="Mangrove Case Study"
-            >
-
-            <div class="case-text">
-                <h4>North Java Coastal Rehabilitation</h4>
-                <p>
-                    A degraded coastline was transformed into a thriving mangrove
-                    ecosystem. Within two years, biodiversity increased while nearby
-                    villages experienced reduced erosion and improved flood protection.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-{{-- ================= FUTURE DEVELOPMENT ================= --}}
-<section class="project-section">
-    <div class="container">
-        <h2 class="section-title">Future Development</h2>
-
-        <div class="row align-items-center mt-4">
-            <div class="col-lg-6">
-                <p class="section-desc">
-                    We aim to scale mangrove restoration to additional coastal regions,
-                    integrate blue carbon certification, and strengthen partnerships
-                    with climate-conscious institutions and corporations.
-                </p>
-            </div>
-
-            <div class="col-lg-6 mt-4 mt-lg-0">
-                <img
-                    src="{{ asset('images/projects/mangrove/mangrove-future.jpg') }}"
-                    class="img-fluid rounded-4 shadow"
-                    alt="Future Mangrove Development"
-                >
-            </div>
-        </div>
-    </div>
-</section>
-
-
-{{-- ================= CTA ================= --}}
-<section class="talk-section text-center py-5">
-    <div class="container">
-
-        <div class="icon-wrapper mx-auto mb-3">
-            <i class="bi bi-chat-dots-fill"></i>
-        </div>
-
-        <h3 class="talk-title mb-3">Talk to Us</h3>
-
-        <p class="talk-desc mx-auto mb-4">
-            Interested in supporting our mangrove restoration initiatives or exploring
-            carbon offset partnerships? We’re ready to collaborate.
+        <h2>Founding Team</h2>
+        <p class="ft-desc">
+            NulliCarbon is powered by a dedicated collective of innovators, tech experts,
+            and sustainability advocates committed to a single purpose: securing a greener
+            tomorrow. Guided by the foresight of our founders, we stand united in our mission
+            to accelerate measurable climate action.
         </p>
 
-        <a href="#contact" class="btn btn-talk">Let’s Talk</a>
+        <div class="ft-cards">
 
+            <div class="ft-card">
+                <img src="{{ asset('images/aan.jpg') }}" alt="Farhan Aldi Nugraha">
+                <p>Farhan Aldi Nugraha</p>
+            </div>
+
+            <div class="ft-card">
+                <img src="{{ asset('images/alik.jpg') }}" alt="Muhammad Fadhil Malikul Sholeh">
+                <p>Muhammad Fadhil<br>Malikul Sholeh</p>
+                            </div>
+
+            <div class="ft-card">
+                <img src="{{ asset('images/lutpi.png') }}" alt="Luthfi Ardhika Akbar">
+                <p>Luthfi Ardhika Akbar</p>
+                            </div>
+
+            <div class="ft-card">
+                <img src="{{ asset('images/ariel.png') }}" alt="Dr. Ariela Raditya Fadlur Rahman">
+                <p>
+                    Dr. Ariela Raditya Fadlur Rahman<br>
+                    <span>S.Kom, M.Kom</span>                          
+                </p>
+            </div>
+       </div>
     </div>
 </section>
 
+<section class="future-section">
+    <div class="future-container">
+        <h2>NulliCarbon: Paving the Future, Transforming Indonesia's Climate</h2>
+
+        <div class="future-grid">
+            <div class="future-card">
+                <h4>Founded on Accessible Climate Action</h4>
+                <p>
+                    NulliCarbon was established with the core purpose of empowering every
+                    individual and institution by providing easy access to climate
+                    mitigation solutions, fulfilling our Mission.
+                </p>
+            </div>
+            <div class="future-card">
+                <h4>Driving Resilient Economic Growth</h4>
+                <p>
+                    Our solutions are designed to ensure that economic growth goes hand
+                    in hand with ecosystem sustainability, creating a pathway toward a
+                    more resilient planet (Vision).
+                </p>
+            </div>
+
+            <div class="future-card">
+                <h4>Integrating Reduction and Restoration</h4>
+                <p>
+                    We offer a comprehensive toolkit that enables clients not only to
+                    achieve carbon emission reduction but also to engage in active
+                    participation in global environmental restoration projects (Mission).
+                </p>
+            </div>
+
+            <div class="future-card">
+                <h4>Strategic Partnerships for Planetary Resilience</h4>
+                <p>
+                    Collaborating with key industry players to build climate-resilient
+                    business practices, directly supporting the Vision of a more
+                    resilient planet.
+                </p>
+            </div>
+
+            <div class="future-card">
+                <h4>Technology for Measurable Impact</h4>
+                <p>
+                    Utilizing advanced AI and data analytics to provide transparent and
+                    accurate measurement of carbon impact, ensuring every climate action
+                    is measurable as defined in our Mission.
+                </p>
+            </div>
+
+            <div class="future-card">
+                <h4>Empowering Every Individual and Institution</h4>
+                <p>
+                    Providing intuitive and powerful dashboards that put decision-making
+                    power in the hands of every individual and institution to drive
+                    meaningful change (Mission).
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="image-slider-section">
+    <div class="image-slider" id="slider">
+        <img src="{{ asset('images/tanemkarang.png') }}" alt="">
+        <img src="{{ asset('images/OIP (1).webp') }}" alt="">
+        <img src="{{ asset('images/mangroveijo.webp') }}" alt="">
+        <img src="{{ asset('images/reduce3.png') }}" alt="">
+        <img src="{{ asset('images/download (1).webp') }}" alt="">
+        <img src="{{ asset('images/reduce2.png') }}" alt="">
+    </div>
+</section>
+<section class="info-section">
+
+    <!-- ATAS: 2 CARD -->
+    <div class="info-top">
+        <div class="info-card text-card">
+            <h3>Mission Focused on Education and Engagement</h3>
+            <p>
+                Advocating environmental literacy and active participation
+                through hands-on education, empowering individuals and institutions
+                to take measurable climate action.
+            </p>
+        </div>
+
+        <div class="info-card image-card">
+            <img src="{{ asset('images/indonesia.png') }}" alt="Indonesia">
+        </div>
+    </div>
+
+  <section class="talk-section text-center py-5">
+        <div class="container"></div>
+
+            <!-- Icon -->
+            <div class="icon-wrapper mx-auto mb-3">
+                <i class="bi bi-chat-dots-fill"></i>
+            </div>
+
+            <!-- Title -->
+            <h3 class="talk-title mb-3">Talk to Us</h3>
+
+            <!-- Description -->
+            <p class="talk-desc mx-auto mb-4">
+                Whether you’d like to consult with our team of experts, inquire about carbon offset solutions,
+                or explore strategic partnership opportunities, we're ready to hear your needs.
+            </p>
+
+            <!-- Button -->
+            <a href="#contact" class="btn btn-talk">Let’s Talk</a>
+
+        </div>
+    </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.getElementById("slider");
+    let scrollAmount = 0;
+
+    function autoSlide() {
+        scrollAmount += 1; // kecepatan (besar = lebih cepat)
+        slider.scrollLeft = scrollAmount;
+
+        if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+            scrollAmount = 0;
+        }
+    }
+
+    setInterval(autoSlide, 25); // smooth
+});
+</script>
 @endsection
