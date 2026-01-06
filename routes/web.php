@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -128,3 +129,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('payment.process');
     
 });
+
+// Payment routes
+Route::get('/payment', [PaymentController::class, 'show'])->name('payment.show');
+Route::post('/payment/process', [PaymentController::class, 'store'])->name('payment.process');
+Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');

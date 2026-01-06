@@ -838,7 +838,7 @@ with global companies, organizations, and communities that share our vision.
             Let's work together to create a positive impact for our planet. 
             Contact us to start strategic collaboration.
         </p>
-        <a href="/contact" class="cta-button">Contact Us</a>
+        <a href="/contactus" class="cta-button">Contact Us</a>
     </div>
 </section>
 

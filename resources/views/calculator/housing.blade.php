@@ -431,16 +431,19 @@ body::-webkit-scrollbar {
 
 @auth
 <script>
-    // Handle Proceed to Payment button
-    document.getElementById("proceedPayment").addEventListener("click", function() {
-        if(totalCarbonValue === 0) {
+    document.getElementById("proceedPayment")?.addEventListener("click", function() {
+        // DEBUG: Cek nilai totalCarbonValue
+        console.log("totalCarbonValue:", totalCarbonValue);
+        
+        if(!totalCarbonValue || totalCarbonValue === 0) {
             alert('Silakan isi data kalkulator terlebih dahulu!');
             return;
         }
         
-        // Show confirmation
         if(confirm(`Total emisi karbon Anda: ${totalCarbonValue.toFixed(2)} kgCO₂e\n\nLanjutkan ke pembayaran?`)) {
-            window.location.href = "{{ route('payment') }}";
+            const url = "{{ route('payment.show') }}?carbon_amount=" + totalCarbonValue.toFixed(2) + "&type=transportation";
+            console.log("Redirecting to:", url); // DEBUG
+            window.location.href = url;
         }
     });
 </script>
