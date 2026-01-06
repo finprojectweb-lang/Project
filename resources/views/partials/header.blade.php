@@ -232,7 +232,7 @@
                         </div>
                     @else
                         <a href="/login" class="btn-navbar btn-signup">Sign up</a>
-                        <a href="#" class="btn-navbar btn-contact">Contact</a>
+                        <a href="/contactus" class="btn-navbar btn-contact">Contact</a>
                     @endauth
                 </div>
             </div>

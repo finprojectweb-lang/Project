@@ -36,6 +36,10 @@ Route::get('/mangrove', function () {
     return view('pages.mangrove');
 })->name('mangrove');
 
+Route::get('/admin', function () {
+    return view('pages.admin');
+})->name('admin');
+
 Route::get('/coralreefs', function () {
     return view('pages.karangterumbu');
 })->name('karangterumbu');
