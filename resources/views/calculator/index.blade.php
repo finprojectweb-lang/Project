@@ -2,106 +2,153 @@
 
 @section('content')
 <style>
-body {
-    padding-top: 80px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-}
-
-.calc-choice-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-}
-
-.calc-title {
-    text-align: center;
+/* SECTION */
+.eco-orbit {
+    padding: 150px 20px;
+    background:
+        radial-gradient(circle at top, #1a1f2b, #0b0f19);
     color: white;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 50px;
+    font-family: 'Inter', sans-serif;
 }
 
-.calc-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.calc-card {
-    background: white;
-    border-radius: 20px;
-    padding: 30px;
+/* HEADER */
+.eco-header {
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
+    margin-bottom: 80px;
+}
+
+.eco-header h2 {
+    font-size: 2.9rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #00f5d4, #4cc9f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.eco-header p {
+    opacity: .7;
+    margin-top: 10px;
+    font-size: 1.05rem;
+}
+
+/* GRID */
+.eco-grid {
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 48px;
+}
+
+/* CARD */
+.eco-card {
+    position: relative;
+    padding: 46px 28px;
+    border-radius: 36px;
+    background: #121726;
+    box-shadow:
+        10px 10px 30px rgba(0,0,0,.6),
+        -10px -10px 30px rgba(255,255,255,.02);
+    transition: all .55s cubic-bezier(.4,0,.2,1);
     text-decoration: none;
-    color: inherit;
-    display: block;
+    color: white;
 }
 
-.calc-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+/* ICON */
+.eco-icon {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem;
+    margin-bottom: 28px;
+    background: rgba(255,255,255,.05);
+    transition: all .6s ease;
 }
 
-.calc-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    color: #667eea;
+/* TEXT */
+.eco-card h4 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
-.calc-card h4 {
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #333;
+.eco-card span {
+    font-size: .95rem;
+    opacity: .7;
 }
 
-.calc-card p {
-    color: #666;
-    font-size: 0.9rem;
+/* HOVER EFFECT */
+.eco-card:hover {
+    transform: translateY(-22px);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.9);
+}
+
+.eco-card:hover .eco-icon {
+    transform: scale(1.15) rotate(8deg);
+}
+
+/* NEON ACCENTS */
+.c1 .eco-icon { color: #00f5d4; box-shadow: 0 0 25px #00f5d4; }
+.c2 .eco-icon { color: #4cc9f0; box-shadow: 0 0 25px #4cc9f0; }
+.c3 .eco-icon { color: #f9c74f; box-shadow: 0 0 25px #f9c74f; }
+.c4 .eco-icon { color: #f28482; box-shadow: 0 0 25px #f28482; }
+
+/* MOBILE */
+@media (max-width: 640px) {
+    .eco-header h2 {
+        font-size: 2.2rem;
+    }
+
+    .eco-card {
+        padding: 38px 24px;
+    }
 }
 </style>
 
-<div class="calc-choice-container">
-    <h2 class="calc-title">Choose Your Carbon Calculator</h2>
+<div class="eco-orbit">
+    <div class="eco-header">
+        <h2>Track Your Environmental Impact</h2>
+        <p>Every choice leaves a footprint</p>
+    </div>
 
-    <div class="calc-grid">
-        <!-- Housing -->
-        <a href="{{ route('calc.housing') }}" class="calc-card">
-            <div class="calc-icon">
-                <i class="bi bi-house-fill"></i>
+    <div class="eco-grid">
+
+        <a href="{{ route('calc.housing') }}" class="eco-card c1">
+            <div class="eco-icon">
+                <i class="bi bi-lightning-charge-fill"></i>
             </div>
-            <h4>Housing</h4>
-            <p>Calculate emissions from your home energy usage</p>
+            <h4>Energy</h4>
+            <span>Home & electricity usage</span>
         </a>
 
-        <!-- Transport -->
-        <a href="{{ route('calc.transport') }}" class="calc-card">
-            <div class="calc-icon">
-                <i class="bi bi-car-front-fill"></i>
+        <a href="{{ route('calc.transport') }}" class="eco-card c2">
+            <div class="eco-icon">
+                <i class="bi bi-geo-alt-fill"></i>
             </div>
-            <h4>Transportation</h4>
-            <p>Calculate emissions from your daily commute</p>
+            <h4>Mobility</h4>
+            <span>Daily travel emissions</span>
         </a>
 
-        <!-- Food -->
-        <a href="{{ route('calc.food') }}" class="calc-card">
-            <div class="calc-icon">
-                <i class="bi bi-egg-fried"></i>
+        <a href="{{ route('calc.food') }}" class="eco-card c3">
+            <div class="eco-icon">
+                <i class="bi bi-flower1"></i>
             </div>
             <h4>Food</h4>
-            <p>Calculate emissions from your diet choices</p>
+            <span>Diet & consumption</span>
         </a>
 
-        <!-- Expenditure -->
-        <a href="{{ route('calc.expenditure') }}" class="calc-card">
-            <div class="calc-icon">
-                <i class="bi bi-bag-fill"></i>
+        <a href="{{ route('calc.expenditure') }}" class="eco-card c4">
+            <div class="eco-icon">
+                <i class="bi bi-wallet2"></i>
             </div>
-            <h4>Expenditure</h4>
-            <p>Calculate emissions from your shopping habits</p>
+            <h4>Lifestyle</h4>
+            <span>Shopping & habits</span>
         </a>
+
     </div>
 </div>
 @endsection
