@@ -243,10 +243,19 @@ body::-webkit-scrollbar {
         <div style="width: 100px;"></div>
     </div>
 
-    <!-- RESULT PANEL -->
+    <!-- UPDATE RESULT PANEL - Replace existing result-box div -->
     <div class="result-box text-center p-4 rounded-4 mb-4">
         <h6>Your Total Carbon Footprint</h6>
         <h2 id="totalCarbon">0 kgCO₂e</h2>
+        
+        <!-- TAMBAHAN: HARGA -->
+        <div class="price-section mt-3 p-3 bg-white rounded-3">
+            <h5 class="text-success mb-2">
+                <i class="fas fa-money-bill-wave me-2"></i>Compensation Cost
+            </h5>
+            <h3 class="fw-bold text-success" id="totalPrice">Rp 0</h3>
+            <small class="text-muted">@ Rp 15.000 per kgCO₂e</small>
+        </div>
 
         <div class="row mt-3 small">
             <div class="col-4">
@@ -345,78 +354,65 @@ body::-webkit-scrollbar {
 </div>
 
 <script>
-    // Emission factors for expenditure (kgCO₂e per IDR spent)
-    // Based on average carbon intensity of consumer goods and services in Indonesia
-    const emissionFactors = {
-        // kgCO₂e per 1,000,000 IDR (per million rupiah)
-        eatingOut: 150,          // Restaurant meals, food delivery (high emissions from transport + preparation)
-        clothing: 200,           // Textile production, fast fashion (high water + energy use)
-        electronics: 300,        // Manufacturing electronics (very high emissions)
-        telephone: 50            // Telecommunication services (lower emissions, mostly infrastructure)
+    // Emission factors (kgCO₂e per IDR 1,000,000 spent)
+    // Based on average carbon intensity of different spending categories
+    const expenditureEmissionFactors = {
+        eatingOut: 0.4,        // kgCO₂e per IDR 1 juta (food services)
+        clothing: 0.6,         // kgCO₂e per IDR 1 juta (textile production)
+        electronics: 0.8,      // kgCO₂e per IDR 1 juta (electronics manufacturing)
+        telephone: 0.2         // kgCO₂e per IDR 1 juta (telecom services)
     };
+
+    // HARGA PER KG CO2
+    const PRICE_PER_KG_CO2 = 15000;
 
     // Store total carbon globally
     let totalCarbonValue = 0;
+    let totalPriceValue = 0;
 
     // Calculate carbon
     function calculateCarbon(){
         let total = 0;
         const details = {};
         
-        // Get all input values (monthly expenditure in IDR)
-        const eatingOut = parseFloat(document.getElementById("eatingOut").value) || 0;
-        const clothing = parseFloat(document.getElementById("clothing").value) || 0;
-        const electronics = parseFloat(document.getElementById("electronics").value) || 0;
-        const telephone = parseFloat(document.getElementById("telephone").value) || 0;
-        
-        // Calculate emissions for each category
-        // Formula: (Amount in IDR / 1,000,000) × Emission Factor
-        const eatingOutEmission = (eatingOut / 1000000) * emissionFactors.eatingOut;
-        const clothingEmission = (clothing / 1000000) * emissionFactors.clothing;
-        const electronicsEmission = (electronics / 1000000) * emissionFactors.electronics;
-        const telephoneEmission = (telephone / 1000000) * emissionFactors.telephone;
-        
-        // Sum all emissions
-        total = eatingOutEmission + clothingEmission + electronicsEmission + telephoneEmission;
-        
-        // Store details
-        if(eatingOut > 0) {
-            details.eatingOut = { 
-                amount: eatingOut.toLocaleString('id-ID'), 
-                emission: eatingOutEmission.toFixed(2) 
-            };
-        }
-        if(clothing > 0) {
-            details.clothing = { 
-                amount: clothing.toLocaleString('id-ID'), 
-                emission: clothingEmission.toFixed(2) 
-            };
-        }
-        if(electronics > 0) {
-            details.electronics = { 
-                amount: electronics.toLocaleString('id-ID'), 
-                emission: electronicsEmission.toFixed(2) 
-            };
-        }
-        if(telephone > 0) {
-            details.telephone = { 
-                amount: telephone.toLocaleString('id-ID'), 
-                emission: telephoneEmission.toFixed(2) 
-            };
+        // Calculate for each expenditure type
+        for(const expType in expenditureEmissionFactors) {
+            const amount = parseFloat(document.getElementById(expType).value) || 0;
+            
+            if(amount > 0) {
+                // Convert amount to millions (Rp)
+                const amountInMillions = amount / 1000000;
+                
+                // Calculate emission
+                const emission = amountInMillions * expenditureEmissionFactors[expType];
+                
+                total += emission;
+                
+                details[expType] = {
+                    amount: amount,
+                    amountFormatted: formatRupiah(amount),
+                    emission: emission.toFixed(2)
+                };
+            }
         }
         
         totalCarbonValue = total;
+        totalPriceValue = total * PRICE_PER_KG_CO2;
         
         // Update display
         document.getElementById("totalCarbon").innerText = total.toFixed(2)+" kgCO₂e";
+        document.getElementById("totalPrice").innerText = formatRupiah(totalPriceValue);
         document.getElementById("plasticEq").innerText = (total/1.67).toFixed(1)+" Kg";
-        document.getElementById("treeEq").innerText   = (total/3.3).toFixed(2)+" Tree(s)";
-        document.getElementById("coralEq").innerText  = (total/10).toFixed(2)+" Fragment";
+        document.getElementById("treeEq").innerText = (total/3.3).toFixed(2)+" Tree(s)";
+        document.getElementById("coralEq").innerText = (total/10).toFixed(2)+" Fragment";
         
-        // Store in sessionStorage for payment page
+        // Store in sessionStorage
         sessionStorage.setItem('carbonData', JSON.stringify({
             type: 'expenditure',
             total: total.toFixed(2),
+            price: totalPriceValue,
+            priceFormatted: formatRupiah(totalPriceValue),
+            pricePerKg: PRICE_PER_KG_CO2,
             details: details,
             plasticEq: (total/1.67).toFixed(1),
             treeEq: (total/3.3).toFixed(2),
@@ -425,7 +421,12 @@ body::-webkit-scrollbar {
         }));
     }
 
-    // Add event listeners to all inputs
+    // Format Rupiah
+    function formatRupiah(number) {
+        return 'Rp ' + Math.round(number).toLocaleString('id-ID');
+    }
+
+    // Add event listeners
     document.querySelectorAll(".calc").forEach(el=>{
         el.addEventListener("input", calculateCarbon);
         el.addEventListener("change", calculateCarbon);
@@ -441,12 +442,31 @@ body::-webkit-scrollbar {
             return;
         }
         
-        // Show confirmation
-        if(confirm(`Total emisi karbon Anda: ${totalCarbonValue.toFixed(2)} kgCO₂e\n\nLanjutkan ke pembayaran?`)) {
+        if(confirm(`Total emisi karbon: ${totalCarbonValue.toFixed(2)} kgCO₂e\nBiaya kompensasi: ${formatRupiah(totalPriceValue)}\n\nLanjutkan ke pembayaran?`)) {
             window.location.href = "{{ route('payment') }}";
         }
     });
 </script>
 @endauth
+
+<!-- TAMBAHAN CSS -->
+<style>
+/* Price Section Styles - Tambahkan di setiap file kalkulator */
+.price-section {
+    border: 2px solid #10B981;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+}
+
+.price-section h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+@media(max-width:768px){
+    .price-section h3 {
+        font-size: 1.5rem;
+    }
+}
+</style>
 
 @endsection

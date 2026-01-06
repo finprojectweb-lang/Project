@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\TransactionHistoryController;
 
 
 /*
@@ -127,4 +128,11 @@ Route::middleware(['auth'])->group(function () {
         return back()->with('success', 'Pembayaran berhasil diproses!');
     })->name('payment.process');
     
+});
+
+
+// Transaction History Routes (tambahkan ini)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/transactions', [TransactionHistoryController::class, 'index'])->name('transactions.index');
+    Route::get('/transactions/{id}', [TransactionHistoryController::class, 'show'])->name('transactions.show');
 });

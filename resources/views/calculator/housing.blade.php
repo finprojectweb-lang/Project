@@ -240,9 +240,19 @@ body::-webkit-scrollbar {
     </div>
 
     <!-- RESULT PANEL -->
+<!-- UPDATE RESULT PANEL - Replace existing result-box div -->
     <div class="result-box text-center p-4 rounded-4 mb-4">
         <h6>Your Total Carbon Footprint</h6>
         <h2 id="totalCarbon">0 kgCO₂e</h2>
+        
+        <!-- TAMBAHAN: HARGA -->
+        <div class="price-section mt-3 p-3 bg-white rounded-3">
+            <h5 class="text-success mb-2">
+                <i class="fas fa-money-bill-wave me-2"></i>Compensation Cost
+            </h5>
+            <h3 class="fw-bold text-success" id="totalPrice">Rp 0</h3>
+            <small class="text-muted">@ Rp 15.000 per kgCO₂e</small>
+        </div>
 
         <div class="row mt-3 small">
             <div class="col-4">
@@ -354,8 +364,12 @@ body::-webkit-scrollbar {
         }
     };
 
+    // HARGA PER KG CO2
+    const PRICE_PER_KG_CO2 = 15000;
+
     // Store total carbon globally
     let totalCarbonValue = 0;
+    let totalPriceValue = 0;
 
     // Calculate carbon
     function calculateCarbon(){
@@ -390,8 +404,7 @@ body::-webkit-scrollbar {
         // Energy Resource calculation
         const energyResource = document.getElementById("energyResource").value;
         if(energyResource && emissionFactors.energyResources[energyResource] !== undefined) {
-            // Assume 100 kWh equivalent usage for energy resource
-            // User can adjust this based on their actual consumption
+            // Assume 100 kWh equivalent usage for energy resource per month
             const resourceUsage = 100; // kWh equivalent
             const resourceEmission = resourceUsage * emissionFactors.energyResources[energyResource];
             total += resourceEmission;
@@ -403,9 +416,11 @@ body::-webkit-scrollbar {
         }
         
         totalCarbonValue = total;
+        totalPriceValue = total * PRICE_PER_KG_CO2;
         
         // Update display
         document.getElementById("totalCarbon").innerText = total.toFixed(2)+" kgCO₂e";
+        document.getElementById("totalPrice").innerText = formatRupiah(totalPriceValue);
         document.getElementById("plasticEq").innerText = (total/1.67).toFixed(1)+" Kg";
         document.getElementById("treeEq").innerText   = (total/3.3).toFixed(2)+" Tree(s)";
         document.getElementById("coralEq").innerText  = (total/10).toFixed(2)+" Fragment";
@@ -414,12 +429,20 @@ body::-webkit-scrollbar {
         sessionStorage.setItem('carbonData', JSON.stringify({
             type: 'housing_energy',
             total: total.toFixed(2),
+            price: totalPriceValue,
+            priceFormatted: formatRupiah(totalPriceValue),
+            pricePerKg: PRICE_PER_KG_CO2,
             details: details,
             plasticEq: (total/1.67).toFixed(1),
             treeEq: (total/3.3).toFixed(2),
             coralEq: (total/10).toFixed(2),
             calculatedAt: new Date().toISOString()
         }));
+    }
+
+    // Format Rupiah
+    function formatRupiah(number) {
+        return 'Rp ' + Math.round(number).toLocaleString('id-ID');
     }
 
     // Add event listeners to all inputs
@@ -439,11 +462,29 @@ body::-webkit-scrollbar {
         }
         
         // Show confirmation
-        if(confirm(`Total emisi karbon Anda: ${totalCarbonValue.toFixed(2)} kgCO₂e\n\nLanjutkan ke pembayaran?`)) {
+        if(confirm(`Total emisi karbon: ${totalCarbonValue.toFixed(2)} kgCO₂e\nBiaya kompensasi: ${formatRupiah(totalPriceValue)}\n\nLanjutkan ke pembayaran?`)) {
             window.location.href = "{{ route('payment') }}";
         }
     });
 </script>
+<style>
+    /* Price Section Styles - Tambahkan di setiap file kalkulator */
+.price-section {
+    border: 2px solid #10B981;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+}
+
+.price-section h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+@media(max-width:768px){
+    .price-section h3 {
+        font-size: 1.5rem;
+    }
+}
+</style>
 @endauth
 
 @endsection

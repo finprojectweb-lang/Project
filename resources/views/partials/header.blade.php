@@ -11,6 +11,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 
@@ -47,7 +50,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             border: none;
             padding: 8px;
-            min-width: 220px;
+            min-width: 240px;
             margin-top: 8px;
         }
 
@@ -98,6 +101,30 @@
 
         .logout-btn:hover {
             background: #fee2e2 !important;
+        }
+
+        /* Highlight untuk menu Riwayat */
+        .dropdown-item.highlight {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            border-left: 3px solid #10b981;
+        }
+
+        .dropdown-item.highlight:hover {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+        }
+
+        .dropdown-item.highlight i {
+            color: #10b981;
+        }
+
+        /* Badge notifikasi (opsional) */
+        .notification-badge {
+            background: #dc2626;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: auto;
         }
 
         /* Responsive */
@@ -178,6 +205,13 @@
                                         <span>Profile</span>
                                     </a>
                                 </li>
+                                <!-- LINK RIWAYAT TRANSAKSI (MOBILE) -->
+                                <li>
+                                    <a class="dropdown-item highlight" href="{{ route('transactions.index') }}">
+                                        <i class="bi bi-clock-history"></i>
+                                        <span>Riwayat Transaksi</span>
+                                    </a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-cog"></i>
@@ -219,6 +253,15 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user"></i>
                                     <span>Profile</span>
+                                </a>
+                            </li>
+                            <!-- LINK RIWAYAT TRANSAKSI (DESKTOP) -->
+                            <li>
+                                <a class="dropdown-item highlight" href="{{ route('transactions.index') }}">
+                                    <i class="bi bi-clock-history"></i>
+                                    <span>Riwayat Transaksi</span>
+                                    <!-- Opsional: Badge notifikasi jika ada transaksi pending -->
+                                    {{-- <span class="notification-badge">2</span> --}}
                                 </a>
                             </li>
                             <li>

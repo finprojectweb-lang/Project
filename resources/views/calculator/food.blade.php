@@ -254,9 +254,19 @@ body::-webkit-scrollbar {
     </div>
 
     <!-- RESULT PANEL -->
+<!-- UPDATE RESULT PANEL - Replace existing result-box div -->
     <div class="result-box text-center p-4 rounded-4 mb-4">
         <h6>Your Total Carbon Footprint</h6>
         <h2 id="totalCarbon">0 kgCO₂e</h2>
+        
+        <!-- TAMBAHAN: HARGA -->
+        <div class="price-section mt-3 p-3 bg-white rounded-3">
+            <h5 class="text-success mb-2">
+                <i class="fas fa-money-bill-wave me-2"></i>Compensation Cost
+            </h5>
+            <h3 class="fw-bold text-success" id="totalPrice">Rp 0</h3>
+            <small class="text-muted">@ Rp 15.000 per kgCO₂e</small>
+        </div>
 
         <div class="row mt-3 small">
             <div class="col-4">
@@ -415,80 +425,71 @@ body::-webkit-scrollbar {
 </div>
 
 <script>
-    // Emission factors for food (kgCO₂e per kg of food)
-    const emissionFactors = {
-        // Food emission factors per kg
-        beefPork: 27.0,        // Beef and pork have highest emissions
-        chickenFish: 6.9,      // Chicken and fish have medium emissions
-        vegetable: 2.0,        // Vegetables have low emissions
-        dairy: 13.5,           // Dairy products (milk, cheese, yogurt)
-        grains: 2.5,           // Rice, wheat, bread, pasta
-        processedFood: 5.0     // Processed and packaged foods
+    // Emission factors (kgCO₂e per kg of food)
+    const foodEmissionFactors = {
+        beefPork: 27.0,      // Beef has very high emissions
+        chickenFish: 6.9,    // Chicken/Fish moderate emissions
+        vegetable: 2.0,      // Vegetables low emissions
+        dairy: 8.9,          // Dairy products moderate-high emissions
+        grains: 2.5,         // Grains low emissions
+        processedFood: 5.0   // Processed food moderate emissions
     };
+
+    // HARGA PER KG CO2
+    const PRICE_PER_KG_CO2 = 15000;
 
     // Store total carbon globally
     let totalCarbonValue = 0;
+    let totalPriceValue = 0;
 
     // Calculate carbon
     function calculateCarbon(){
         let total = 0;
         const details = {};
         
-        // Get all input values (consumption in kg)
-        const beefPork = parseFloat(document.getElementById("beefPork").value) || 0;
-        const chickenFish = parseFloat(document.getElementById("chickenFish").value) || 0;
-        const vegetable = parseFloat(document.getElementById("vegetable").value) || 0;
-        const dairy = parseFloat(document.getElementById("dairy").value) || 0;
-        const grains = parseFloat(document.getElementById("grains").value) || 0;
-        const processedFood = parseFloat(document.getElementById("processedFood").value) || 0;
-        
         // Get number of people and days
         const numPeople = parseFloat(document.getElementById("numPeople").value) || 1;
         const numDays = parseFloat(document.getElementById("numDays").value) || 7;
         
-        // Calculate total food consumption
-        const totalFoodPerWeek = beefPork + chickenFish + vegetable + dairy + grains + processedFood;
-        
-        // Calculate emissions for each food category per week
-        const beefPorkEmission = beefPork * emissionFactors.beefPork;
-        const chickenFishEmission = chickenFish * emissionFactors.chickenFish;
-        const vegetableEmission = vegetable * emissionFactors.vegetable;
-        const dairyEmission = dairy * emissionFactors.dairy;
-        const grainsEmission = grains * emissionFactors.grains;
-        const processedFoodEmission = processedFood * emissionFactors.processedFood;
-        
-        // Sum all emissions for one person per week
-        const weeklyEmissionPerPerson = beefPorkEmission + chickenFishEmission + vegetableEmission + 
-                                       dairyEmission + grainsEmission + processedFoodEmission;
-        
-        // Calculate total emissions: multiply by number of people and adjust for number of days
-        // (numDays / 7) converts weekly data to the specified number of days
-        total = weeklyEmissionPerPerson * numPeople * (numDays / 7);
-        
-        // Store details
-        details.beefPork = { weight: beefPork, emission: beefPorkEmission.toFixed(2) };
-        details.chickenFish = { weight: chickenFish, emission: chickenFishEmission.toFixed(2) };
-        details.vegetable = { weight: vegetable, emission: vegetableEmission.toFixed(2) };
-        details.dairy = { weight: dairy, emission: dairyEmission.toFixed(2) };
-        details.grains = { weight: grains, emission: grainsEmission.toFixed(2) };
-        details.processedFood = { weight: processedFood, emission: processedFoodEmission.toFixed(2) };
-        details.numPeople = numPeople;
-        details.numDays = numDays;
-        details.weeklyEmissionPerPerson = weeklyEmissionPerPerson.toFixed(2);
-        details.totalEmission = total.toFixed(2);
+        // Calculate for each food type
+        for(const foodType in foodEmissionFactors) {
+            const kgPerWeek = parseFloat(document.getElementById(foodType).value) || 0;
+            
+            if(kgPerWeek > 0) {
+                // Calculate emission: (kg per week / 7 days) * numDays * emission factor / numPeople
+                const dailyKg = kgPerWeek / 7;
+                const totalKg = dailyKg * numDays;
+                const emission = (totalKg * foodEmissionFactors[foodType]) / numPeople;
+                
+                total += emission;
+                
+                details[foodType] = {
+                    kgPerWeek: kgPerWeek,
+                    totalKg: totalKg.toFixed(2),
+                    emission: emission.toFixed(2)
+                };
+            }
+        }
         
         totalCarbonValue = total;
+        totalPriceValue = total * PRICE_PER_KG_CO2;
         
         // Update display
         document.getElementById("totalCarbon").innerText = total.toFixed(2)+" kgCO₂e";
+        document.getElementById("totalPrice").innerText = formatRupiah(totalPriceValue);
         document.getElementById("plasticEq").innerText = (total/1.67).toFixed(1)+" Kg";
-        document.getElementById("treeEq").innerText   = (total/3.3).toFixed(2)+" Tree(s)";
-        document.getElementById("coralEq").innerText  = (total/10).toFixed(2)+" Fragment";
+        document.getElementById("treeEq").innerText = (total/3.3).toFixed(2)+" Tree(s)";
+        document.getElementById("coralEq").innerText = (total/10).toFixed(2)+" Fragment";
         
-        // Store in sessionStorage for payment page
+        // Store in sessionStorage
         sessionStorage.setItem('carbonData', JSON.stringify({
             type: 'food',
             total: total.toFixed(2),
+            price: totalPriceValue,
+            priceFormatted: formatRupiah(totalPriceValue),
+            pricePerKg: PRICE_PER_KG_CO2,
+            numPeople: numPeople,
+            numDays: numDays,
             details: details,
             plasticEq: (total/1.67).toFixed(1),
             treeEq: (total/3.3).toFixed(2),
@@ -497,14 +498,16 @@ body::-webkit-scrollbar {
         }));
     }
 
-    // Add event listeners to all inputs
+    // Format Rupiah
+    function formatRupiah(number) {
+        return 'Rp ' + Math.round(number).toLocaleString('id-ID');
+    }
+
+    // Add event listeners
     document.querySelectorAll(".calc").forEach(el=>{
         el.addEventListener("input", calculateCarbon);
         el.addEventListener("change", calculateCarbon);
     });
-    
-    // Calculate on page load with default values
-    calculateCarbon();
 </script>
 
 @auth
@@ -516,12 +519,31 @@ body::-webkit-scrollbar {
             return;
         }
         
-        // Show confirmation
-        if(confirm(`Total emisi karbon Anda: ${totalCarbonValue.toFixed(2)} kgCO₂e\n\nLanjutkan ke pembayaran?`)) {
+        if(confirm(`Total emisi karbon: ${totalCarbonValue.toFixed(2)} kgCO₂e\nBiaya kompensasi: ${formatRupiah(totalPriceValue)}\n\nLanjutkan ke pembayaran?`)) {
             window.location.href = "{{ route('payment') }}";
         }
     });
 </script>
 @endauth
+
+<!-- TAMBAHAN CSS -->
+<style>
+/* Price Section Styles - Tambahkan di setiap file kalkulator */
+.price-section {
+    border: 2px solid #10B981;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+}
+
+.price-section h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+@media(max-width:768px){
+    .price-section h3 {
+        font-size: 1.5rem;
+    }
+}
+</style>
 
 @endsection

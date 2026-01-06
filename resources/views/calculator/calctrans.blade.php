@@ -233,6 +233,15 @@ body::-webkit-scrollbar {
     <div class="result-box text-center p-4 rounded-4 mb-4">
         <h6>Your Total Carbon Footprint</h6>
         <h2 id="totalCarbon">0 kgCO₂e</h2>
+        
+        <!-- TAMBAHAN: HARGA -->
+        <div class="price-section mt-3 p-3 bg-white rounded-3">
+            <h5 class="text-success mb-2">
+                <i class="fas fa-money-bill-wave me-2"></i>Compensation Cost
+            </h5>
+            <h3 class="fw-bold text-success" id="totalPrice">Rp 0</h3>
+            <small class="text-muted">@ Rp 15.000 per kgCO₂e</small>
+        </div>
 
         <div class="row mt-3 small">
             <div class="col-4">
@@ -395,6 +404,9 @@ body::-webkit-scrollbar {
         plane: 0.255
     };
 
+    // HARGA PER KG CO2
+    const PRICE_PER_KG_CO2 = 15000; // Rp 15.000 per kgCO₂e
+
     // Predefined distances
     const trainRoutes = {
         "GMR-BDG": 150,
@@ -412,6 +424,7 @@ body::-webkit-scrollbar {
 
     // Store total carbon globally
     let totalCarbonValue = 0;
+    let totalPriceValue = 0;
 
     // Event listeners
     document.getElementById("trainRoute").addEventListener("change", e=>{
@@ -424,7 +437,7 @@ body::-webkit-scrollbar {
         calculateCarbon();
     });
 
-    // Calculate carbon
+    // Calculate carbon and price
     function calculateCarbon(){
         let total = 0;
         const details = {};
@@ -444,7 +457,12 @@ body::-webkit-scrollbar {
         
         totalCarbonValue = total;
         
+        // HITUNG HARGA
+        totalPriceValue = total * PRICE_PER_KG_CO2;
+        
+        // Update Display
         document.getElementById("totalCarbon").innerText = total.toFixed(2)+" kgCO₂e";
+        document.getElementById("totalPrice").innerText = formatRupiah(totalPriceValue);
         document.getElementById("plasticEq").innerText = (total/1.67).toFixed(1)+" Kg";
         document.getElementById("treeEq").innerText   = (total/3.3).toFixed(2)+" Tree(s)";
         document.getElementById("coralEq").innerText  = (total/10).toFixed(2)+" Fragment";
@@ -453,6 +471,9 @@ body::-webkit-scrollbar {
         sessionStorage.setItem('carbonData', JSON.stringify({
             type: 'transport',
             total: total.toFixed(2),
+            price: totalPriceValue,
+            priceFormatted: formatRupiah(totalPriceValue),
+            pricePerKg: PRICE_PER_KG_CO2,
             details: details,
             plasticEq: (total/1.67).toFixed(1),
             treeEq: (total/3.3).toFixed(2),
@@ -461,11 +482,17 @@ body::-webkit-scrollbar {
         }));
     }
 
+    // Format Rupiah
+    function formatRupiah(number) {
+        return 'Rp ' + Math.round(number).toLocaleString('id-ID');
+    }
+
     document.querySelectorAll(".calc").forEach(el=>{
         el.addEventListener("input", calculateCarbon);
     });
 </script>
 
+<!-- UPDATE PAYMENT BUTTON SCRIPT -->
 @auth
 <script>
     // Handle Proceed to Payment button
@@ -475,12 +502,31 @@ body::-webkit-scrollbar {
             return;
         }
         
-        // Show confirmation
-        if(confirm(`Total emisi karbon Anda: ${totalCarbonValue.toFixed(2)} kgCO₂e\n\nLanjutkan ke pembayaran?`)) {
+        // Show confirmation with price
+        if(confirm(`Total emisi karbon: ${totalCarbonValue.toFixed(2)} kgCO₂e\nBiaya kompensasi: ${formatRupiah(totalPriceValue)}\n\nLanjutkan ke pembayaran?`)) {
             window.location.href = "{{ route('payment') }}";
         }
     });
 </script>
 @endauth
+
+<!-- TAMBAHAN CSS -->
+<style>
+.price-section {
+    border: 2px solid #10B981;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+}
+
+.price-section h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+@media(max-width:768px){
+    .price-section h3 {
+        font-size: 1.5rem;
+    }
+}
+</style>
 
 @endsection
