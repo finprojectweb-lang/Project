@@ -353,14 +353,16 @@ body::-webkit-scrollbar {
 
 </div>
 
+<!-- Ganti HANYA bagian script di expenditure.blade.php dengan ini -->
+
 <script>
     // Emission factors (kgCO₂e per IDR 1,000,000 spent)
-    // Based on average carbon intensity of different spending categories
+    // Based on lifecycle analysis of consumption categories
     const expenditureEmissionFactors = {
-        eatingOut: 0.4,        // kgCO₂e per IDR 1 juta (food services)
-        clothing: 0.6,         // kgCO₂e per IDR 1 juta (textile production)
-        electronics: 0.8,      // kgCO₂e per IDR 1 juta (electronics manufacturing)
-        telephone: 0.2         // kgCO₂e per IDR 1 juta (telecom services)
+        eatingOut: 2.5,       // Makanan di luar (termasuk delivery, packaging)
+        clothing: 5.8,        // Pakaian (produksi textile sangat tinggi emisi)
+        electronics: 15.0,    // Elektronik (produksi & supply chain)
+        telephone: 1.2        // Telekomunikasi (data center, network)
     };
 
     // HARGA PER KG CO2
@@ -377,13 +379,19 @@ body::-webkit-scrollbar {
         
         // Calculate for each expenditure type
         for(const expType in expenditureEmissionFactors) {
-            const amount = parseFloat(document.getElementById(expType).value) || 0;
+            let amount = parseFloat(document.getElementById(expType).value) || 0;
+            
+            // Validasi: tidak boleh negatif
+            if(amount < 0) {
+                amount = 0;
+                document.getElementById(expType).value = 0;
+            }
             
             if(amount > 0) {
-                // Convert amount to millions (Rp)
+                // Konversi ke juta rupiah
                 const amountInMillions = amount / 1000000;
                 
-                // Calculate emission
+                // Hitung emisi
                 const emission = amountInMillions * expenditureEmissionFactors[expType];
                 
                 total += emission;
@@ -391,6 +399,7 @@ body::-webkit-scrollbar {
                 details[expType] = {
                     amount: amount,
                     amountFormatted: formatRupiah(amount),
+                    amountInMillions: amountInMillions.toFixed(2),
                     emission: emission.toFixed(2)
                 };
             }
@@ -431,27 +440,36 @@ body::-webkit-scrollbar {
         el.addEventListener("input", calculateCarbon);
         el.addEventListener("change", calculateCarbon);
     });
+    
+    // Validasi input saat user mengetik
+    document.querySelectorAll(".calc").forEach(el=>{
+        el.addEventListener("input", function() {
+            // Hapus karakter non-numeric
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            // Batasi max input (opsional)
+            if(parseFloat(this.value) > 1000000000) { // Max 1 Miliar
+                this.value = 1000000000;
+            }
+        });
+    });
 </script>
 
 @auth
 <script>
-    // Handle Proceed to Payment button
     document.getElementById("proceedPayment").addEventListener("click", function() {
-        if(totalCarbonValue === 0) {
-            alert('Silakan isi data kalkulator terlebih dahulu!');
+        if(!totalCarbonValue || totalCarbonValue <= 0) {
+            alert('⚠️ Please calculate your carbon footprint first!');
             return;
         }
         
-        if(confirm(`Total emisi karbon: ${totalCarbonValue.toFixed(2)} kgCO₂e\nBiaya kompensasi: ${formatRupiah(totalPriceValue)}\n\nLanjutkan ke pembayaran?`)) {
-            window.location.href = "{{ route('payment') }}";
-        }
+        // Redirect ke payment page dengan query parameters
+        window.location.href = `/payment?carbon_amount=${totalCarbonValue.toFixed(2)}&type=expenditure`;
     });
 </script>
 @endauth
 
-<!-- TAMBAHAN CSS -->
 <style>
-/* Price Section Styles - Tambahkan di setiap file kalkulator */
 .price-section {
     border: 2px solid #10B981;
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);

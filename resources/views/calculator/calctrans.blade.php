@@ -405,7 +405,7 @@ body::-webkit-scrollbar {
     };
 
     // HARGA PER KG CO2
-    const PRICE_PER_KG_CO2 = 15000; // Rp 15.000 per kgCO₂e
+    const PRICE_PER_KG_CO2 = 15000;
 
     // Predefined distances
     const trainRoutes = {
@@ -456,8 +456,6 @@ body::-webkit-scrollbar {
         }
         
         totalCarbonValue = total;
-        
-        // HITUNG HARGA
         totalPriceValue = total * PRICE_PER_KG_CO2;
         
         // Update Display
@@ -492,25 +490,26 @@ body::-webkit-scrollbar {
     });
 </script>
 
-<!-- UPDATE PAYMENT BUTTON SCRIPT -->
 @auth
 <script>
-    // Handle Proceed to Payment button
-    document.getElementById("proceedPayment").addEventListener("click", function() {
-        if(totalCarbonValue === 0) {
-            alert('Silakan isi data kalkulator terlebih dahulu!');
-            return;
-        }
-        
-        // Show confirmation with price
-        if(confirm(`Total emisi karbon: ${totalCarbonValue.toFixed(2)} kgCO₂e\nBiaya kompensasi: ${formatRupiah(totalPriceValue)}\n\nLanjutkan ke pembayaran?`)) {
-            window.location.href = "{{ route('payment') }}";
-        }
-    });
+    // Payment button handler
+    const proceedPaymentBtn = document.getElementById('proceedPayment');
+    if (proceedPaymentBtn) {
+        proceedPaymentBtn.addEventListener('click', function() {
+            // Validasi apakah sudah ada kalkulasi
+            if (!totalCarbonValue || totalCarbonValue <= 0) {
+                alert('⚠️ Please calculate your carbon footprint first!');
+                return;
+            }
+            
+            // Redirect ke payment page dengan query parameters
+            window.location.href = `/payment?carbon_amount=${totalCarbonValue.toFixed(2)}&type=transportation`;
+        });
+    }
 </script>
 @endauth
 
-<!-- TAMBAHAN CSS -->
+
 <style>
 .price-section {
     border: 2px solid #10B981;

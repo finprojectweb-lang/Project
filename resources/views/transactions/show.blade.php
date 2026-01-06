@@ -4,11 +4,14 @@
 
 @section('content')
 <style>
-    .detail-page {
+    body {
         background-color: #F0F8FF;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .detail-page {
         min-height: 100vh;
-        padding: 60px 0;
-        font-family: 'Arima', sans-serif;
+        padding: 120px 0;
     }
 
     .back-btn {
@@ -69,6 +72,8 @@
 
     .status-paid { background: #dcfce7; color: #166534; }
     .status-pending { background: #fef3c7; color: #92400e; }
+    .status-cancelled { background: #f1f5f9; color: #64748b; }
+    .status-failed { background: #fee2e2; color: #991b1b; }
 
     .info-row {
         padding: 15px 0;
@@ -305,6 +310,28 @@
         opacity: 1;
         transform: translateY(0);
     }
+
+    @media (max-width: 768px) {
+        .detail-page {
+            padding: 30px 0;
+        }
+
+        .detail-card {
+            padding: 24px;
+        }
+
+        .card-title {
+            font-size: 22px;
+        }
+
+        .highlight-number {
+            font-size: 36px;
+        }
+
+        .chart-card {
+            padding: 20px;
+        }
+    }
 </style>
 
 <div class="detail-page">
@@ -318,15 +345,23 @@
         <div class="row g-4 mb-4">
             <div class="col-lg-8">
                 <div class="detail-card reveal">
-                    <div class="d-flex justify-content-between align-items-start mb-4">
+                    <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap gap-3">
                         <div>
                             <h2 class="card-title">Detail Transaksi</h2>
                             <p style="color: #64748b; margin: 0; font-family: 'Courier New', monospace;">
-                                {{ $transaction->transaction_id }}
+                                {{ $payment->order_id }}
                             </p>
                         </div>
-                        <span class="status-badge-large status-{{ $transaction->status }}">
-                            {{ $transaction->status_text }}
+                        <span class="status-badge-large status-{{ $payment->status }}">
+                            @if($payment->status === 'paid')
+                                Paid
+                            @elseif($payment->status === 'pending')
+                                Pending
+                            @elseif($payment->status === 'cancelled')
+                                Cancelled
+                            @else
+                                Failed
+                            @endif
                         </span>
                     </div>
 
@@ -334,27 +369,51 @@
                         <div class="col-md-6">
                             <div class="info-row">
                                 <div class="info-label">Tanggal Transaksi</div>
-                                <div class="info-value">{{ $transaction->created_at->format('d F Y, H:i') }}</div>
+                                <div class="info-value">{{ $payment->created_at->format('d F Y, H:i') }}</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info-row">
                                 <div class="info-label">Jenis Kalkulator</div>
-                                <div class="info-value">{{ $transaction->calculator_type_name }}</div>
+                                <div class="info-value">{{ ucfirst(str_replace('_', ' ', $payment->calculator_type)) }}</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info-row">
                                 <div class="info-label">Metode Pembayaran</div>
-                                <div class="info-value">{{ $transaction->payment_method ?? '-' }}</div>
+                                <div class="info-value">{{ $payment->payment_method_name }}</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info-row">
                                 <div class="info-label">Tanggal Pembayaran</div>
                                 <div class="info-value">
-                                    {{ $transaction->paid_at ? $transaction->paid_at->format('d F Y, H:i') : '-' }}
+                                    {{ $payment->paid_at ? $payment->paid_at->format('d F Y, H:i') : 'Belum dibayar' }}
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-row">
+                                <div class="info-label">Nama</div>
+                                <div class="info-value">{{ $payment->name }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-row">
+                                <div class="info-label">Email</div>
+                                <div class="info-value">{{ $payment->email }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-row">
+                                <div class="info-label">Telepon</div>
+                                <div class="info-value">{{ $payment->phone }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-row">
+                                <div class="info-label">Program Offset</div>
+                                <div class="info-value">{{ $payment->program_name }}</div>
                             </div>
                         </div>
                     </div>
@@ -365,49 +424,82 @@
                 <div class="highlight-card reveal">
                     <div class="highlight-icon">🌿</div>
                     <div class="info-label" style="color: rgba(255,255,255,0.8);">Total Offset CO₂</div>
-                    <div class="highlight-number">{{ number_format($transaction->co2_offset, 2) }}</div>
+                    <div class="highlight-number">{{ number_format($payment->carbon_amount, 2) }}</div>
                     <div style="font-size: 16px; margin-bottom: 20px;">kg CO₂e</div>
+                    <hr style="border-color: rgba(255,255,255,0.3); margin: 25px 0;">
+                    <div class="info-label" style="color: rgba(255,255,255,0.8);">Subtotal</div>
+                    <div style="font-size: 24px; font-weight: 600; margin-bottom: 10px;">
+                        Rp {{ number_format($payment->subtotal, 0, ',', '.') }}
+                    </div>
+                    <div class="info-label" style="color: rgba(255,255,255,0.8);">Admin Fee</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 20px;">
+                        Rp {{ number_format($payment->admin_fee, 0, ',', '.') }}
+                    </div>
                     <hr style="border-color: rgba(255,255,255,0.3); margin: 25px 0;">
                     <div class="info-label" style="color: rgba(255,255,255,0.8);">Total Pembayaran</div>
                     <div style="font-size: 32px; font-weight: 700;">
-                        Rp {{ number_format($transaction->amount, 0, ',', '.') }}
+                        Rp {{ number_format($payment->total_amount, 0, ',', '.') }}
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Calculator Data Section -->
+        @if($payment->carbonCalculation)
         <div class="detail-card reveal">
             <h3 class="section-header">
                 <i class="bi bi-calculator"></i>
                 Data Kalkulator
             </h3>
             <div class="row g-3">
-                @foreach($transaction->calculator_data as $key => $value)
-                <div class="col-md-4">
-                    <div class="data-box">
-                        <div class="data-key">{{ ucwords(str_replace('_', ' ', $key)) }}</div>
-                        <div class="data-value">{{ is_array($value) ? json_encode($value) : $value }}</div>
+                @if($payment->carbonCalculation->details)
+                    @foreach($payment->carbonCalculation->details as $key => $detail)
+                    <div class="col-md-4">
+                        <div class="data-box">
+                            <div class="data-key">{{ ucwords(str_replace('_', ' ', $key)) }}</div>
+                            <div class="data-value">
+                                @if(is_array($detail))
+                                    @if(isset($detail['distance']))
+                                        {{ $detail['distance'] }} km - {{ $detail['emission'] ?? 0 }} kg CO₂e
+                                    @elseif(isset($detail['amount']))
+                                        Rp {{ number_format($detail['amount'], 0, ',', '.') }}
+                                    @elseif(isset($detail['kgPerWeek']))
+                                        {{ $detail['kgPerWeek'] }} kg/week
+                                    @else
+                                        {{ json_encode($detail) }}
+                                    @endif
+                                @else
+                                    {{ $detail }}
+                                @endif
+                            </div>
+                        </div>
                     </div>
-                </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
 
             <div class="row mt-4">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="alert-custom alert-warning-custom">
-                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                        <strong>Emisi Dihasilkan:</strong> {{ number_format($transaction->co2_emission, 2) }} kg CO₂e
+                        <i class="bi bi-recycle me-2"></i>
+                        <strong>Plastik Setara:</strong> {{ $payment->carbonCalculation->plastic_eq }} Kg
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="alert-custom alert-success-custom">
-                        <i class="bi bi-check-circle-fill me-2"></i>
-                        <strong>Emisi Dikompensasi:</strong> {{ number_format($transaction->co2_offset, 2) }} kg CO₂e
+                        <i class="bi bi-tree-fill me-2"></i>
+                        <strong>Pohon Setara:</strong> {{ $payment->carbonCalculation->tree_eq }} Pohon
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert-custom" style="background: #dbeafe; color: #1e40af;">
+                        <i class="bi bi-water me-2"></i>
+                        <strong>Karang Setara:</strong> {{ $payment->carbonCalculation->coral_eq }} Fragmen
                     </div>
                 </div>
             </div>
         </div>
+        @endif
 
         <!-- Charts Section -->
         <div class="row g-4 mb-4">
@@ -415,7 +507,7 @@
                 <div class="chart-card">
                     <h3 class="section-header">
                         <i class="bi bi-graph-up"></i>
-                        Emisi per Bulan
+                        Offset per Bulan
                     </h3>
                     <canvas id="monthlyChart"></canvas>
                 </div>
@@ -447,9 +539,9 @@
                     </div>
                     <div class="insight-label">Aktivitas Tertinggi Bulan Ini</div>
                     @if($insights['highest_emission'])
-                    <div class="insight-value">{{ $insights['highest_emission']->calculator_type_name }}</div>
+                    <div class="insight-value">{{ ucfirst(str_replace('_', ' ', $insights['highest_emission']->calculator_type)) }}</div>
                     <div style="color: #dc2626; font-size: 18px; font-weight: 600;">
-                        {{ number_format($insights['highest_emission']->co2_emission, 2) }} kg CO₂e
+                        {{ number_format($insights['highest_emission']->carbon_amount, 2) }} kg CO₂e
                     </div>
                     @else
                     <div class="insight-desc">Belum ada data</div>
@@ -464,9 +556,9 @@
                     </div>
                     <div class="insight-label">Offset Paling Efisien</div>
                     @if($insights['most_efficient'])
-                    <div class="insight-value">{{ $insights['most_efficient']->calculator_type_name }}</div>
+                    <div class="insight-value">{{ ucfirst(str_replace('_', ' ', $insights['most_efficient']->calculator_type)) }}</div>
                     <div style="color: #166534; font-size: 18px; font-weight: 600;">
-                        Rp {{ number_format($insights['most_efficient']->efficiency, 0, ',', '.') }}/kg
+                        Rp {{ number_format($insights['most_efficient']->total_amount / $insights['most_efficient']->carbon_amount, 0, ',', '.') }}/kg
                     </div>
                     @else
                     <div class="insight-desc">Belum ada data</div>
@@ -505,7 +597,7 @@
                     <div class="insight-value text-capitalize">
                         {{ $insights['trend'] == 'increasing' ? 'Meningkat' : ($insights['trend'] == 'decreasing' ? 'Menurun' : 'Stabil') }}
                     </div>
-                    <div class="insight-desc">{{ $insights['trend_percentage'] }}% dari bulan lalu</div>
+                    <div class="insight-desc">{{ abs($insights['trend_percentage']) }}% dari bulan lalu</div>
                 </div>
             </div>
 
@@ -515,7 +607,7 @@
                         <i class="bi bi-speedometer2"></i>
                     </div>
                     <div class="insight-label">Efisiensi Transaksi Ini</div>
-                    <div class="insight-value">Rp {{ number_format($transaction->efficiency, 0, ',', '.') }}</div>
+                    <div class="insight-value">Rp {{ number_format($payment->total_amount / $payment->carbon_amount, 0, ',', '.') }}</div>
                     <div class="insight-desc">per kg CO₂e</div>
                 </div>
             </div>
@@ -533,7 +625,7 @@
         </div>
 
         <!-- Certificate Section -->
-        @if($transaction->status === 'paid' && $transaction->certificate_number)
+        @if($payment->status === 'paid')
         <div class="certificate-card reveal" style="margin-top: 40px;">
             <div class="row align-items-center">
                 <div class="col-md-8">
@@ -541,16 +633,17 @@
                         <i class="bi bi-award-fill me-2"></i>Sertifikat Kompensasi Karbon
                     </h3>
                     <p style="font-size: 18px; margin-bottom: 10px;">
-                        <strong>Nomor Sertifikat:</strong> {{ $transaction->certificate_number }}
+                        <strong>Nomor Sertifikat:</strong> CERT-{{ strtoupper(substr($payment->order_id, -8)) }}
                     </p>
                     <p style="font-size: 16px; opacity: 0.9; margin: 0;">
-                        {{ $transaction->offset_description }}
+                        Terima kasih telah berkontribusi dalam mengurangi jejak karbon sebesar {{ number_format($payment->carbon_amount, 2) }} kg CO₂e 
+                        melalui program {{ $payment->program_name }}.
                     </p>
                 </div>
                 <div class="col-md-4 text-end">
-                    <button class="btn-download">
+                    <a href="{{ route('transactions.certificate', $payment->id) }}" class="btn-download">
                         <i class="bi bi-download me-2"></i>Download Sertifikat
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -560,6 +653,18 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
+// Reveal animation on scroll
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        }
+    });
+}, { threshold: 0.1 });
+
+reveals.forEach(reveal => revealObserver.observe(reveal));
+
 // Monthly Chart
 const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
 const monthlyData = @json($monthlyData);
@@ -567,14 +672,14 @@ const monthlyLabels = monthlyData.map(item => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
     return months[item.month - 1] + ' ' + item.year;
 });
-const monthlyValues = monthlyData.map(item => item.total_offset);
+const monthlyValues = monthlyData.map(item => parseFloat(item.total_offset));
 
 new Chart(monthlyCtx, {
     type: 'line',
     data: {
         labels: monthlyLabels,
         datasets: [{
-            label: 'Emisi Dikompensasi (kg CO₂e)',
+            label: 'Offset (kg CO₂e)',
             data: monthlyValues,
             borderColor: '#22c55e',
             backgroundColor: 'rgba(34, 197, 94, 0.1)',
@@ -585,7 +690,7 @@ new Chart(monthlyCtx, {
     },
     options: {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         plugins: {
             legend: { display: false }
         },
@@ -599,8 +704,11 @@ new Chart(monthlyCtx, {
 // Cumulative Chart
 const cumulativeCtx = document.getElementById('cumulativeChart').getContext('2d');
 const cumulativeData = @json($cumulativeData);
-const cumulativeLabels = cumulativeData.map(item => item.date);
-const cumulativeValues = cumulativeData.map(item => item.cumulative);
+const cumulativeLabels = cumulativeData.map(item => {
+    const date = new Date(item.date);
+    return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
+});
+const cumulativeValues = cumulativeData.map(item => parseFloat(item.cumulative));
 
 new Chart(cumulativeCtx, {
     type: 'line',
@@ -618,7 +726,7 @@ new Chart(cumulativeCtx, {
     },
     options: {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         plugins: {
             legend: { display: false }
         },
@@ -633,10 +741,17 @@ new Chart(cumulativeCtx, {
 const typeCtx = document.getElementById('typeBreakdownChart').getContext('2d');
 const typeData = @json($typeBreakdown);
 const typeLabels = typeData.map(item => {
-    const types = { transport: 'Transportasi', electricity: 'Listrik', waste: 'Limbah', event: 'Event' };
+    const types = { 
+        transport: 'Transportasi',
+        transportation: 'Transportasi',
+        food: 'Makanan', 
+        expenditure: 'Pengeluaran', 
+        housing_energy: 'Hunian & Energi',
+        housing: 'Hunian & Energi'
+    };
     return types[item.calculator_type] || item.calculator_type;
 });
-const typeValues = typeData.map(item => item.total);
+const typeValues = typeData.map(item => parseFloat(item.total));
 
 new Chart(typeCtx, {
     type: 'doughnut',

@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SocialAuthController;
-use App\Http\Controllers\TransactionHistoryController;
-
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\TransactionController; // TAMBAHKAN INI (ganti TransactionHistoryController)
 
 /*
 |--------------------------------------------------------------------------
@@ -69,11 +69,9 @@ Route::get('/calculator/expenditure', function () {
     return view('calculator.expenditure');
 })->name('calc.expenditure');
 
-// Di web.php, tambahkan:
 Route::get('/calculator', function () {
     return view('calculator.index');
 })->name('calculator.index');
-
 
 Route::get('/discover-us/ourvalues', function () {
     return view('discoverus.ourvalues');
@@ -106,10 +104,10 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 // Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
-
+// Social Auth
 Route::get('/auth/google', [SocialAuthController::class, 'redirect']);
 Route::get('/auth/google/callback', [SocialAuthController::class, 'callback']);
+
 /*
 |--------------------------------------------------------------------------
 | Protected Routes (Harus login terlebih dahulu)
@@ -117,22 +115,16 @@ Route::get('/auth/google/callback', [SocialAuthController::class, 'callback']);
 */
 
 Route::middleware(['auth'])->group(function () {
+    // Payment Routes
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
+    Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+    Route::get('/payment/success/{payment}', [PaymentController::class, 'success'])->name('payment.success');
     
-    // Payment - Hanya bisa diakses setelah login
-    Route::get('/payment', function () {
-        return view('pages.payment');
-    })->name('payment');
-    
-    Route::post('/payment/process', function () {
-        // Logic untuk proses pembayaran
-        return back()->with('success', 'Pembayaran berhasil diproses!');
-    })->name('payment.process');
-    
+    // Transaction Routes
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::get('/transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
+    Route::get('/transactions/{id}/certificate', [TransactionController::class, 'certificate'])->name('transactions.certificate');
 });
 
-
-// Transaction History Routes (tambahkan ini)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/transactions', [TransactionHistoryController::class, 'index'])->name('transactions.index');
-    Route::get('/transactions/{id}', [TransactionHistoryController::class, 'show'])->name('transactions.show');
-});
+// Callback untuk payment gateway (tidak perlu auth)
+Route::post('/payment/callback', [PaymentController::class, 'callback'])->name('payment.callback');

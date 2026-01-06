@@ -342,25 +342,21 @@ body::-webkit-scrollbar {
 
 </div>
 
+<!-- Ganti HANYA bagian script di housing-energy.blade.php dengan ini -->
+
 <script>
     // Emission factors
     const emissionFactors = {
-        // Housing base emission per person per m²
-        housingBase: 0.5, // kgCO₂e per m² per month
-        
-        // Electricity emission factor (kgCO₂e per kWh)
-        // Based on average grid emission factor in Indonesia
-        electricityPerKwh: 0.85, // kgCO₂e per kWh
-        
-        // Energy Resources emission factors (kgCO₂e per kWh equivalent)
+        housingBase: 0.5,
+        electricityPerKwh: 0.85,
         energyResources: {
-            coal: 0.95,           // Highest emission
-            natural_gas: 0.45,    // Medium-low emission
-            lpg: 0.23,            // Lower emission
-            solar: 0.05,          // Very low emission (manufacturing impact)
-            wind: 0.02,           // Very low emission
-            hydro: 0.02,          // Very low emission
-            biomass: 0.18         // Low-medium emission (carbon neutral if sustainable)
+            coal: 0.95,
+            natural_gas: 0.45,
+            lpg: 0.23,
+            solar: 0.05,
+            wind: 0.02,
+            hydro: 0.02,
+            biomass: 0.18
         }
     };
 
@@ -390,7 +386,7 @@ body::-webkit-scrollbar {
             };
         }
         
-        // Electricity calculation (user input kWh)
+        // Electricity calculation
         const electricityKwh = parseFloat(document.getElementById("electricityKwh").value) || 0;
         if(electricityKwh > 0) {
             const electricityEmission = electricityKwh * emissionFactors.electricityPerKwh;
@@ -404,8 +400,7 @@ body::-webkit-scrollbar {
         // Energy Resource calculation
         const energyResource = document.getElementById("energyResource").value;
         if(energyResource && emissionFactors.energyResources[energyResource] !== undefined) {
-            // Assume 100 kWh equivalent usage for energy resource per month
-            const resourceUsage = 100; // kWh equivalent
+            const resourceUsage = 100;
             const resourceEmission = resourceUsage * emissionFactors.energyResources[energyResource];
             total += resourceEmission;
             details.energyResource = {
@@ -422,10 +417,10 @@ body::-webkit-scrollbar {
         document.getElementById("totalCarbon").innerText = total.toFixed(2)+" kgCO₂e";
         document.getElementById("totalPrice").innerText = formatRupiah(totalPriceValue);
         document.getElementById("plasticEq").innerText = (total/1.67).toFixed(1)+" Kg";
-        document.getElementById("treeEq").innerText   = (total/3.3).toFixed(2)+" Tree(s)";
-        document.getElementById("coralEq").innerText  = (total/10).toFixed(2)+" Fragment";
+        document.getElementById("treeEq").innerText = (total/3.3).toFixed(2)+" Tree(s)";
+        document.getElementById("coralEq").innerText = (total/10).toFixed(2)+" Fragment";
         
-        // Store in sessionStorage for payment page
+        // Store in sessionStorage
         sessionStorage.setItem('carbonData', JSON.stringify({
             type: 'housing_energy',
             total: total.toFixed(2),
@@ -445,7 +440,7 @@ body::-webkit-scrollbar {
         return 'Rp ' + Math.round(number).toLocaleString('id-ID');
     }
 
-    // Add event listeners to all inputs
+    // Add event listeners
     document.querySelectorAll(".calc").forEach(el=>{
         el.addEventListener("input", calculateCarbon);
         el.addEventListener("change", calculateCarbon);
@@ -454,21 +449,19 @@ body::-webkit-scrollbar {
 
 @auth
 <script>
-    // Handle Proceed to Payment button
     document.getElementById("proceedPayment").addEventListener("click", function() {
-        if(totalCarbonValue === 0) {
-            alert('Silakan isi data kalkulator terlebih dahulu!');
+        if(!totalCarbonValue || totalCarbonValue <= 0) {
+            alert('⚠️ Please calculate your carbon footprint first!');
             return;
         }
         
-        // Show confirmation
-        if(confirm(`Total emisi karbon: ${totalCarbonValue.toFixed(2)} kgCO₂e\nBiaya kompensasi: ${formatRupiah(totalPriceValue)}\n\nLanjutkan ke pembayaran?`)) {
-            window.location.href = "{{ route('payment') }}";
-        }
+        // Redirect ke payment page dengan query parameters
+        window.location.href = `/payment?carbon_amount=${totalCarbonValue.toFixed(2)}&type=housing`;
     });
 </script>
+@endauth
+
 <style>
-    /* Price Section Styles - Tambahkan di setiap file kalkulator */
 .price-section {
     border: 2px solid #10B981;
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
@@ -484,7 +477,7 @@ body::-webkit-scrollbar {
         font-size: 1.5rem;
     }
 }
+
 </style>
-@endauth
 
 @endsection

@@ -1,385 +1,371 @@
 @extends('layouts.app')
 
-@section('title', 'Riwayat Transaksi - NulliCarbon')
+@section('title', 'Transaction History - NulliCarbon')
 
 @section('content')
 <style>
-    .transaction-page {
-        background-color: #F0F8FF;
-        min-height: 100vh;
-        padding: 60px 0;
-        font-family: 'Arima', sans-serif;
+body {
+    background-color: #F0F8FF;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(22, 101, 52, 0.08);
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(22, 101, 52, 0.15);
+}
+
+.stat-card:nth-child(1) { border-left-color: #22c55e; }
+.stat-card:nth-child(2) { border-left-color: #3b82f6; }
+.stat-card:nth-child(3) { border-left-color: #f59e0b; }
+.stat-card:nth-child(4) { border-left-color: #8b5cf6; }
+
+.stat-card h6 {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.stat-card h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.stat-card .text-success { color: #22c55e !important; }
+.stat-card .text-primary { color: #3b82f6 !important; }
+.stat-card .text-warning { color: #f59e0b !important; }
+.stat-card .text-info { color: #8b5cf6 !important; }
+
+.transactions-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(22, 101, 52, 0.08);
+    overflow: hidden;
+}
+
+.transactions-card .card-header {
+    background: linear-gradient(135deg, #166534, #22c55e);
+    color: white;
+    padding: 24px 30px;
+    border: none;
+}
+
+.transactions-card .card-header h5 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.table-responsive {
+    padding: 0;
+}
+
+.table {
+    margin: 0;
+}
+
+.table thead th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    padding: 18px 20px;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.table tbody td {
+    padding: 20px;
+    vertical-align: middle;
+    color: #334155;
+    font-size: 14px;
+}
+
+.table tbody td code {
+    background: #f1f5f9;
+    color: #166534;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bg-success { background-color: #dcfce7 !important; color: #166534 !important; }
+.bg-warning { background-color: #fef3c7 !important; color: #92400e !important; }
+.bg-danger { background-color: #fee2e2 !important; color: #991b1b !important; }
+.bg-secondary { background-color: #f1f5f9 !important; color: #475569 !important; }
+
+.btn-outline-primary {
+    color: #166534;
+    border-color: #166534;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: #166534;
+    border-color: #166534;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.empty-state i {
+    font-size: 80px;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+}
+
+.empty-state h4 {
+    color: #475569;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.empty-state p {
+    color: #94a3b8;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #166534, #22c55e);
+    border: none;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(22, 101, 52, 0.3);
+}
+
+.page-header {
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #166534;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #64748b;
+    font-size: 16px;
+    margin: 0;
+}
+
+.pagination {
+    margin: 0;
+    padding: 20px;
+}
+
+.pagination .page-link {
+    color: #166534;
+    border-color: #e2e8f0;
+    padding: 10px 16px;
+    margin: 0 4px;
+    border-radius: 8px;
+}
+
+.pagination .page-link:hover {
+    background: #166534;
+    border-color: #166534;
+    color: white;
+}
+
+.pagination .page-item.active .page-link {
+    background: #166534;
+    border-color: #166534;
+}
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 28px;
     }
-
-    .stats-card {
-        background: white;
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 8px 24px rgba(22, 101, 52, 0.1);
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .stats-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #166534, #22c55e);
-    }
-
-    .stats-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 32px rgba(22, 101, 52, 0.15);
-        border-color: #22c55e;
-    }
-
-    .stats-icon {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32px;
-        margin-bottom: 20px;
-    }
-
-    .icon-green { background: linear-gradient(135deg, #166534, #22c55e); color: white; }
-    .icon-blue { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; }
-    .icon-orange { background: linear-gradient(135deg, #ea580c, #fb923c); color: white; }
-    .icon-purple { background: linear-gradient(135deg, #7c3aed, #a78bfa); color: white; }
-
-    .stats-number {
-        font-size: 36px;
-        font-weight: 700;
-        color: #166534;
-        margin: 10px 0;
-    }
-
-    .stats-label {
-        color: #64748b;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .page-header {
-        text-align: center;
-        margin-bottom: 50px;
-        animation: fadeInDown 0.8s ease;
-    }
-
-    .page-title {
-        font-size: 48px;
-        font-weight: 700;
-        color: #166534;
-        margin-bottom: 10px;
-        text-shadow: 2px 2px 4px rgba(22, 101, 52, 0.1);
-    }
-
-    .page-subtitle {
-        font-size: 18px;
-        color: #64748b;
-    }
-
-    .transaction-table-card {
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 8px 24px rgba(22, 101, 52, 0.1);
-        overflow: hidden;
-        margin-top: 40px;
-    }
-
-    .table-header {
-        background: linear-gradient(135deg, #166534, #22c55e);
-        color: white;
-        padding: 25px 30px;
+    
+    .stat-card h3 {
         font-size: 24px;
-        font-weight: 600;
     }
-
-    .custom-table {
-        width: 100%;
-        margin: 0;
-    }
-
-    .custom-table thead {
-        background: #f8fafc;
-    }
-
-    .custom-table thead th {
-        padding: 20px;
-        font-weight: 600;
-        color: #166534;
-        border: none;
-        text-transform: uppercase;
-        font-size: 12px;
-        letter-spacing: 1px;
-    }
-
-    .custom-table tbody td {
-        padding: 20px;
-        vertical-align: middle;
-        border-bottom: 1px solid #f1f5f9;
-        color: #334155;
-    }
-
-    .custom-table tbody tr {
-        transition: all 0.3s ease;
-    }
-
-    .custom-table tbody tr:hover {
-        background: #f8fafc;
-        transform: scale(1.01);
-    }
-
-    .transaction-id {
-        font-family: 'Courier New', monospace;
-        background: #f1f5f9;
-        padding: 6px 12px;
-        border-radius: 8px;
+    
+    .table {
         font-size: 13px;
-        font-weight: 600;
-        color: #166534;
     }
-
-    .badge-custom {
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+    
+    .table tbody td {
+        padding: 14px 10px;
     }
-
-    .badge-transport { background: #fef3c7; color: #92400e; }
-    .badge-electricity { background: #dbeafe; color: #1e40af; }
-    .badge-waste { background: #dcfce7; color: #166534; }
-    .badge-event { background: #fce7f3; color: #9f1239; }
-
-    .status-paid { background: #dcfce7; color: #166534; }
-    .status-pending { background: #fef3c7; color: #92400e; }
-    .status-failed { background: #fee2e2; color: #991b1b; }
-    .status-cancelled { background: #f1f5f9; color: #64748b; }
-
-    .btn-detail {
-        background: linear-gradient(135deg, #166534, #22c55e);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 12px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .btn-detail:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(22, 101, 52, 0.3);
-        color: white;
-    }
-
-    .empty-state {
-        padding: 80px 20px;
-        text-align: center;
-    }
-
-    .empty-icon {
-        font-size: 80px;
-        color: #cbd5e1;
-        margin-bottom: 20px;
-    }
-
-    .pagination {
-        justify-content: center;
-        margin-top: 30px;
-    }
-
-    .pagination .page-link {
-        color: #166534;
-        border: 2px solid #e2e8f0;
-        border-radius: 8px;
-        margin: 0 5px;
-        padding: 10px 16px;
-        font-weight: 600;
-    }
-
-    .pagination .page-link:hover {
-        background: #166534;
-        color: white;
-        border-color: #166534;
-    }
-
-    .pagination .page-item.active .page-link {
-        background: linear-gradient(135deg, #166534, #22c55e);
-        border-color: #166534;
-    }
-
-    @keyframes fadeInDown {
-        from {
-            opacity: 0;
-            transform: translateY(-30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s ease;
-    }
-
-    .reveal.show {
-        opacity: 1;
-        transform: translateY(0);
-    }
+}
 </style>
 
-<div class="transaction-page">
-    <div class="container">
-        <!-- Header -->
-        <div class="page-header reveal">
-            <h1 class="page-title">🌿 Riwayat Kompensasi Karbon</h1>
-            <p class="page-subtitle">Lihat semua kontribusi Anda untuk lingkungan yang lebih hijau</p>
-        </div>
-
-        <!-- Statistics Cards -->
-        <div class="row g-4 mb-5">
-            <div class="col-lg-3 col-md-6 reveal">
-                <div class="stats-card">
-                    <div class="stats-icon icon-green mx-auto">
-                        <i class="bi bi-tree-fill"></i>
-                    </div>
-                    <div class="text-center">
-                        <div class="stats-label">Total Offset</div>
-                        <div class="stats-number">{{ number_format($stats['total_offset'], 2) }}</div>
-                        <div class="stats-label">kg CO₂e</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 reveal">
-                <div class="stats-card">
-                    <div class="stats-icon icon-blue mx-auto">
-                        <i class="bi bi-wallet2"></i>
-                    </div>
-                    <div class="text-center">
-                        <div class="stats-label">Total Kontribusi</div>
-                        <div class="stats-number">Rp {{ number_format($stats['total_spent'], 0, ',', '.') }}</div>
-                        <div class="stats-label">Total Pengeluaran</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 reveal">
-                <div class="stats-card">
-                    <div class="stats-icon icon-orange mx-auto">
-                        <i class="bi bi-receipt"></i>
-                    </div>
-                    <div class="text-center">
-                        <div class="stats-label">Transaksi</div>
-                        <div class="stats-number">{{ $stats['total_transactions'] }}</div>
-                        <div class="stats-label">Berhasil</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 reveal">
-                <div class="stats-card">
-                    <div class="stats-icon icon-purple mx-auto">
-                        <i class="bi bi-calendar-month"></i>
-                    </div>
-                    <div class="text-center">
-                        <div class="stats-label">Bulan Ini</div>
-                        <div class="stats-number">{{ number_format($stats['this_month_offset'], 2) }}</div>
-                        <div class="stats-label">kg CO₂e</div>
-                    </div>
-                </div>
+<div class="container py-5">
+    <!-- Page Header -->
+    <div class="page-header" style="padding-top: 100px !important;">
+        <h1>Transaction History</h1>
+        <p>Track your carbon offset contributions and payment status</p>
+    </div>
+    
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+                <h6>Total Spent</h6>
+                <h3 class="text-success">Rp {{ number_format($data['total_spent'], 0, ',', '.') }}</h3>
             </div>
         </div>
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+                <h6>CO₂ Offset</h6>
+                <h3 class="text-primary">{{ number_format($data['co2_offset'], 2) }} kg</h3>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+                <h6>Total Transactions</h6>
+                <h3 class="text-warning">{{ $data['total_transactions'] }}</h3>
+            </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+                <h6>This Month</h6>
+                <h3 class="text-info">{{ number_format($data['this_month_offset'], 2) }} kg</h3>
+            </div>
+        </div>
+    </div>
 
-        <!-- Transactions Table -->
-        <div class="transaction-table-card reveal">
-            <div class="table-header">
-                <i class="bi bi-clock-history me-2"></i>Daftar Transaksi
-            </div>
-            <div class="table-responsive">
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th>ID Transaksi</th>
-                            <th>Tanggal</th>
-                            <th>Kalkulator</th>
-                            <th>Emisi (kg CO₂e)</th>
-                            <th>Jumlah</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($transactions as $transaction)
-                        <tr>
-                            <td>
-                                <span class="transaction-id">{{ $transaction->transaction_id }}</span>
-                            </td>
-                            <td>
-                                <strong>{{ $transaction->created_at->format('d M Y') }}</strong><br>
-                                <small style="color: #94a3b8;">{{ $transaction->created_at->format('H:i') }}</small>
-                            </td>
-                            <td>
-                                <span class="badge-custom badge-{{ $transaction->calculator_type }}">
-                                    {{ $transaction->calculator_type_name }}
-                                </span>
-                            </td>
-                            <td>
-                                <strong style="color: #166534; font-size: 18px;">{{ number_format($transaction->co2_offset, 2) }}</strong>
-                            </td>
-                            <td>
-                                <strong style="color: #166534; font-size: 16px;">Rp {{ number_format($transaction->amount, 0, ',', '.') }}</strong>
-                            </td>
-                            <td>
-                                <span class="badge-custom status-{{ $transaction->status }}">
-                                    {{ $transaction->status_text }}
-                                </span>
-                            </td>
-                            <td>
-                                <a href="{{ route('transactions.show', $transaction->id) }}" class="btn-detail">
-                                    <i class="bi bi-eye me-1"></i> Detail
-                                </a>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="7">
-                                <div class="empty-state">
-                                    <div class="empty-icon">
-                                        <i class="bi bi-inbox"></i>
-                                    </div>
-                                    <h4 style="color: #64748b; margin-bottom: 10px;">Belum ada transaksi</h4>
-                                    <p style="color: #94a3b8;">Mulai kompensasi karbon Anda sekarang!</p>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            
-            @if($transactions->hasPages())
-            <div style="padding: 30px;">
-                {{ $transactions->links() }}
-            </div>
+    <!-- Transactions Table -->
+    <div class="transactions-card">
+        <div class="card-header">
+            <h5>All Transactions</h5>
+        </div>
+        <div class="card-body p-0">
+            @if($transactions->count() > 0)
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Program</th>
+                                <th>CO₂ Offset</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($transactions as $transaction)
+                            <tr>
+                                <td><code>{{ $transaction->order_id }}</code></td>
+                                <td>{{ $transaction->created_at->format('d M Y') }}</td>
+                                <td>
+                                    <span class="badge bg-secondary">
+                                        {{ ucfirst(str_replace('_', ' ', $transaction->calculator_type)) }}
+                                    </span>
+                                </td>
+                                <td>
+                                    @php
+                                        $programs = [
+                                            'water_turbine' => '💧 Water Turbine',
+                                            'mangrove' => '🌿 Mangrove',
+                                            'waste_recycle' => '♻️ Waste Recycle',
+                                            'coral_reef' => '🪸 Coral Reef'
+                                        ];
+                                    @endphp
+                                    {{ $programs[$transaction->offset_program] ?? ucfirst(str_replace('_', ' ', $transaction->offset_program)) }}
+                                </td>
+                                <td>{{ number_format($transaction->carbon_amount, 2) }} kg</td>
+                                <td>Rp {{ number_format($transaction->total_amount, 0, ',', '.') }}</td>
+                                <td>
+                                    @if($transaction->status === 'paid')
+                                        <span class="badge bg-success">Paid</span>
+                                    @elseif($transaction->status === 'pending')
+                                        <span class="badge bg-warning">Pending</span>
+                                    @elseif($transaction->status === 'cancelled')
+                                        <span class="badge bg-secondary">Cancelled</span>
+                                    @else
+                                        <span class="badge bg-danger">Failed</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('transactions.show', $transaction->id) }}" 
+                                       class="btn btn-sm btn-outline-primary">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                @if($transactions->hasPages())
+                <div class="pagination-wrapper">
+                    {{ $transactions->links() }}
+                </div>
+                @endif
+            @else
+                <div class="empty-state">
+                    <i class="bi bi-inbox"></i>
+                    <h4>No Transactions Yet</h4>
+                    <p>Start calculating your carbon footprint and make your first contribution!</p>
+                    <a href="/calculator" class="btn btn-success">
+                        <i class="bi bi-calculator me-2"></i>Start Calculating
+                    </a>
+                </div>
             @endif
         </div>
     </div>
 </div>
+
 @endsection

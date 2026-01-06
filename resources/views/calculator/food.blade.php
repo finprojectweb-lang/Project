@@ -423,16 +423,17 @@ body::-webkit-scrollbar {
     </div>
 
 </div>
+<!-- Ganti HANYA bagian script di food.blade.php dengan ini -->
 
 <script>
     // Emission factors (kgCO₂e per kg of food)
     const foodEmissionFactors = {
-        beefPork: 27.0,      // Beef has very high emissions
-        chickenFish: 6.9,    // Chicken/Fish moderate emissions
-        vegetable: 2.0,      // Vegetables low emissions
-        dairy: 8.9,          // Dairy products moderate-high emissions
-        grains: 2.5,         // Grains low emissions
-        processedFood: 5.0   // Processed food moderate emissions
+        beefPork: 27.0,
+        chickenFish: 6.9,
+        vegetable: 2.0,
+        dairy: 8.9,
+        grains: 2.5,
+        processedFood: 5.0
     };
 
     // HARGA PER KG CO2
@@ -456,7 +457,6 @@ body::-webkit-scrollbar {
             const kgPerWeek = parseFloat(document.getElementById(foodType).value) || 0;
             
             if(kgPerWeek > 0) {
-                // Calculate emission: (kg per week / 7 days) * numDays * emission factor / numPeople
                 const dailyKg = kgPerWeek / 7;
                 const totalKg = dailyKg * numDays;
                 const emission = (totalKg * foodEmissionFactors[foodType]) / numPeople;
@@ -512,23 +512,19 @@ body::-webkit-scrollbar {
 
 @auth
 <script>
-    // Handle Proceed to Payment button
     document.getElementById("proceedPayment").addEventListener("click", function() {
-        if(totalCarbonValue === 0) {
-            alert('Silakan isi data kalkulator terlebih dahulu!');
+        if(!totalCarbonValue || totalCarbonValue <= 0) {
+            alert('⚠️ Please calculate your carbon footprint first!');
             return;
         }
         
-        if(confirm(`Total emisi karbon: ${totalCarbonValue.toFixed(2)} kgCO₂e\nBiaya kompensasi: ${formatRupiah(totalPriceValue)}\n\nLanjutkan ke pembayaran?`)) {
-            window.location.href = "{{ route('payment') }}";
-        }
+        // Redirect ke payment page dengan query parameters
+        window.location.href = `/payment?carbon_amount=${totalCarbonValue.toFixed(2)}&type=food`;
     });
 </script>
 @endauth
 
-<!-- TAMBAHAN CSS -->
 <style>
-/* Price Section Styles - Tambahkan di setiap file kalkulator */
 .price-section {
     border: 2px solid #10B981;
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
