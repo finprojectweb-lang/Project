@@ -94,12 +94,10 @@
             <aside class="fun-fact-card">
                 <h3>Fun Fact!</h3>
 
-                <h4>Mangroves Have Their Own<br>"Snorkeling Equipment"</h4>
+                <h4>Water Turbines Are The<br>"Efficiency Kings of Energy"</h4>
 
                 <p>
-                    Because the mud is poor in oxygen, mangroves have breathing roots
-                    (pneumatophores) that stick out above the water surface like straws
-                    to take in air.
+                    Because unlike car engines or coal plants that waste half their energy as heat, water turbines are so precisely designed that they capture over 90% of the water's kinetic force, making them the most efficient power source on the planet.
                 </p>
             </aside>
 
@@ -116,13 +114,13 @@
 
         <div class="content-item">
             <div class="text">
-                <h3>Satellite Imagery & Remote Sensing</h3>
+                <h3>field verification</h3>
                 <p>
-                    We don't just plant trees and leave them. We embed a "digital nervous system" into the ecosystem to monitor the forest's heartbeat in real time. Mangrove forests are highly sensitive to hydrological changes; even small changes in salinity or water circulation can be fatal for young seedlings.
+                    Field verification is the essential on-site validation process that bridges the critical gap between digital planning and physical reality. It involves deploying engineering teams to the project location—such as a hydroelectric plant—to conduct rigorous inspections using specialized handheld sensors, rugged tablets for real-time data entry, and standardized checklists. By physically examining assets like turbine components and civil infrastructure against their digital models, this ground-truthing exercise ensures the accuracy of remote sensing data, confirms operational integrity, and guarantees that the installed systems are functioning exactly as designed.
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/peta.png') }}" alt="Map">
+                <img src="{{ asset('images/fieldverif.png') }}" alt="Map">
             </div>
         </div>
 

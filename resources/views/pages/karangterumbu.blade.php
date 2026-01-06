@@ -94,12 +94,10 @@
             <aside class="fun-fact-card">
                 <h3>Fun Fact!</h3>
 
-                <h4>Mangroves Have Their Own<br>"Snorkeling Equipment"</h4>
+                <h4>Coral Reefs Are The<br>"Ocean's Invisible Shield"</h4>
 
                 <p>
-                    Because the mud is poor in oxygen, mangroves have breathing roots
-                    (pneumatophores) that stick out above the water surface like straws
-                    to take in air.
+                    Because a healthy coral reef system acts as a massive natural breakwater that absorbs up to 97% of wave energy, protecting coastal communities from storms and erosion more effectively than man-made concrete sea walls.
                 </p>
             </aside>
 
@@ -116,13 +114,13 @@
 
         <div class="content-item">
             <div class="text">
-                <h3>Satellite Imagery & Remote Sensing</h3>
+                <h3>biorock/mineral accretion technology</h3>
                 <p>
-                    We don't just plant trees and leave them. We embed a "digital nervous system" into the ecosystem to monitor the forest's heartbeat in real time. Mangrove forests are highly sensitive to hydrological changes; even small changes in salinity or water circulation can be fatal for young seedlings.
+                    Biorock technology, formally known as Mineral Accretion Technology, revolutionizes marine conservation by applying a safe, low-voltage electrical current to submerged steel structures. This electrochemical process causes dissolved minerals in seawater to precipitate onto the metal frame, forming a hard layer of calcium carbonate that mimics natural reef substrate. This "electrified" foundation creates an ideal environment for corals, accelerating their growth rates by up to five times and significantly boosting their resilience against environmental stressors like rising ocean temperatures and acidification.
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/peta.png') }}" alt="Map">
+                <img src="{{ asset('images/biorock.png') }}" alt="Map">
             </div>
         </div>
 

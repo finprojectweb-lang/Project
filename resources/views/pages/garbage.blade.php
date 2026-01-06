@@ -94,12 +94,10 @@
             <aside class="fun-fact-card">
                 <h3>Fun Fact!</h3>
 
-                <h4>Mangroves Have Their Own<br>"Snorkeling Equipment"</h4>
+                <h4>Your Plastic Bottle Is Just<br>"A Winter Jacket in Disguise"</h4>
 
                 <p>
-                    Because the mud is poor in oxygen, mangroves have breathing roots
-                    (pneumatophores) that stick out above the water surface like straws
-                    to take in air.
+                    Because plastic bottles are made from the same chemical ingredients as polyester, they can be shredded, melted, and spun into fine threads to create warm fleece jackets—transforming rigid single-use waste into soft, wearable fashion.
                 </p>
             </aside>
 
@@ -117,13 +115,13 @@
 
         <div class="content-item">
             <div class="text">
-                <h3>Satellite Imagery & Remote Sensing</h3>
+                <h3>recycling and processing</h3>
                 <p>
-                    We don't just plant trees and leave them. We embed a "digital nervous system" into the ecosystem to monitor the forest's heartbeat in real time. Mangrove forests are highly sensitive to hydrological changes; even small changes in salinity or water circulation can be fatal for young seedlings.
+                    Waste processing and recycling serve as the transformative engine of the circular economy, turning what was once considered refuse into valuable industrial assets. Through a rigorous system of automated sorting, material recovery, and purification, we divert tons of plastics, metals, and paper from landfills, effectively closing the production loop and significantly reducing the environmental footprint of manufacturing by supplying high-quality, sustainable raw materials.
                 </p>
             </div>
             <div class="image">
-                <img src="{{ asset('images/peta.png') }}" alt="Map">
+                <img src="{{ asset('images/reduce.png') }}" alt="Map">
             </div>
         </div>
 
