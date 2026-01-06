@@ -599,8 +599,8 @@
             <div class="hero-badge">Our Partnerships</div>
             <h1 class="hero-title">Partners & Collaborations</h1>
             <p class="hero-description">
-                Bersama membangun masa depan berkelanjutan melalui kolaborasi strategis 
-                dengan perusahaan global, organisasi, dan komunitas yang berbagi visi kami.
+                Building a sustainable future together through strategic collaborations
+with global companies, organizations, and communities that share our vision.
             </p>
             <div class="hero-stats">
                 <div class="hero-stat">
@@ -625,10 +625,9 @@
     <div class="container">
         <div class="section-header fade-up">
             <span class="section-tag">Trusted By</span>
-            <h2 class="section-title">Mitra Strategis Kami</h2>
+            <h2 class="section-title">Our Strategic Partners</h2>
             <p class="section-description">
-                Bekerja sama dengan perusahaan terkemuka dunia untuk menciptakan 
-                dampak positif terhadap lingkungan dan masyarakat.
+                Working with leading global companies to create a positive impact on the environment and society.
             </p>
         </div>
 
@@ -740,10 +739,10 @@
     <div class="container">
         <div class="section-header fade-up">
             <span class="section-tag">How We Collaborate</span>
-            <h2 class="section-title">Jenis Kolaborasi</h2>
+            <h2 class="section-title">Types of Collaboration</h2>
             <p class="section-description">
-                Berbagai bentuk kemitraan yang kami tawarkan untuk mencapai 
-                tujuan keberlanjutan bersama.
+                Various forms of partnerships we offer to achieve 
+                shared sustainability goals.
             </p>
         </div>
 
@@ -752,8 +751,7 @@
                 <div class="collaboration-icon">🌱</div>
                 <h3 class="collaboration-title">Carbon Offset Programs</h3>
                 <p class="collaboration-description">
-                    Program kompensasi karbon yang terukur dan terverifikasi untuk mengurangi 
-                    jejak karbon perusahaan Anda.
+                    Verified and measurable carbon offset programs to reduce your company's carbon footprint.
                 </p>
             </div>
 
@@ -761,8 +759,8 @@
                 <div class="collaboration-icon">🤝</div>
                 <h3 class="collaboration-title">Strategic Partnerships</h3>
                 <p class="collaboration-description">
-                    Kemitraan jangka panjang dalam pengembangan proyek berkelanjutan 
-                    dan inovasi teknologi hijau.
+                    Long-term partnerships in developing sustainable projects 
+                    and green technology innovation.
                 </p>
             </div>
 
@@ -770,8 +768,8 @@
                 <div class="collaboration-icon">🎓</div>
                 <h3 class="collaboration-title">Education & Training</h3>
                 <p class="collaboration-description">
-                    Program edukasi dan pelatihan untuk meningkatkan kesadaran 
-                    lingkungan di organisasi Anda.
+                    Education and training programs to enhance environmental awareness 
+                    in your organization.
                 </p>
             </div>
 
@@ -779,8 +777,8 @@
                 <div class="collaboration-icon">💡</div>
                 <h3 class="collaboration-title">Research & Innovation</h3>
                 <p class="collaboration-description">
-                    Kolaborasi riset untuk mengembangkan solusi inovatif dalam 
-                    mitigasi perubahan iklim.
+                    Research collaboration to develop innovative solutions in 
+                    climate change mitigation.
                 </p>
             </div>
         </div>
@@ -817,9 +815,9 @@
         <div class="testimonial-card fade-up">
             <div class="quote-icon">"</div>
             <p class="testimonial-text">
-                Kemitraan dengan perusahaan kompensasi karbon ini telah membantu kami 
-                mencapai target net-zero emissions lebih cepat dari yang kami perkirakan. 
-                Profesionalisme dan komitmen mereka terhadap keberlanjutan sangat luar biasa.
+                Partnership with this carbon compensation company has helped us 
+                achieve our net-zero emissions target faster than we anticipated. 
+                Their professionalism and commitment to sustainability is exceptional.
             </p>
             <div class="testimonial-author">
                 <div class="author-avatar">S</div>
@@ -835,12 +833,12 @@
 <!-- CTA -->
 <section class="cta-section">
     <div class="cta-content">
-        <h2 class="cta-title">Bergabung Sebagai Partner</h2>
+        <h2 class="cta-title">Join Us as a Partner</h2>
         <p class="cta-text">
-            Mari bersama-sama menciptakan dampak positif untuk planet kita. 
-            Hubungi kami untuk memulai kolaborasi strategis.
+            Let's work together to create a positive impact for our planet. 
+            Contact us to start strategic collaboration.
         </p>
-        <a href="/contact" class="cta-button">Hubungi Kami</a>
+        <a href="/contact" class="cta-button">Contact Us</a>
     </div>
 </section>
 

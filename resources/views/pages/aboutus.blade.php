@@ -60,7 +60,8 @@
 
             <div class="ft-card">
                 <img src="{{ asset('images/aan.jpg') }}" alt="Farhan Aldi Nugraha">
-                <p>Farhan Aldi Nugraha</p>
+                <p>Farhan Aldi Nugraha <br>
+            <span>B.Sc., B.Eng., M.Sc., M.Eng., Ph.D.</span></p>
             </div>
 
             <div class="ft-card">

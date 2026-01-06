@@ -320,7 +320,6 @@ body{
     visibility: hidden;
     transform: translateY(10px);
     transition: 0.3s ease;
-
     margin-top: 8px;
 }
 

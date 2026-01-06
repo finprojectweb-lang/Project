@@ -629,22 +629,22 @@
         <div class="row g-0">
             <div class="col-lg-5 left-side">
                 <div class="logo-section">
-                    <div class="logo-icon">🌍</div>
-                    <h2>Carbon Offset</h2>
-                    <p>Bersama kita wujudkan masa depan yang lebih hijau dan berkelanjutan untuk generasi mendatang</p>
+                    <div class="logo-icon"><img src="/images/daunjatuh.png" alt="" style="height: 100px;"></div>
+                    <h2>NulliCarbon</h2>
+                    <p>Together we create a greener and more sustainable future for future generations.</p>
                 </div>
                 <div class="features">
                     <div class="feature-item">
                         <i class="fas fa-leaf"></i>
-                        <span>Kompensasi karbon terverifikasi</span>
+                        <span>Verified carbon offset</span>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-chart-line"></i>
-                        <span>Tracking emisi real-time</span>
+                        <span>Real-time emissions tracking</span>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-globe-asia"></i>
-                        <span>Dampak positif global</span>
+                        <span>Global positive impact</span>
                     </div>
                 </div>
             </div>
@@ -652,14 +652,14 @@
             <div class="col-lg-7 right-side">
                 <div class="form-container">
                     <div class="form-tabs">
-                        <button class="tab-btn active" onclick="switchTab('login')">Masuk</button>
-                        <button class="tab-btn" onclick="switchTab('register')">Daftar</button>
+                        <button class="tab-btn active" onclick="switchTab('login')">Sign In</button>
+                        <button class="tab-btn" onclick="switchTab('register')">Sign Up</button>
                     </div>
 
                     <!-- Login Form -->
                     <div id="login-form" class="form-content active">
-                        <h3>Selamat Datang Kembali!</h3>
-                        <p class="subtitle">Masuk ke akun Anda untuk melanjutkan</p>
+                        <h3>Welcome Back!</h3>
+                        <p class="subtitle">Sign in to your account to continue</p>
 
                         <!-- Notifikasi Success -->
                         @if (session('success'))
@@ -703,22 +703,22 @@
                                 <div class="input-group">
                                     <i class="fas fa-lock"></i>
                                     <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" 
-                                           placeholder="Masukkan password" required>
+                                           placeholder="Enter password" required>
                                 </div>
                             </div>
 
                             <div class="remember-forgot">
                                 <label>
-                                    <input type="checkbox" name="remember"> Ingat saya
+                                    <input type="checkbox" name="remember"> Remember me
                                 </label>
-                                <a href="#">Lupa password?</a>
+                                <a href="#">Forgot password?</a>
                             </div>
 
-                            <button type="submit" class="btn-primary">Masuk</button>
+                            <button type="submit" class="btn-primary">Sign In</button>
                         </form>
 
                         <div class="divider">
-                            <span>Atau masuk dengan</span>
+                            <span>Or sign in with</span>
                         </div>
 
                         <div class="social-login">
@@ -739,8 +739,8 @@
 
                     <!-- Register Form -->
                     <div id="register-form" class="form-content">
-                        <h3>Buat Akun Baru</h3>
-                        <p class="subtitle">Bergabunglah dalam misi kami untuk masa depan hijau</p>
+                        <h3>Create New Account</h3>
+                        <p class="subtitle">Join our mission for a greener and more sustainable future</p>
 
                         <!-- Notifikasi Error -->
                         @if ($errors->any())
@@ -757,11 +757,11 @@
                         <form action="{{ route('register') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label class="form-label">Nama Lengkap</label>
+                                <label class="form-label">Full Name</label>
                                 <div class="input-group">
                                     <i class="fas fa-user"></i>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" 
-                                           placeholder="Nama lengkap Anda" value="{{ old('name') }}" required>
+                                           placeholder="Your full name" value="{{ old('name') }}" required>
                                 </div>
                             </div>
 
@@ -784,26 +784,26 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label">Konfirmasi Password</label>
+                                <label class="form-label">Confirm Password</label>
                                 <div class="input-group">
                                     <i class="fas fa-lock"></i>
                                     <input type="password" name="password_confirmation" class="form-control" 
-                                           placeholder="Ulangi password" required>
+                                           placeholder="Repeat password" required>
                                 </div>
                             </div>
 
                             <div class="remember-forgot">
                                 <label style="font-size: 12px;">
                                     <input type="checkbox" name="terms" value="1" required> 
-                                    Saya setuju dengan <a href="#" onclick="openTermsModal(event)">syarat & ketentuan</a>
+                                    I agree to the <a href="#" onclick="openTermsModal(event)">Terms and Conditions</a>
                                 </label>
                             </div>
 
-                            <button type="submit" class="btn-primary">Daftar Sekarang</button>
+                            <button type="submit" class="btn-primary">Sign Up Now</button>
                         </form>
 
                         <div class="divider">
-                            <span>Atau daftar dengan</span>
+                            <span>Or sign up with</span>
                         </div>
 
                         <div class="social-login">
@@ -831,82 +831,82 @@
     <div id="termsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h4><i class="fas fa-file-contract"></i> Syarat & Ketentuan</h4>
+                <h4><i class="fas fa-file-contract"></i> Terms and Conditions</h4>
                 <button class="close" onclick="closeTermsModal()">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="terms-section">
-                    <h5><i class="fas fa-info-circle"></i> Ketentuan Umum</h5>
-                    <p>Dengan mendaftar dan menggunakan layanan NulliCarbon, Anda menyetujui untuk terikat dengan syarat dan ketentuan berikut:</p>
+                    <h5><i class="fas fa-info-circle"></i>General Terms</h5>
+                    <p>By registering and using NulliCarbon services, you agree to be bound by the following terms and conditions:</p>
                     <ul>
-                        <li>Anda harus berusia minimal 18 tahun atau memiliki izin dari orang tua/wali untuk menggunakan layanan ini</li>
-                        <li>Informasi yang Anda berikan harus akurat, lengkap, dan terkini</li>
-                        <li>Anda bertanggung jawab untuk menjaga kerahasiaan akun dan password Anda</li>
-                        <li>Anda tidak boleh menggunakan layanan untuk tujuan ilegal atau tidak sah</li>
+                        <li>You must be at least 18 years old or have parental/guardian permission to use this service</li>
+                        <li>The information you provide must be accurate, complete, and up-to-date</li>
+                        <li>You are responsible for maintaining the confidentiality of your account and password</li>
+                        <li>You may not use the service for illegal or unauthorized purposes</li>
                     </ul>
                 </div>
 
                 <div class="terms-section">
-                    <h5><i class="fas fa-shield-alt"></i> Privasi & Keamanan Data</h5>
-                    <p>Kami berkomitmen untuk melindungi privasi dan keamanan data Anda:</p>
+                    <h5><i class="fas fa-shield-alt"></i> Privacy & Data Security</h5>
+                    <p>We are committed to protecting your privacy and data security:</p>
                     <ul>
-                        <li>Data pribadi Anda akan dienkripsi dan disimpan dengan aman</li>
-                        <li>Kami tidak akan membagikan informasi Anda kepada pihak ketiga tanpa persetujuan Anda</li>
-                        <li>Anda memiliki hak untuk mengakses, mengubah, atau menghapus data pribadi Anda</li>
-                        <li>Kami menggunakan cookies untuk meningkatkan pengalaman pengguna</li>
+                        <li>Your personal data will be encrypted and stored securely</li>
+                        <li>We will not share your information with third parties without your consent</li>
+                        <li>You have the right to access, modify, or delete your personal data</li>
+                        <li>We use cookies to enhance user experience</li>
                     </ul>
                 </div>
 
                 <div class="terms-section">
-                    <h5><i class="fas fa-leaf"></i> Layanan Carbon Offset</h5>
-                    <p>Mengenai layanan kompensasi karbon kami:</p>
+                    <h5><i class="fas fa-leaf"></i> Carbon Offset Services</h5>
+                    <p>Regarding our carbon offset services:</p>
                     <ul>
-                        <li>Semua proyek carbon offset telah diverifikasi oleh lembaga internasional</li>
-                        <li>Laporan dampak lingkungan akan diberikan secara berkala</li>
-                        <li>Pembayaran bersifat final dan tidak dapat dikembalikan kecuali dalam kondisi tertentu</li>
-                        <li>Kami berhak untuk mengubah harga layanan dengan pemberitahuan terlebih dahulu</li>
+                        <li>All carbon offset projects have been verified by international institutions</li>
+                        <li>Environmental impact reports will be provided periodically</li>
+                        <li>Payments are final and non-refundable unless under specific conditions</li>
+                        <li>We reserve the right to change service pricing with prior notification</li>
                     </ul>
                 </div>
 
                 <div class="terms-section">
-                    <h5><i class="fas fa-user-shield"></i> Hak dan Kewajiban Pengguna</h5>
-                    <p>Sebagai pengguna layanan NulliCarbon:</p>
+                    <h5><i class="fas fa-user-shield"></i> User Rights and Responsibilities</h5>
+                    <p>As a NulliCarbon service user:</p>
                     <ul>
-                        <li>Anda berhak mendapatkan informasi transparan tentang penggunaan dana Anda</li>
-                        <li>Anda berhak untuk membatalkan langganan kapan saja</li>
-                        <li>Anda wajib menggunakan platform dengan etika dan tidak menyalahgunakan sistem</li>
-                        <li>Anda wajib melaporkan jika menemukan bug atau masalah keamanan</li>
+                        <li>You have the right to receive transparent information about the use of your funds</li>
+                        <li>You have the right to cancel your subscription at any time</li>
+                        <li>You are required to use the platform ethically and not misuse the system</li>
+                        <li>You are required to report any bugs or security issues you find</li>
                     </ul>
                 </div>
 
                 <div class="terms-section">
-                    <h5><i class="fas fa-gavel"></i> Batasan Tanggung Jawab</h5>
-                    <p>NulliCarbon tidak bertanggung jawab atas:</p>
+                    <h5><i class="fas fa-gavel"></i> Limitation of Liability</h5>
+                    <p>NulliCarbon is not liable for:</p>
                     <ul>
-                        <li>Kerugian yang timbul akibat penggunaan layanan yang tidak sesuai ketentuan</li>
-                        <li>Gangguan layanan akibat force majeure atau pemeliharaan sistem</li>
-                        <li>Kerusakan perangkat atau kehilangan data yang disebabkan oleh pihak ketiga</li>
-                        <li>Perubahan regulasi pemerintah yang mempengaruhi layanan</li>
+                        <li>Losses arising from improper use of the service</li>
+                        <li>Service disruptions due to force majeure or system maintenance</li>
+                        <li>Device damage or data loss caused by third parties</li>
+                        <li>Changes in government regulations that affect the service</li>
                     </ul>
                 </div>
 
                 <div class="terms-section">
-                    <h5><i class="fas fa-edit"></i> Perubahan Ketentuan</h5>
-                    <p>Kami berhak untuk mengubah syarat dan ketentuan ini sewaktu-waktu. Perubahan akan dinotifikasikan melalui email atau notifikasi di platform. Dengan tetap menggunakan layanan setelah perubahan, Anda dianggap menyetujui ketentuan yang telah diperbarui.</p>
+                    <h5><i class="fas fa-edit"></i> Changes to Terms</h5>
+                    <p>We reserve the right to change these terms and conditions at any time. Changes will be notified via email or platform notification. By continuing to use the service after changes, you are deemed to have accepted the updated terms.</p>
                 </div>
 
                 <div class="terms-section">
-                    <h5><i class="fas fa-envelope"></i> Kontak</h5>
-                    <p>Jika Anda memiliki pertanyaan tentang syarat dan ketentuan ini, silakan hubungi kami di:</p>
+                    <h5><i class="fas fa-envelope"></i> Contact</h5>
+                    <p>If you have any questions about these terms and conditions, please contact us at:</p>
                     <ul>
                         <li>Email: support@nullicarbon.com</li>
-                        <li>Telepon: +62 21 1234 5678</li>
-                        <li>Alamat: Jakarta, Indonesia</li>
+                        <li>Phone: +62 21 1234 5678</li>
+                        <li>Address: Jakarta, Indonesia</li>
                     </ul>
                 </div>
 
                 <p style="font-size: 12px; color: #6b7280; margin-top: 20px; font-style: italic;">
-                    Terakhir diperbarui: 5 Januari 2026
+                    Last updated: January 5, 2026
                 </p>
             </div>
         </div>

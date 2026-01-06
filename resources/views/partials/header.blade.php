@@ -148,7 +148,13 @@
                         <li><a href="/coralreefs">Coral Guardian</a></li>
                     </ul></li>
                     <li class="nav-item"><a class="nav-link" href="/projects">Our Project</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Discover Us</a></li>
+                    <li class="nav-item dropdown"><a class="nav-link" href="/discover-us">Discover Us</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/aboutus">About Us</a></li>
+                        <li><a href="/discover-us/ourvalues">Our Value</a></li>
+                        <li><a href="/discover-us/partners">Partners</a></li>
+                        <li><a href="/contactus">Contact</a></li>
+                    </ul></li>
                 </ul>
 
                 <!-- BUTTON MOBILE -->

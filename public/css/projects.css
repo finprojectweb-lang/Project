@@ -190,7 +190,7 @@
     background: linear-gradient(180deg, #9cfcd9, #3bdc9c);
     color: #064F40;
     padding: 10px 28px;
-    border-radius: 50px;
+    border-radius: 50px !important;
     font-weight: 600;
     border: none;
     transition: all .25s ease;

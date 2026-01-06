@@ -285,7 +285,7 @@ body::-webkit-scrollbar {
                         <label>
                             <div class="icon-text">
                                 <img src="/images/icons/meat.png" alt="Beef" class="food-icon">
-                                <span class="label-text">Beef or pork (kg/week)</span>
+                                <span class="label-text">Beef(kg/week)</span>
                             </div>
                         </label>
                         <input type="number" class="calc" id="beefPork" placeholder="Type here" min="0" step="0.1">
@@ -298,7 +298,7 @@ body::-webkit-scrollbar {
                         <label>
                             <div class="icon-text">
                                 <img src="/images/icons/fish.png" alt="Chicken" class="food-icon">
-                                <span class="label-text">Chicken or fish (kg/week)</span>
+                                <span class="label-text">Fish (kg/week)</span>
                             </div>
                         </label>
                         <input type="number" class="calc" id="chickenFish" placeholder="Type here" min="0" step="0.1">

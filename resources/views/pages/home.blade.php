@@ -379,7 +379,7 @@
                     <div class="news-content">
                         
                         <h5 class="news-title-item">
-                            Eco-Friendly vs Biodegradable: Apa Sih Bedanya? Kok Labelnya Mirip Semua
+                            Eco-Friendly vs. Biodegradable: What's the Difference? Why Do the Labels All Look So Similar?
                         </h5>
                         
                         <span class="news-date">
@@ -387,8 +387,8 @@
                         </span>
 
                         <p class="news-desc">
-                            Lagi pilih sabun cuci piring atau kantong belanjaan di supermarket, 
-                            tiba-tiba lihat dua produk dengan label “eco-friendly” dan “biodegradable”.
+                            While choosing dish soap or shopping bags at the supermarket,
+                            you suddenly see two products labeled "eco-friendly" and "biodegradable."
                         </p>
 
                         <a href="#" class="news-link">Read More →</a>
@@ -404,7 +404,7 @@
                     <div class="news-content">
                         
                         <h5 class="news-title-item">
-                            Jangan Asal Buang! Ini Arti 7 Simbol Segitiga Daur Ulang di Kemasan Plastik Kamu
+                            Don't Just Throw Away! Here's What the 7 Triangle Recycling Symbols on Your Plastic Packaging Mean
                         </h5>
 
                         <span class="news-date">
@@ -412,7 +412,7 @@
                         </span>
 
                         <p class="news-desc">
-                            Sering lihat simbol segitiga dengan angka di bawah botol minum? Ternyata gak semua jenis plastik bisa didaur ulang dengan cara yang sama. Yuk, kenali kodenya biar gak salah pilah!
+                            Ever see the triangle symbol with a number on the bottom of a water bottle? It turns out not all types of plastic can be recycled the same way. Learn the code to avoid missorting!
                         </p>
 
                         <a href="#" class="news-link">Read More →</a>
@@ -428,7 +428,7 @@
                     <div class="news-content">
                         
                         <h5 class="news-title-item">
-                            Totebag Kain vs Kantong Kertas: Ternyata Gak Semuanya 'Suci' dari Jejak Karbon!
+                            Cloth Tote Bags vs. Paper Bags: Turns Out Not All Are 'Pure' from a Carbon Footprint!
                         </h5>
 
                         <span class="news-date">
@@ -436,7 +436,7 @@
                         </span>
 
                         <p class="news-desc">
-                            Kamu pikir pakai totebag kain yang numpuk di lemari itu pasti lebih baik dari plastik? Tunggu dulu. Kita bedah faktanya berdasarkan riset terbaru soal emisi produksi tas belanja.
+                            You think using a cloth tote bag that's been sitting in your closet is definitely better than plastic? Wait a minute. Let's break down the facts based on the latest research on production emissions.
                         </p>
 
                         <a href="#" class="news-link">Read More →</a>
@@ -498,7 +498,7 @@
             </p>
 
             <!-- Button -->
-            <a href="#contact" class="btn btn-talk">Let’s Talk</a>
+            <a href="/contactus" class="btn btn-talk">Let’s Talk</a>
 
         </div>
     </section>

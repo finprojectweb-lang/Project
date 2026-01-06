@@ -710,19 +710,18 @@
     <div class="hero-left">
         <div class="hero-content">
             <div class="hero-badge">Our Core Values</div>
-            <h1 class="hero-title">Nilai yang Membentuk Kami</h1>
+            <h1 class="hero-title">Values ​​That Shape Us</h1>
             <p class="hero-subtitle">
-                Enam prinsip fundamental yang memandu setiap langkah kami dalam menciptakan 
-                masa depan berkelanjutan dan dampak positif bagi planet.
+                Six fundamental principles guide every step we take in creating a sustainable future and a positive impact on the planet.
             </p>
             <div class="hero-stats">
                 <div class="hero-stat-item">
                     <span class="hero-stat-number">500+</span>
-                    <span class="hero-stat-label">Proyek</span>
+                    <span class="hero-stat-label">Projects</span>
                 </div>
                 <div class="hero-stat-item">
                     <span class="hero-stat-number">50+</span>
-                    <span class="hero-stat-label">Negara</span>
+                    <span class="hero-stat-label">Countries</span>
                 </div>
                 <div class="hero-stat-item">
                     <span class="hero-stat-number">1M+</span>
@@ -748,10 +747,10 @@
     <div class="container">
         <div class="section-header fade-up">
             <span class="section-tag">What Drives Us</span>
-            <h2 class="section-title">Prinsip yang Kami Pegang Teguh</h2>
+            <h2 class="section-title">Principles We Hold Firmly</h2>
             <p class="section-description">
-                Setiap nilai adalah komitmen yang kami buktikan melalui tindakan nyata 
-                dalam setiap proyek dan interaksi dengan stakeholder kami.
+                Every value is a commitment we prove through real action 
+                in every project and interaction with our stakeholders.
             </p>
         </div>
 
@@ -764,10 +763,10 @@
                     <div class="value-card-image-overlay"></div>
                 </div>
                 <div class="value-card-content">
-                    <h3 class="value-card-title">Keberlanjutan</h3>
+                    <h3 class="value-card-title">Sustainability</h3>
                     <p class="value-card-text">
-                        Kami berkomitmen untuk menciptakan solusi jangka panjang yang tidak hanya mengurangi jejak karbon, 
-                        tetapi juga membangun ekosistem yang sehat untuk generasi mendatang.
+                        We are committed to creating long-term solutions that not only reduce carbon footprint, 
+                        but also build a healthy ecosystem for future generations.
                     </p>
                 </div>
             </div>
@@ -780,10 +779,10 @@
                     <div class="value-card-image-overlay"></div>
                 </div>
                 <div class="value-card-content">
-                    <h3 class="value-card-title">Inovasi</h3>
+                    <h3 class="value-card-title">Innovation</h3>
                     <p class="value-card-text">
-                        Terus berinovasi dalam teknologi kompensasi karbon dan metode pengukuran dampak lingkungan 
-                        untuk memberikan solusi paling efektif dan efisien.
+                        Continuously innovate in carbon compensation technology and environmental impact measurement methods 
+                        to provide the most effective and efficient solutions.
                     </p>
                 </div>
             </div>
@@ -796,10 +795,10 @@
                     <div class="value-card-image-overlay"></div>
                 </div>
                 <div class="value-card-content">
-                    <h3 class="value-card-title">Integritas</h3>
+                    <h3 class="value-card-title">Integrity</h3>
                     <p class="value-card-text">
-                        Menjalankan bisnis dengan standar etika tertinggi, memastikan setiap kredit karbon yang kami tawarkan 
-                        terverifikasi dan berdampak nyata terhadap lingkungan.
+                        Running business with the highest ethical standards, ensuring every carbon credit we offer 
+                        is verified and has a real impact on the environment.
                     </p>
                 </div>
             </div>
@@ -812,10 +811,10 @@
                     <div class="value-card-image-overlay"></div>
                 </div>
                 <div class="value-card-content">
-                    <h3 class="value-card-title">Kolaborasi</h3>
+                    <h3 class="value-card-title">Collaboration</h3>
                     <p class="value-card-text">
-                        Bekerja sama dengan komunitas lokal, organisasi internasional, dan para pemangku kepentingan 
-                        untuk menciptakan dampak positif yang lebih besar terhadap planet kita.
+                        Working together with local communities, international organizations, and stakeholders 
+                        to create a greater positive impact on our planet.
                     </p>
                 </div>
             </div>
@@ -828,10 +827,10 @@
                     <div class="value-card-image-overlay"></div>
                 </div>
                 <div class="value-card-content">
-                    <h3 class="value-card-title">Transparansi</h3>
+                    <h3 class="value-card-title">Transparency</h3>
                     <p class="value-card-text">
-                        Menyediakan data dan laporan yang jelas tentang proyek-proyek kami, memastikan klien dapat melacak 
-                        kontribusi mereka dan dampak nyata yang tercipta dengan verifikasi independen.
+                        Providing clear data and reports about our projects, ensuring clients can track their contributions 
+                        and the real impact created with independent verification.
                     </p>
                 </div>
             </div>
@@ -844,11 +843,11 @@
                     <div class="value-card-image-overlay"></div>
                 </div>
                 <div class="value-card-content">
-                    <h3 class="value-card-title">Dampak Nyata</h3>
+                    <h3 class="value-card-title">Real Impact</h3>
                     <p class="value-card-text">
-                        Fokus pada hasil yang terukur dan berkelanjutan, memastikan setiap aksi yang kami lakukan memberikan 
-                        kontribusi signifikan dalam memerangi perubahan iklim global. Kami mengukur dampak bukan hanya dalam 
-                        angka, tapi dalam perubahan nyata di lapangan yang dapat dirasakan oleh komunitas lokal dan lingkungan.
+                        Focusing on measurable and sustainable outcomes, ensuring every action we take contributes significantly 
+                        to combating global climate change. We measure impact not just in numbers, but in real changes on the ground 
+                        that can be felt by local communities and the environment.
                     </p>
                 </div>
             </div>
@@ -862,19 +861,19 @@
         <div class="impact-grid">
             <div class="impact-card">
                 <div class="impact-number" data-target="500">0</div>
-                <div class="impact-label">Proyek Aktif</div>
+                <div class="impact-label">Active Projects</div>
             </div>
             <div class="impact-card">
                 <div class="impact-number" data-target="1">0</div>
-                <div class="impact-label">Juta Ton CO₂</div>
+                <div class="impact-label">Million Ton CO₂</div>
             </div>
             <div class="impact-card">
                 <div class="impact-number" data-target="50">0</div>
-                <div class="impact-label">Negara Partner</div>
+                <div class="impact-label">Partner Countries</div>
             </div>
             <div class="impact-card">
                 <div class="impact-number" data-target="10">0</div>
-                <div class="impact-label">Ribu Hektar</div>
+                <div class="impact-label">Thousand Hectares</div>
             </div>
         </div>
     </div>
@@ -887,15 +886,14 @@
         <div class="cta-left">
             <div class="cta-content-wrapper">
                 <div class="cta-badge">Join Our Mission</div>
-                <h2 class="cta-title">Mari Ciptakan Dampak Bersama</h2>
+                <h2 class="cta-title">Let's Create Impact Together</h2>
                 <p class="cta-text">
-                    Nilai-nilai kami bukan sekadar kata-kata. Ini adalah komitmen yang kami buktikan 
-                    setiap hari melalui proyek-proyek nyata. Bergabunglah dengan kami dalam perjalanan 
-                    menciptakan masa depan yang lebih hijau dan berkelanjutan.
+                    Our values are not just words. They are a commitment we prove every day through real projects. 
+                    Join us on the journey to create a greener and more sustainable future.
                 </p>
                 <div class="cta-buttons">
-                    <a href="/contact" class="btn btn-primary">Hubungi Kami</a>
-                    <a href="/projects" class="btn btn-secondary">Lihat Proyek</a>
+                    <a href="/contact" class="btn btn-primary">Contact us</a>
+                    <a href="/projects" class="btn btn-secondary">View Projects</a>
                 </div>
             </div>
         </div>
