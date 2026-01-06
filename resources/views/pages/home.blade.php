@@ -295,6 +295,171 @@
         </div>
     </section>
 
+    <!-- Carbon Calculator Section -->
+    <section class="py-4 py-md-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Column - Content -->
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="pe-lg-4 px-3 px-md-0">
+                        <!-- Badge -->
+                        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-3">
+                            <i class="bi bi-calculator me-1"></i>
+                            Gratis & Mudah Digunakan
+                        </span>
+                        
+                        <!-- Heading -->
+                        <h2 class="display-6 display-md-5 fw-bold mb-3">
+                            Kalkulator Jejak Karbon
+                        </h2>
+                        
+                        <!-- Description -->
+                        <p class="lead text-muted mb-4 fs-6 fs-md-5">
+                            Hitung dampak karbon dari aktivitas bisnis Anda dengan mudah dan akurat menggunakan kalkulator kami yang telah disesuaikan dengan standar internasional.
+                        </p>
+                        
+                        <!-- Features List -->
+                        <div class="mb-4">
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-success bg-opacity-10 rounded-circle p-2" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="bi bi-check-circle-fill text-success fs-6"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1 fs-6 fs-md-5">Pengukuran Akurat</h5>
+                                    <p class="text-muted mb-0 small">Menggunakan metodologi standar GHG Protocol untuk hasil yang tepat dan dapat dipertanggungjawabkan.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-success bg-opacity-10 rounded-circle p-2" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="bi bi-speedometer2 text-success fs-6"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1 fs-6 fs-md-5">Hasil Instan</h5>
+                                    <p class="text-muted mb-0 small">Dapatkan laporan emisi karbon Anda dalam hitungan detik dengan visualisasi yang mudah dipahami.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-success bg-opacity-10 rounded-circle p-2" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="bi bi-graph-up-arrow text-success fs-6"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1 fs-6 fs-md-5">Rekomendasi Kompensasi</h5>
+                                    <p class="text-muted mb-0 small">Terima saran proyek kompensasi karbon yang sesuai untuk menetralisir emisi perusahaan Anda.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA Button -->
+                        <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3">
+                            <a href="{{ route('calculator.index') }}" class="btn btn-success btn-lg px-4 w-100 w-sm-auto">
+                                <i class="bi bi-calculator me-2"></i>
+                                Mulai Hitung Sekarang
+                            </a>
+                            <a href="#cara-kerja" class="btn btn-outline-secondary btn-lg px-4 w-100 w-sm-auto">
+                                Cara Kerja
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Visual/Icon -->
+                <div class="col-lg-6 px-3 px-md-0">
+                    <div class="position-relative">
+                        <!-- Background decoration -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-success bg-opacity-10 rounded-4 d-none d-md-block" style="transform: rotate(-3deg);"></div>
+                        
+                        <!-- Main card -->
+                        <div class="card border-0 shadow-lg position-relative">
+                            <div class="card-body p-4 p-md-5 text-center">
+                                <!-- Icon illustration -->
+                                <div class="mb-3 mb-md-4">
+                                    <i class="bi bi-cloud-check display-3 display-md-1 text-success"></i>
+                                </div>
+                                
+                                <!-- Stats -->
+                                <div class="row g-2 g-md-3 mb-3 mb-md-4">
+                                    <div class="col-6">
+                                        <div class="bg-light rounded-3 p-2 p-md-3">
+                                            <h3 class="fw-bold mb-0 text-success fs-4 fs-md-3">1,500+</h3>
+                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Perusahaan Terdaftar</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="bg-light rounded-3 p-2 p-md-3">
+                                            <h3 class="fw-bold mb-0 text-success fs-4 fs-md-3">50K+</h3>
+                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Ton CO₂ Dioffset</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-muted mb-0 small">
+                                    <i class="bi bi-shield-check text-success me-2"></i>
+                                    Terverifikasi & Terpercaya
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Optional: How It Works Section -->
+    <section id="cara-kerja" class="py-4 py-md-5">
+        <div class="container px-3 px-md-0">
+            <div class="text-center mb-4 mb-md-5">
+                <h2 class="fw-bold mb-3 fs-3 fs-md-2">Cara Kerja Kalkulator</h2>
+                <p class="lead text-muted fs-6 fs-md-5">Tiga langkah mudah untuk menghitung jejak karbon Anda</p>
+            </div>
+            
+            <div class="row g-3 g-md-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-3 p-md-4">
+                            <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <span class="display-6 display-md-4 fw-bold text-success">1</span>
+                            </div>
+                            <h4 class="mb-3 fs-5 fs-md-4">Input Data</h4>
+                            <p class="text-muted small">Masukkan data aktivitas bisnis Anda seperti konsumsi energi, transportasi, dan limbah.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-3 p-md-4">
+                            <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <span class="display-6 display-md-4 fw-bold text-success">2</span>
+                            </div>
+                            <h4 class="mb-3 fs-5 fs-md-4">Analisis Otomatis</h4>
+                            <p class="text-muted small">Sistem kami menghitung total emisi karbon berdasarkan standar internasional.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-3 p-md-4">
+                            <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <span class="display-6 display-md-4 fw-bold text-success">3</span>
+                            </div>
+                            <h4 class="mb-3 fs-5 fs-md-4">Dapatkan Laporan</h4>
+                            <p class="text-muted small">Terima laporan lengkap dan rekomendasi proyek kompensasi yang tepat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="partners-section text-center">
         <h3 class="partners-title mb-4">Partners</h3>
 

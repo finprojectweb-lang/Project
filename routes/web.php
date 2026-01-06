@@ -89,6 +89,20 @@ Route::get('/discover-us/partners', function () {
     return view('discoverus.partcollab');
 })->name('partners');
 
+
+// routes/web.php
+use App\Http\Controllers\CorporateCalculatorController;
+
+Route::prefix('calculator/corporate')->name('calc.corporate.')->group(function () {
+    Route::get('/', [CorporateCalculatorController::class, 'index'])->name('index');
+    Route::get('/wizard', [CorporateCalculatorController::class, 'create'])->name('create');
+    Route::post('/calculate', [CorporateCalculatorController::class, 'calculate'])->name('calculate');
+    Route::get('/result/{id}', [CorporateCalculatorController::class, 'result'])->name('result');
+    Route::get('/export-pdf/{id}', [CorporateCalculatorController::class, 'exportPdf'])->name('export-pdf');
+    Route::get('/history', [CorporateCalculatorController::class, 'history'])->name('history')->middleware('auth');
+    // Tambahkan ini di dalam group atau setelah routes lainnya
+    Route::delete('/{id}/delete', [CorporateCalculatorController::class, 'delete'])->name('delete');
+});
 /*
 |--------------------------------------------------------------------------
 | Authentication Routes
