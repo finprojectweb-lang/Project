@@ -52,6 +52,10 @@ Route::get('/projects', function () {
     return view('pages.ourproject');
 })->name('ourproject');
 
+Route::get('/news', function () {
+    return view('pages.news');
+})->name('news');
+
 // KALKULATOR - Bisa diakses tanpa login
 Route::get('/calculator/housing', function () {
     return view('calculator.housing');

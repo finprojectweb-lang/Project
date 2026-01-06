@@ -1,0 +1,733 @@
+/* =====================================================
+   GLOBAL FONT - DISCOVER PAGE
+===================================================== */
+.discover-hero,
+.discover-hot,
+.discover-main,
+.talk-section {
+    font-family: 'Baloo Paaji 2', cursive;
+}
+
+/* =====================================================
+   PURE CSS SCROLL ANIMATIONS
+   Fade In from Bottom - HANYA SEKALI SAAT SCROLL KEBAWAH
+===================================================== */
+
+/* Keyframe untuk fade in dari bawah */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Base class - Initial state (hidden) */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+/* Modern browser dengan animation-timeline support */
+@supports (animation-timeline: view()) {
+    .animate-on-scroll {
+        animation: fadeInUp 0.8s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0% cover 25%;
+        /* forwards = animasi tetap di state akhir (tidak repeat) */
+    }
+}
+
+/* Fallback untuk browser lama - butuh JavaScript minimal */
+@supports not (animation-timeline: view()) {
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    
+    /* Class ini akan ditambahkan oleh JavaScript saat elemen terlihat */
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Variasi delay untuk stagger effect */
+.animate-delay-1 {
+    animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+    animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+    animation-delay: 0.3s;
+}
+
+.animate-delay-4 {
+    animation-delay: 0.4s;
+}
+
+.animate-delay-5 {
+    animation-delay: 0.5s;
+}
+
+.animate-delay-6 {
+    animation-delay: 0.6s;
+}
+
+.animate-delay-7 {
+    animation-delay: 0.7s;
+}
+
+/* =====================================================
+   PAGE BACKGROUND WRAPPER
+===================================================== */
+.discover-page-bg {
+    background-image: url('../images/backgroundcontent.png');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* =====================================================
+   HERO / FEATURED NEWS
+===================================================== */
+.discover-hero {
+    position: relative;
+    width: 100%;
+    min-height: 70vh;
+    margin-left: 0;
+    margin-right: 0;
+    overflow: hidden;
+}
+
+.discover-hero-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 70vh;
+}
+
+.discover-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.discover-hero-overlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    min-height: 70vh;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.35)
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    color: #ffffff;
+}
+
+.discover-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    width: fit-content;
+}
+
+.discover-hero-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+.discover-hero-desc {
+    color: #e6e6e6;
+    margin-top: 1rem;
+    max-width: 720px;
+    margin-inline: auto;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+/* =====================================================
+   HOT NEWS
+===================================================== */
+.discover-hot {
+    padding: 60px 0 15px;
+    background: transparent;
+}
+
+.hot-news-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #064F40;
+}
+
+.discover-hot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 320px;
+    gap: 20px;
+    align-items: start;
+}
+
+.hot-news-card {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    cursor: pointer;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.hot-news-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.hot-news-card p {
+    padding: 12px;
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.hot-news-card small {
+    display: block;
+    padding: 0 12px 12px;
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+.hot-news-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+}
+
+/* =====================================================
+   RECOMMENDATION
+===================================================== */
+.discover-recommendation {
+    background: #f3f6f5;
+    border-radius: 18px;
+    padding: 18px;
+    display: grid;
+    gap: 14px;
+}
+
+.discover-recommendation h5 {
+    font-weight: 700;
+    color: #064F40;
+    font-size: 1.2rem;
+}
+
+.recommend-item {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 12px;
+    align-items: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    transition: 
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+.recommend-item img {
+    width: 70px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.recommend-item p {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.recommend-item small {
+    display: block;
+    color: #6b7280;
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
+.recommend-item:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* =====================================================
+   TRENDING
+===================================================== */
+.discover-trending {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.discover-trending h5 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #064F40;
+    font-size: 1.2rem;
+}
+
+.discover-trending ol {
+    padding-left: 18px;
+    margin: 0;
+}
+
+.discover-trending ol li {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #1f2937;
+}
+
+/* =====================================================
+   MAIN CONTENT (BERITA TERKINI + SIDEBAR)
+===================================================== */
+.discover-main {
+    margin-top: 0;
+    padding: 40px 0;
+}
+
+.discover-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Berita Terkini */
+.discover-news h4 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #064F40;
+}
+
+.discover-news-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+    align-items: center;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+    border-radius: 14px;
+    padding: 10px;
+    cursor: pointer;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.discover-news-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.15);
+}
+
+.discover-news-item img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.discover-news-item h6 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.discover-news-item small {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+.discover-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.discover-sidebar-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background: transparent;
+    padding: 0;
+}
+
+.sidebar-item {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+}
+
+.sidebar-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.sidebar-item p {
+    padding: 12px;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* =====================================================
+   TALK / CTA
+===================================================== */
+.talk-section {
+    background: #064F40;
+    color: #e8fff5;
+    border-radius: 90% 90% 0 0 / 45% 45% 0 0;
+    margin-top: 80px;
+    padding: 90px 20px 70px;
+}
+
+.icon-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #2fe39a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2fe39a;
+    font-size: 42px;
+}
+
+.talk-title {
+    color: #7cf6c9;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.talk-desc {
+    max-width: 720px;
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
+    line-height: 1.7;
+}
+
+.btn-talk {
+    background: linear-gradient(180deg, #9cfcd9, #3bdc9c);
+    color: #064F40;
+    padding: 10px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    transition: all .25s ease;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn-talk:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,.25);
+    color: #064F40;
+}
+
+/* =====================================================
+   RESPONSIVE BREAKPOINTS
+===================================================== */
+
+/* ========== TABLET LARGE (max-width: 1200px) ========== */
+@media (max-width: 1200px) {
+    .discover-hot-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .discover-recommendation {
+        grid-column: span 2;
+    }
+    
+    .discover-layout {
+        grid-template-columns: 1fr 300px;
+        gap: 20px;
+    }
+    
+    .discover-sidebar-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== TABLET (max-width: 992px) ========== */
+@media (max-width: 992px) {
+    .discover-hero {
+        min-height: 60vh;
+    }
+    
+    .discover-hero-card {
+        min-height: 60vh;
+    }
+    
+    .discover-hero-overlay {
+        min-height: 60vh;
+        padding: 15px;
+    }
+    
+    .discover-hot {
+        padding: 40px 0 15px;
+    }
+    
+    .discover-hot-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .discover-recommendation {
+        grid-column: auto;
+    }
+    
+    .discover-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .discover-sidebar {
+        order: -1;
+    }
+    
+    .discover-sidebar-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .discover-trending ol {
+        column-count: 2;
+        column-gap: 20px;
+    }
+}
+
+/* ========== MOBILE LARGE (max-width: 768px) ========== */
+@media (max-width: 768px) {
+    .discover-page-bg {
+        background-attachment: scroll;
+    }
+    
+    .discover-hero {
+        min-height: 50vh;
+    }
+    
+    .discover-hero-card {
+        min-height: 50vh;
+    }
+    
+    .discover-hero-overlay {
+        min-height: 50vh;
+        padding: 15px;
+    }
+    
+    .discover-hot {
+        padding: 30px 0 15px;
+    }
+    
+    .hot-news-card img {
+        height: 160px;
+    }
+    
+    .discover-news-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .discover-news-item img {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .discover-sidebar-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .discover-trending ol {
+        column-count: 1;
+    }
+    
+    .talk-section {
+        border-radius: 50% 50% 0 0 / 25% 25% 0 0;
+        margin-top: 60px;
+        padding: 60px 15px 50px;
+    }
+    
+    .icon-wrapper {
+        width: 70px;
+        height: 70px;
+        font-size: 32px;
+    }
+}
+
+/* ========== MOBILE MEDIUM (max-width: 576px) ========== */
+@media (max-width: 576px) {
+    .discover-hero {
+        min-height: 45vh;
+    }
+    
+    .discover-hero-card {
+        min-height: 45vh;
+    }
+    
+    .discover-hero-overlay {
+        min-height: 45vh;
+        padding: 15px;
+    }
+    
+    .discover-hero-title {
+        margin-top: 8px;
+    }
+    
+    .discover-hot {
+        padding: 25px 0 15px;
+    }
+    
+    .hot-news-title {
+        margin-bottom: 15px;
+    }
+    
+    .hot-news-card img {
+        height: 140px;
+    }
+    
+    .recommend-item {
+        grid-template-columns: 60px 1fr;
+        gap: 10px;
+    }
+    
+    .recommend-item img {
+        width: 60px;
+        height: 50px;
+    }
+    
+    .discover-news-item img {
+        height: 180px;
+    }
+    
+    .talk-section {
+        border-radius: 30% 30% 0 0 / 15% 15% 0 0;
+        margin-top: 40px;
+        padding: 50px 15px 40px;
+    }
+    
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+        border-width: 2px;
+    }
+    
+    .btn-talk {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ========== MOBILE SMALL (max-width: 400px) ========== */
+@media (max-width: 400px) {
+    .discover-hero {
+        min-height: 40vh;
+    }
+    
+    .discover-hero-card {
+        min-height: 40vh;
+    }
+    
+    .discover-hero-overlay {
+        min-height: 40vh;
+        padding: 12px;
+    }
+    
+    .discover-hot {
+        padding: 20px 0 10px;
+    }
+    
+    .hot-news-card img {
+        height: 120px;
+    }
+    
+    .discover-recommendation {
+        padding: 15px;
+    }
+    
+    .recommend-item {
+        padding: 8px;
+    }
+    
+    .discover-news-item {
+        padding: 8px;
+    }
+    
+    .discover-news-item img {
+        height: 160px;
+    }
+    
+    .discover-trending {
+        padding: 15px;
+    }
+    
+    .talk-section {
+        padding: 40px 10px 30px;
+    }
+}
+
+/* =====================================================
+   LANDSCAPE MOBILE FIX
+===================================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .discover-hero,
+    .discover-hero-card,
+    .discover-hero-overlay {
+        min-height: 100vh;
+    }
+}
