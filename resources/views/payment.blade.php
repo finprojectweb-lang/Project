@@ -28,7 +28,7 @@
                     <div class="calculation-details">
                         <div class="detail-row">
                             <span class="detail-label">Total Carbon Emission</span>
-                            <span class="detail-value">{{ $carbonAmount ?? '0' }} kg CO₂</span>
+                            <span class="detail-value">{{ number_format($carbonAmount ?? 0, 2) }} kg CO₂</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Calculation Period</span>
@@ -82,7 +82,7 @@
                         
                         <div class="program-options">
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="water_turbine" required data-impact="turbin">
+                                <input type="radio" name="offset_program" value="water_turbine" >
                                 <div class="program-card">
                                     <div class="program-icon">💧</div>
                                     <div class="program-content">
@@ -94,7 +94,7 @@
                             </label>
 
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="mangrove" required data-impact="mangrove">
+                                <input type="radio" name="offset_program" value="mangrove" >
                                 <div class="program-card">
                                     <div class="program-icon">🌿</div>
                                     <div class="program-content">
@@ -106,7 +106,7 @@
                             </label>
 
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="waste_recycle" required data-impact="recycle">
+                                <input type="radio" name="offset_program" value="waste_recycle" >
                                 <div class="program-card">
                                     <div class="program-icon">♻️</div>
                                     <div class="program-content">
@@ -118,7 +118,7 @@
                             </label>
 
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="coral_reef" required data-impact="coral">
+                                <input type="radio" name="offset_program" value="coral_reef" >
                                 <div class="program-card">
                                     <div class="program-icon">🪸</div>
                                     <div class="program-content">
@@ -137,17 +137,17 @@
                         
                         <div class="form-group">
                             <label for="name" class="form-label">Full Name *</label>
-                            <input type="text" id="name" name="name" class="form-control" required value="{{ old('name', Auth::user()->name ?? '') }}">
+                            <input type="text" id="name" name="name" class="form-control" required value="{{ old('name', Auth::check() ? Auth::user()->name : '') }}">
                         </div>
 
                         <div class="form-group">
                             <label for="email" class="form-label">Email Address *</label>
-                            <input type="email" id="email" name="email" class="form-control" required value="{{ old('email', Auth::user()->email ?? '') }}">
+                            <input type="email" id="email" name="email" class="form-control" required value="{{ old('email', Auth::check() ? Auth::user()->email : '') }}">
                         </div>
 
                         <div class="form-group">
                             <label for="phone" class="form-label">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" required value="{{ old('phone') }}">
+                            <input type="tel" id="phone" name="phone" class="form-control" required value="{{ old('phone') }}" placeholder="08xxxxxxxxxx">
                         </div>
                     </div>
 
@@ -157,7 +157,7 @@
                         
                         <div class="payment-methods">
                             <label class="payment-method-option">
-                                <input type="radio" name="payment_method" value="bank_transfer" required checked>
+                                <input type="radio" name="payment_method" value="bank_transfer"  >
                                 <div class="method-card">
                                     <div class="method-icon">🏦</div>
                                     <div class="method-info">
@@ -168,7 +168,7 @@
                             </label>
 
                             <label class="payment-method-option">
-                                <input type="radio" name="payment_method" value="e_wallet" required>
+                                <input type="radio" name="payment_method" value="e_wallet" >
                                 <div class="method-card">
                                     <div class="method-icon">📱</div>
                                     <div class="method-info">
@@ -179,7 +179,7 @@
                             </label>
 
                             <label class="payment-method-option">
-                                <input type="radio" name="payment_method" value="credit_card" required>
+                                <input type="radio" name="payment_method" value="credit_card" >
                                 <div class="method-card">
                                     <div class="method-icon">💳</div>
                                     <div class="method-info">
@@ -434,7 +434,9 @@
 }
 
 .program-option input[type="radio"] {
-    display: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .program-card {
@@ -537,7 +539,9 @@
 }
 
 .payment-method-option input[type="radio"] {
-    display: none;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .method-card {
@@ -683,33 +687,35 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('paymentForm');
     const programRadios = document.querySelectorAll('input[name="offset_program"]');
     const impactInfo = document.getElementById('impactInfo');
-    const carbonAmount = {{ $carbonAmount ?? 100 }};
+    const carbonAmount = parseFloat('{{ $carbonAmount ?? 0 }}') || 0;
     
     const impactData = {
         turbin: {
             icon: '💧',
             title: 'Water Turbine Development Impact',
-            description: `Your contribution will help build ${Math.round(carbonAmount / 500)} micro-hydro turbine(s), providing clean energy to approximately ${Math.round(carbonAmount / 10)} households in rural areas.`
+            description: 'Your contribution will help build ' + Math.round(carbonAmount / 500) + ' micro-hydro turbine(s), providing clean energy to approximately ' + Math.round(carbonAmount / 10) + ' households in rural areas.'
         },
         mangrove: {
             icon: '🌿',
             title: 'Mangrove Planting Impact',
-            description: `Your contribution will plant approximately ${Math.round(carbonAmount / 5)} mangrove trees, which will absorb CO₂ for decades and protect ${Math.round(carbonAmount / 50)} meters of coastline.`
+            description: 'Your contribution will plant approximately ' + Math.round(carbonAmount / 5) + ' mangrove trees, which will absorb CO₂ for decades and protect ' + Math.round(carbonAmount / 50) + ' meters of coastline.'
         },
         recycle: {
             icon: '♻️',
             title: 'Waste Recycling Impact',
-            description: `Your contribution will help recycle approximately ${Math.round(carbonAmount * 2)} kg of waste, preventing methane emissions and supporting ${Math.round(carbonAmount / 100)} waste collection workers.`
+            description: 'Your contribution will help recycle approximately ' + Math.round(carbonAmount * 2) + ' kg of waste, preventing methane emissions and supporting ' + Math.round(carbonAmount / 100) + ' waste collection workers.'
         },
         coral: {
             icon: '🪸',
             title: 'Coral Reef Restoration Impact',
-            description: `Your contribution will restore approximately ${Math.round(carbonAmount / 10)} coral fragments, covering ${Math.round(carbonAmount / 20)}m² of reef area and supporting marine biodiversity.`
+            description: 'Your contribution will restore approximately ' + Math.round(carbonAmount / 10) + ' coral fragments, covering ' + Math.round(carbonAmount / 20) + 'm² of reef area and supporting marine biodiversity.'
         }
     };
     
+    // Update impact info when program is selected
     programRadios.forEach(radio => {
         radio.addEventListener('change', function() {
             const impact = this.dataset.impact;
@@ -718,17 +724,151 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data) {
                 impactInfo.style.opacity = '0';
                 setTimeout(() => {
-                    impactInfo.innerHTML = `
-                        <div class="impact-icon">${data.icon}</div>
-                        <div class="impact-text">
-                            <strong>${data.title}</strong>
-                            <p>${data.description}</p>
-                        </div>
-                    `;
+                    impactInfo.innerHTML = '<div class="impact-icon">' + data.icon + '</div>' +
+                        '<div class="impact-text">' +
+                        '<strong>' + data.title + '</strong>' +
+                        '<p>' + data.description + '</p>' +
+                        '</div>';
                     impactInfo.style.opacity = '1';
                 }, 150);
             }
         });
+    });
+    
+    // CUSTOM VALIDATION - Form Submit Handler
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent default submit
+        
+        let isValid = true;
+        let errors = [];
+        
+        // 1. Check offset program
+        const offsetProgram = document.querySelector('input[name="offset_program"]:checked');
+        if (!offsetProgram) {
+            isValid = false;
+            errors.push('Please select a Carbon Offset Program');
+        }
+        
+        // 2. Check name
+        const name = document.getElementById('name').value.trim();
+        if (!name) {
+            isValid = false;
+            errors.push('Please enter your Full Name');
+        }
+        
+        // 3. Check email
+        const email = document.getElementById('email').value.trim();
+        if (!email) {
+            isValid = false;
+            errors.push('Please enter your Email Address');
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            isValid = false;
+            errors.push('Please enter a valid Email Address');
+        }
+        
+        // 4. Check phone
+        const phone = document.getElementById('phone').value.trim();
+        if (!phone) {
+            isValid = false;
+            errors.push('Please enter your Phone Number');
+        }
+        
+        // 5. Check payment method
+        const paymentMethod = document.querySelector('input[name="payment_method"]:checked');
+        if (!paymentMethod) {
+            isValid = false;
+            errors.push('Please select a Payment Method');
+        }
+        
+        // 6. Check agreement
+        const agreement = document.querySelector('input[name="agreement"]');
+        if (!agreement.checked) {
+            isValid = false;
+            errors.push('Please agree to the Terms & Conditions');
+        }
+        
+        // Show errors or submit
+        if (!isValid) {
+            alert('Please complete the following:\n\n• ' + errors.join('\n• '));
+            
+            // Focus on first error
+            if (!offsetProgram) {
+                document.querySelector('.program-options').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else if (!name) {
+                document.getElementById('name').focus();
+            } else if (!email) {
+                document.getElementById('email').focus();
+            } else if (!phone) {
+                document.getElementById('phone').focus();
+            } else if (!agreement.checked) {
+                agreement.focus();
+            }
+            
+            return false;
+        }
+        
+        // If valid, submit the form
+        console.log('✅ Form is valid. Submitting...');
+        form.submit();
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('paymentForm');
+    
+    if (!form) {
+        console.error('❌ Form not found!');
+        return;
+    }
+    
+    console.log('✅ Form found');
+    console.log('Form action:', form.action);
+    console.log('Form method:', form.method);
+    
+    form.addEventListener('submit', function(e) {
+        console.log('🚀 Form submit triggered');
+        
+        // Get form data
+        const formData = new FormData(form);
+        
+        console.log('📋 Form Data:');
+        for (let [key, value] of formData.entries()) {
+            console.log(`  - ${key}: ${value}`);
+        }
+        
+        // Check required fields
+        const requiredChecks = {
+            offset_program: formData.get('offset_program'),
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            payment_method: formData.get('payment_method'),
+            agreement: formData.get('agreement')
+        };
+        
+        let hasError = false;
+        let missingFields = [];
+        
+        for (let [field, value] of Object.entries(requiredChecks)) {
+            if (!value) {
+                console.error(`❌ Missing: ${field}`);
+                missingFields.push(field);
+                hasError = true;
+            } else {
+                console.log(`✅ ${field}: ${value}`);
+            }
+        }
+        
+        if (hasError) {
+            e.preventDefault();
+            alert('Please fill in the following required fields:\n\n' + missingFields.join('\n'));
+            return false;
+        }
+        
+        console.log('✅ All validations passed. Submitting...');
+        // Form akan submit secara normal
     });
 });
 </script>

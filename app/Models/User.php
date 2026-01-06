@@ -42,4 +42,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get all carbon calculations for the user
+     */
+    public function carbonCalculations()
+    {
+        return $this->hasMany(CarbonCalculation::class);
+    }
+
+    /**
+     * Get all payments for the user
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

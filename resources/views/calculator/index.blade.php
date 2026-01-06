@@ -2,151 +2,122 @@
 
 @section('content')
 <style>
-/* SECTION */
-.eco-orbit {
-    padding: 150px 20px;
-    background:
-        radial-gradient(circle at top, #1a1f2b, #0b0f19);
-    color: white;
-    font-family: 'Inter', sans-serif;
-}
-
-/* HEADER */
-.eco-header {
+.eco-calc {
+    padding: 120px 20px;
+    background: linear-gradient(180deg, #f4fdf9, #e8f6ef);
     text-align: center;
-    margin-bottom: 80px;
 }
 
-.eco-header h2 {
-    font-size: 2.9rem;
+.eco-title {
+    font-size: 2.6rem;
     font-weight: 800;
-    background: linear-gradient(90deg, #00f5d4, #4cc9f0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #064e3b;
 }
 
-.eco-header p {
-    opacity: .7;
-    margin-top: 10px;
-    font-size: 1.05rem;
+.eco-sub {
+    margin: 12px 0 50px;
+    color: #475569;
 }
 
-/* GRID */
 .eco-grid {
-    max-width: 1050px;
+    max-width: 1100px;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 48px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 36px;
 }
 
-/* CARD */
 .eco-card {
-    position: relative;
-    padding: 46px 28px;
-    border-radius: 36px;
-    background: #121726;
-    box-shadow:
-        10px 10px 30px rgba(0,0,0,.6),
-        -10px -10px 30px rgba(255,255,255,.02);
-    transition: all .55s cubic-bezier(.4,0,.2,1);
+    border-radius: 28px;
+    padding: 36px 24px;
     text-decoration: none;
     color: white;
+    position: relative;
+    transition: all 0.35s ease;
+    box-shadow: 0 20px 40px rgba(0,0,0,.15);
+}
+
+.eco-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 30px 60px rgba(0,0,0,.25);
 }
 
 /* ICON */
 .eco-icon {
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
+    width: 82px;
+    height: 82px;
+    margin: auto;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.25);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2.8rem;
-    margin-bottom: 28px;
-    background: rgba(255,255,255,.05);
-    transition: all .6s ease;
+    margin-bottom: 20px;
 }
 
 /* TEXT */
 .eco-card h4 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .eco-card span {
-    font-size: .95rem;
-    opacity: .7;
+    font-size: 0.9rem;
+    opacity: 0.9;
 }
 
-/* HOVER EFFECT */
-.eco-card:hover {
-    transform: translateY(-22px);
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.9);
-}
-
-.eco-card:hover .eco-icon {
-    transform: scale(1.15) rotate(8deg);
-}
-
-/* NEON ACCENTS */
-.c1 .eco-icon { color: #00f5d4; box-shadow: 0 0 25px #00f5d4; }
-.c2 .eco-icon { color: #4cc9f0; box-shadow: 0 0 25px #4cc9f0; }
-.c3 .eco-icon { color: #f9c74f; box-shadow: 0 0 25px #f9c74f; }
-.c4 .eco-icon { color: #f28482; box-shadow: 0 0 25px #f28482; }
+/* VARIANTS */
+.green  { background: linear-gradient(135deg,#10b981,#047857); }
+.blue   { background: linear-gradient(135deg,#38bdf8,#0369a1); }
+.orange { background: linear-gradient(135deg,#fb923c,#c2410c); }
+.purple { background: linear-gradient(135deg,#a78bfa,#6d28d9); }
 
 /* MOBILE */
 @media (max-width: 640px) {
-    .eco-header h2 {
-        font-size: 2.2rem;
-    }
-
-    .eco-card {
-        padding: 38px 24px;
-    }
+    .eco-title { font-size: 2rem; }
+    .eco-card { padding: 30px 20px; }
 }
+
 </style>
 
-<div class="eco-orbit">
-    <div class="eco-header">
-        <h2>Track Your Environmental Impact</h2>
-        <p>Every choice leaves a footprint</p>
-    </div>
+<div class="eco-calc">
+    <h2 class="eco-title">Carbon Calculator</h2>
+    <p class="eco-sub">Choose a category to measure your impact</p>
 
     <div class="eco-grid">
 
-        <a href="{{ route('calc.housing') }}" class="eco-card c1">
+        <a href="{{ route('calc.housing') }}" class="eco-card green">
             <div class="eco-icon">
-                <i class="bi bi-lightning-charge-fill"></i>
+                <i class="bi bi-house-fill"></i>
             </div>
-            <h4>Energy</h4>
-            <span>Home & electricity usage</span>
+            <h4>Housing</h4>
+            <span>Electricity & Home Energy</span>
         </a>
 
-        <a href="{{ route('calc.transport') }}" class="eco-card c2">
+        <a href="{{ route('calc.transport') }}" class="eco-card blue">
             <div class="eco-icon">
-                <i class="bi bi-geo-alt-fill"></i>
+                <i class="bi bi-car-front-fill"></i>
             </div>
-            <h4>Mobility</h4>
-            <span>Daily travel emissions</span>
+            <h4>Transport</h4>
+            <span>Daily Travel & Commute</span>
         </a>
 
-        <a href="{{ route('calc.food') }}" class="eco-card c3">
+        <a href="{{ route('calc.food') }}" class="eco-card orange">
             <div class="eco-icon">
-                <i class="bi bi-flower1"></i>
+                <i class="bi bi-egg-fried"></i>
             </div>
             <h4>Food</h4>
-            <span>Diet & consumption</span>
+            <span>Diet & Consumption</span>
         </a>
 
-        <a href="{{ route('calc.expenditure') }}" class="eco-card c4">
+        <a href="{{ route('calc.expenditure') }}" class="eco-card purple">
             <div class="eco-icon">
-                <i class="bi bi-wallet2"></i>
+                <i class="bi bi-bag-fill"></i>
             </div>
-            <h4>Lifestyle</h4>
-            <span>Shopping & habits</span>
+            <h4>Shopping</h4>
+            <span>Lifestyle Spending</span>
         </a>
 
     </div>

@@ -66,7 +66,7 @@
 
             <div class="ft-card">
                 <img src="{{ asset('images/aliknb.jpg') }}" alt="Muhammad Fadhil Malikul Sholeh">
-                <p>Muhammad Fadhil Malikul Sholeh <br>
+                <p>Dr. Muhammad Fadhil Malikul Sholeh <br>
             <span>S.Kom, M.Kom</span></p>
                             </div>
 

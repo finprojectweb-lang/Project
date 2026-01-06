@@ -128,7 +128,7 @@
 .success-container {
     min-height: 100vh;
     background: linear-gradient(135deg, #f8faf7 0%, #e8f0e5 100%);
-    padding: 40px 20px;
+    padding: 100px 20px;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
