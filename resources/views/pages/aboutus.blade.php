@@ -61,21 +61,23 @@
             <div class="ft-card">
                 <img src="{{ asset('images/aan.jpg') }}" alt="Farhan Aldi Nugraha">
                 <p>Farhan Aldi Nugraha <br>
-            <span>B.Sc., B.Eng., M.Sc., M.Eng., Ph.D.</span></p>
+            <span>B.Sc., B.Eng., M.Sc., M.Eng., Ph.D., ASEAN Eng.</span></p>
             </div>
 
             <div class="ft-card">
-                <img src="{{ asset('images/alik.jpg') }}" alt="Muhammad Fadhil Malikul Sholeh">
-                <p>Muhammad Fadhil<br>Malikul Sholeh</p>
+                <img src="{{ asset('images/aliknb.jpg') }}" alt="Muhammad Fadhil Malikul Sholeh">
+                <p>Muhammad Fadhil Malikul Sholeh <br>
+            <span>S.Kom, M.Kom</span></p>
                             </div>
 
             <div class="ft-card">
-                <img src="{{ asset('images/lutpi.png') }}" alt="Luthfi Ardhika Akbar">
-                <p>Luthfi Ardhika Akbar</p>
+                <img src="{{ asset('images/lutpinb.jpg') }}" alt="Luthfi Ardhika Akbar">
+                <p>Luthfi Ardhika Akbar <br>
+            <span>S.Kom, M.Kom</span></p>
                             </div>
 
             <div class="ft-card">
-                <img src="{{ asset('images/ariel.png') }}" alt="Dr. Ariela Raditya Fadlur Rahman">
+                <img src="{{ asset('images/arielnb.jpg') }}" alt="Dr. Ariela Raditya Fadlur Rahman">
                 <p>
                     Dr. Ariela Raditya Fadlur Rahman<br>
                     <span>S.Kom, M.Kom</span>                          
