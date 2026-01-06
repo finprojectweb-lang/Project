@@ -63,7 +63,7 @@
                     <h5>Recommendation</h5>
 
                     <div class="recommend-item">
-                        <img src="/images/mangr.jpeg" alt="Mangrove Restoration">
+                        <img src="/images/mang.jpeg" alt="Mangrove Restoration">
                         <div>
                             <p>Why mangrove restoration matters</p>
                             <small>08 Dec 2025</small>
@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="discover-news-item animate-on-scroll animate-delay-3">
-                    <img src="/images/shanghai.jpg" alt="Shanghai Business">
+                    <img src="images/shanghai.jpg" alt="Shanghai Business">
                     <div>
                         <h6>Shanghai Issues Ninth Annual Action Plan to Build First-Class Business Environment.</h6>
                         <small>10 Dec 2025 · 09:20 WIB</small>

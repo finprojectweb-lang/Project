@@ -7,7 +7,7 @@
     <div class="payment-wrapper">
         <!-- Header Section -->
         <div class="payment-header">
-            <div class="back-button">
+            <div class="header-top">
                 <a href="{{ url()->previous() }}" class="btn-back">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -82,7 +82,7 @@
                         
                         <div class="program-options">
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="water_turbine" >
+                                <input type="radio" name="offset_program" value="water_turbine" data-impact="water_turbine">
                                 <div class="program-card">
                                     <div class="program-icon">💧</div>
                                     <div class="program-content">
@@ -94,7 +94,7 @@
                             </label>
 
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="mangrove" >
+                                <input type="radio" name="offset_program" value="mangrove" data-impact="mangrove">
                                 <div class="program-card">
                                     <div class="program-icon">🌿</div>
                                     <div class="program-content">
@@ -106,7 +106,7 @@
                             </label>
 
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="waste_recycle" >
+                                <input type="radio" name="offset_program" value="waste_recycle" data-impact="waste_recycle">
                                 <div class="program-card">
                                     <div class="program-icon">♻️</div>
                                     <div class="program-content">
@@ -118,7 +118,7 @@
                             </label>
 
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="coral_reef" >
+                                <input type="radio" name="offset_program" value="coral_reef" data-impact="coral_reef">
                                 <div class="program-card">
                                     <div class="program-icon">🪸</div>
                                     <div class="program-content">
@@ -157,7 +157,7 @@
                         
                         <div class="payment-methods">
                             <label class="payment-method-option">
-                                <input type="radio" name="payment_method" value="bank_transfer"  >
+                                <input type="radio" name="payment_method" value="bank_transfer">
                                 <div class="method-card">
                                     <div class="method-icon">🏦</div>
                                     <div class="method-info">
@@ -168,7 +168,7 @@
                             </label>
 
                             <label class="payment-method-option">
-                                <input type="radio" name="payment_method" value="e_wallet" >
+                                <input type="radio" name="payment_method" value="e_wallet">
                                 <div class="method-card">
                                     <div class="method-icon">📱</div>
                                     <div class="method-info">
@@ -179,7 +179,7 @@
                             </label>
 
                             <label class="payment-method-option">
-                                <input type="radio" name="payment_method" value="credit_card" >
+                                <input type="radio" name="payment_method" value="credit_card">
                                 <div class="method-card">
                                     <div class="method-icon">💳</div>
                                     <div class="method-info">
@@ -239,10 +239,14 @@
 .payment-header {
     text-align: center;
     margin-bottom: 40px;
+    margin-top: 90px;
+    position: relative;
 }
 
-.back-button {
-    margin-bottom: 20px;
+.header-top {
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .btn-back {
@@ -253,13 +257,17 @@
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    padding: 8px 16px;
+    padding: 10px 18px;
     border-radius: 8px;
     transition: all 0.3s ease;
+    background: white;
+    border: 2px solid #e8f0e5;
+    white-space: nowrap;
 }
 
 .btn-back:hover {
     background: rgba(85, 107, 47, 0.1);
+    border-color: #556B2F;
 }
 
 .page-title {
@@ -682,6 +690,21 @@
     .program-icon {
         font-size: 40px;
     }
+
+    .btn-back {
+        font-size: 13px;
+        padding: 8px 14px;
+    }
+
+    .btn-back svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .header-top {
+        position: static;
+        margin-bottom: 16px;
+    }
 }
 </style>
 
@@ -692,8 +715,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const impactInfo = document.getElementById('impactInfo');
     const carbonAmount = parseFloat('{{ $carbonAmount ?? 0 }}') || 0;
     
+    // Impact data untuk setiap program
     const impactData = {
-        turbin: {
+        water_turbine: {
             icon: '💧',
             title: 'Water Turbine Development Impact',
             description: 'Your contribution will help build ' + Math.round(carbonAmount / 500) + ' micro-hydro turbine(s), providing clean energy to approximately ' + Math.round(carbonAmount / 10) + ' households in rural areas.'
@@ -703,60 +727,66 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Mangrove Planting Impact',
             description: 'Your contribution will plant approximately ' + Math.round(carbonAmount / 5) + ' mangrove trees, which will absorb CO₂ for decades and protect ' + Math.round(carbonAmount / 50) + ' meters of coastline.'
         },
-        recycle: {
+        waste_recycle: {
             icon: '♻️',
             title: 'Waste Recycling Impact',
             description: 'Your contribution will help recycle approximately ' + Math.round(carbonAmount * 2) + ' kg of waste, preventing methane emissions and supporting ' + Math.round(carbonAmount / 100) + ' waste collection workers.'
         },
-        coral: {
+        coral_reef: {
             icon: '🪸',
             title: 'Coral Reef Restoration Impact',
             description: 'Your contribution will restore approximately ' + Math.round(carbonAmount / 10) + ' coral fragments, covering ' + Math.round(carbonAmount / 20) + 'm² of reef area and supporting marine biodiversity.'
         }
     };
     
-    // Update impact info when program is selected
+    // Update impact info ketika program dipilih
     programRadios.forEach(radio => {
         radio.addEventListener('change', function() {
             const impact = this.dataset.impact;
             const data = impactData[impact];
             
             if (data) {
+                // Fade out effect
                 impactInfo.style.opacity = '0';
+                
                 setTimeout(() => {
-                    impactInfo.innerHTML = '<div class="impact-icon">' + data.icon + '</div>' +
+                    // Update content
+                    impactInfo.innerHTML = 
+                        '<div class="impact-icon">' + data.icon + '</div>' +
                         '<div class="impact-text">' +
-                        '<strong>' + data.title + '</strong>' +
-                        '<p>' + data.description + '</p>' +
+                            '<strong>' + data.title + '</strong>' +
+                            '<p>' + data.description + '</p>' +
                         '</div>';
+                    
+                    // Fade in effect
                     impactInfo.style.opacity = '1';
-                }, 150);
+                }, 200);
             }
         });
     });
     
-    // CUSTOM VALIDATION - Form Submit Handler
+    // Form validation
     form.addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent default submit
+        e.preventDefault();
         
         let isValid = true;
         let errors = [];
         
-        // 1. Check offset program
+        // Check offset program
         const offsetProgram = document.querySelector('input[name="offset_program"]:checked');
         if (!offsetProgram) {
             isValid = false;
             errors.push('Please select a Carbon Offset Program');
         }
         
-        // 2. Check name
+        // Check name
         const name = document.getElementById('name').value.trim();
         if (!name) {
             isValid = false;
             errors.push('Please enter your Full Name');
         }
         
-        // 3. Check email
+        // Check email
         const email = document.getElementById('email').value.trim();
         if (!email) {
             isValid = false;
@@ -766,21 +796,21 @@ document.addEventListener('DOMContentLoaded', function() {
             errors.push('Please enter a valid Email Address');
         }
         
-        // 4. Check phone
+        // Check phone
         const phone = document.getElementById('phone').value.trim();
         if (!phone) {
             isValid = false;
             errors.push('Please enter your Phone Number');
         }
         
-        // 5. Check payment method
+        // Check payment method
         const paymentMethod = document.querySelector('input[name="payment_method"]:checked');
         if (!paymentMethod) {
             isValid = false;
             errors.push('Please select a Payment Method');
         }
         
-        // 6. Check agreement
+        // Check agreement
         const agreement = document.querySelector('input[name="agreement"]');
         if (!agreement.checked) {
             isValid = false;
@@ -791,7 +821,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isValid) {
             alert('Please complete the following:\n\n• ' + errors.join('\n• '));
             
-            // Focus on first error
+            // Focus on first error field
             if (!offsetProgram) {
                 document.querySelector('.program-options').scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else if (!name) {
@@ -807,69 +837,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
         
-        // If valid, submit the form
-        console.log('✅ Form is valid. Submitting...');
+        // Submit form jika valid
         form.submit();
     });
 });
 </script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('paymentForm');
-    
-    if (!form) {
-        console.error('❌ Form not found!');
-        return;
-    }
-    
-    console.log('✅ Form found');
-    console.log('Form action:', form.action);
-    console.log('Form method:', form.method);
-    
-    form.addEventListener('submit', function(e) {
-        console.log('🚀 Form submit triggered');
-        
-        // Get form data
-        const formData = new FormData(form);
-        
-        console.log('📋 Form Data:');
-        for (let [key, value] of formData.entries()) {
-            console.log(`  - ${key}: ${value}`);
-        }
-        
-        // Check required fields
-        const requiredChecks = {
-            offset_program: formData.get('offset_program'),
-            name: formData.get('name'),
-            email: formData.get('email'),
-            phone: formData.get('phone'),
-            payment_method: formData.get('payment_method'),
-            agreement: formData.get('agreement')
-        };
-        
-        let hasError = false;
-        let missingFields = [];
-        
-        for (let [field, value] of Object.entries(requiredChecks)) {
-            if (!value) {
-                console.error(`❌ Missing: ${field}`);
-                missingFields.push(field);
-                hasError = true;
-            } else {
-                console.log(`✅ ${field}: ${value}`);
-            }
-        }
-        
-        if (hasError) {
-            e.preventDefault();
-            alert('Please fill in the following required fields:\n\n' + missingFields.join('\n'));
-            return false;
-        }
-        
-        console.log('✅ All validations passed. Submitting...');
-        // Form akan submit secara normal
-    });
-});
-</script>
 @endsection

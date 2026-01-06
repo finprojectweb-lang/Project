@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", runReveal);
 document.addEventListener("scroll", runReveal);
 </script>
 
-
+    @include('components.ai-assistant')
 </body>
 
 
