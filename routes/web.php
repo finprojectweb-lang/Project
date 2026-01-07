@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TransactionController; // TAMBAHKAN INI (ganti TransactionHistoryController)
+use App\Http\Controllers\CorporateCalculatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,8 +91,11 @@ Route::get('/discover-us/partners', function () {
 })->name('partners');
 
 
+
 // routes/web.php
-use App\Http\Controllers\CorporateCalculatorController;
+
+
+// Di web.php, tambahkan route ini:
 
 Route::prefix('calculator/corporate')->name('calc.corporate.')->group(function () {
     Route::get('/', [CorporateCalculatorController::class, 'index'])->name('index');
@@ -100,9 +104,9 @@ Route::prefix('calculator/corporate')->name('calc.corporate.')->group(function (
     Route::get('/result/{id}', [CorporateCalculatorController::class, 'result'])->name('result');
     Route::get('/export-pdf/{id}', [CorporateCalculatorController::class, 'exportPdf'])->name('export-pdf');
     Route::get('/history', [CorporateCalculatorController::class, 'history'])->name('history')->middleware('auth');
-    // Tambahkan ini di dalam group atau setelah routes lainnya
-    Route::delete('/{id}/delete', [CorporateCalculatorController::class, 'delete'])->name('delete');
+    Route::delete('/{id}', [CorporateCalculatorController::class, 'delete'])->name('delete');
 });
+
 /*
 |--------------------------------------------------------------------------
 | Authentication Routes
@@ -135,6 +139,9 @@ Route::get('/auth/google/callback', [SocialAuthController::class, 'callback']);
 | Protected Routes (Harus login terlebih dahulu)
 |--------------------------------------------------------------------------
 */
+Route::get('/payment/create/{calculation}', [PaymentController::class, 'create'])
+    ->name('payment.create')
+    ->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
     // Payment Routes
@@ -146,6 +153,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
     Route::get('/transactions/{id}/certificate', [TransactionController::class, 'certificate'])->name('transactions.certificate');
+});
+
+Route::middleware(['auth'])->group(function () {
+    // Payment Routes untuk Corporate
+    Route::get('/payment/corporate/{calculation}', [PaymentController::class, 'create'])
+        ->name('payment.create');
+    
+    Route::post('/payment/process', [PaymentController::class, 'process'])
+        ->name('payment.process');
+    
+    Route::get('/payment/success/{payment}', [PaymentController::class, 'success'])
+        ->name('payment.success');
 });
 
 // Callback untuk payment gateway (tidak perlu auth)

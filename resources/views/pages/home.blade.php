@@ -315,7 +315,7 @@
                         
                         <!-- Description -->
                         <p class="lead text-muted mb-4 fs-6 fs-md-5">
-                            Hitung dampak karbon dari aktivitas bisnis Anda dengan mudah dan akurat menggunakan kalkulator kami yang telah disesuaikan dengan standar internasional.
+                            Hitung dampak karbon dari aktivitas pribadi atau aktivitas bisnis Anda dengan mudah dan akurat menggunakan kalkulator kami yang telah disesuaikan dengan standar internasional.
                         </p>
                         
                         <!-- Features List -->

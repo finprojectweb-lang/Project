@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CarbonCalculation;
+use App\Models\CorporateCalculation; // TAMBAHKAN INI
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,43 @@ use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
+    // METHOD BARU UNTUK CORPORATE CALCULATOR
+    public function create($calculationId)
+    {
+        try {
+            // Ambil data calculation
+            $calculation = CorporateCalculation::findOrFail($calculationId);
+            
+            // Hitung payment details
+            $carbonAmount = $calculation->total_emission / 1000; // Convert ke Ton
+            $rate = 15000; // Rp per kg
+            $subtotal = ($calculation->total_emission * $rate); // total emission dalam kg
+            $adminFee = 5000;
+            $totalAmount = $subtotal + $adminFee;
+            
+            return view('payment.corporate', [
+                'calculation' => $calculation,
+                'carbonAmount' => $carbonAmount,
+                'calculatorType' => 'corporate',
+                'rate' => $rate,
+                'subtotal' => $subtotal,
+                'adminFee' => $adminFee,
+                'totalAmount' => $totalAmount,
+                'period' => 'Year ' . $calculation->calculation_year
+            ]);
+            
+        } catch (\Exception $e) {
+            Log::error('Error loading corporate payment:', [
+                'calculation_id' => $calculationId,
+                'error' => $e->getMessage()
+            ]);
+            
+            return redirect()->route('calc.corporate.index')
+                ->with('error', 'Calculation not found');
+        }
+    }
+
+    // METHOD EXISTING (jangan dihapus)
     public function index(Request $request)
     {
         $carbonAmount = $request->query('carbon_amount', 0);
@@ -48,7 +86,8 @@ class PaymentController extends Controller
                 'email' => 'required|email|max:255',
                 'phone' => 'required|string|max:20',
                 'payment_method' => 'required|in:bank_transfer,e_wallet,credit_card',
-                'agreement' => 'accepted'
+                'agreement' => 'accepted',
+                'calculation_id' => 'nullable|exists:corporate_calculations,id' // TAMBAHKAN INI
             ]);
             
             Log::info('✅ Validation passed');
@@ -56,27 +95,38 @@ class PaymentController extends Controller
             DB::beginTransaction();
             
             try {
-                // 1. Simpan Carbon Calculation
-                $carbonData = session('carbonData');
-                if (is_string($carbonData)) {
-                    $carbonData = json_decode($carbonData, true);
+                // Handle berdasarkan calculator type
+                if ($validated['calculator_type'] === 'corporate' && isset($validated['calculation_id'])) {
+                    // Untuk corporate calculator
+                    $carbonCalculationId = null;
+                    $corporateCalculationId = $validated['calculation_id'];
+                    
+                } else {
+                    // Untuk general calculator (existing logic)
+                    $carbonData = session('carbonData');
+                    if (is_string($carbonData)) {
+                        $carbonData = json_decode($carbonData, true);
+                    }
+                    
+                    Log::info('Carbon Data from session:', ['data' => $carbonData]);
+                    
+                    $carbonCalculation = CarbonCalculation::create([
+                        'user_id' => Auth::id(),
+                        'type' => $validated['calculator_type'],
+                        'carbon_amount' => $validated['carbon_amount'],
+                        'price' => $validated['total_amount'],
+                        'price_per_kg' => 15000,
+                        'details' => $carbonData['details'] ?? [],
+                        'plastic_eq' => $carbonData['plasticEq'] ?? 0,
+                        'tree_eq' => $carbonData['treeEq'] ?? 0,
+                        'coral_eq' => $carbonData['coralEq'] ?? 0,
+                    ]);
+                    
+                    Log::info('✅ Carbon calculation created', ['id' => $carbonCalculation->id]);
+                    
+                    $carbonCalculationId = $carbonCalculation->id;
+                    $corporateCalculationId = null;
                 }
-                
-                Log::info('Carbon Data from session:', ['data' => $carbonData]);
-                
-                $carbonCalculation = CarbonCalculation::create([
-                    'user_id' => Auth::id(),
-                    'type' => $validated['calculator_type'],
-                    'carbon_amount' => $validated['carbon_amount'],
-                    'price' => $validated['total_amount'],
-                    'price_per_kg' => 15000,
-                    'details' => $carbonData['details'] ?? [],
-                    'plastic_eq' => $carbonData['plasticEq'] ?? 0,
-                    'tree_eq' => $carbonData['treeEq'] ?? 0,
-                    'coral_eq' => $carbonData['coralEq'] ?? 0,
-                ]);
-                
-                Log::info('✅ Carbon calculation created', ['id' => $carbonCalculation->id]);
 
                 // 2. Simpan Payment
                 $subtotal = $validated['carbon_amount'] * 15000;
@@ -84,7 +134,8 @@ class PaymentController extends Controller
                 
                 $payment = Payment::create([
                     'user_id' => Auth::id(),
-                    'carbon_calculation_id' => $carbonCalculation->id,
+                    'carbon_calculation_id' => $carbonCalculationId,
+                    'corporate_calculation_id' => $corporateCalculationId, // TAMBAHKAN FIELD INI
                     'order_id' => Payment::generateOrderId(),
                     'name' => $validated['name'],
                     'email' => $validated['email'],
@@ -151,42 +202,42 @@ class PaymentController extends Controller
     }
 
     public function success($paymentId)
-{
-    try {
-        $payment = Payment::with('carbonCalculation')->findOrFail($paymentId);
-        
-        // Cek authorization
-        if (Auth::check() && $payment->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized access');
+    {
+        try {
+            $payment = Payment::with(['carbonCalculation', 'corporateCalculation'])->findOrFail($paymentId);
+            
+            // Cek authorization
+            if (Auth::check() && $payment->user_id !== Auth::id()) {
+                abort(403, 'Unauthorized access');
+            }
+            
+            Log::info('✅ Success page loaded', ['payment_id' => $paymentId]);
+            
+            // Prepare payment data for view
+            $paymentData = [
+                'order_id' => $payment->order_id,
+                'name' => $payment->name,
+                'email' => $payment->email,
+                'phone' => $payment->phone,
+                'carbon_amount' => $payment->carbon_amount,
+                'offset_program' => $payment->offset_program,
+                'payment_method' => $payment->payment_method,
+                'total_amount' => $payment->total_amount,
+                'subtotal' => $payment->subtotal,
+                'admin_fee' => $payment->admin_fee,
+                'status' => $payment->status,
+            ];
+            
+            return view('payment.success', compact('payment', 'paymentData'));
+            
+        } catch (\Exception $e) {
+            Log::error('❌ Error loading success page:', [
+                'payment_id' => $paymentId,
+                'error' => $e->getMessage()
+            ]);
+            
+            return redirect()->route('dashboard')
+                ->with('error', 'Payment not found');
         }
-        
-        Log::info('✅ Success page loaded', ['payment_id' => $paymentId]);
-        
-        // Prepare payment data for view
-        $paymentData = [
-            'order_id' => $payment->order_id,
-            'name' => $payment->name,
-            'email' => $payment->email,
-            'phone' => $payment->phone,
-            'carbon_amount' => $payment->carbon_amount,
-            'offset_program' => $payment->offset_program,
-            'payment_method' => $payment->payment_method,
-            'total_amount' => $payment->total_amount,
-            'subtotal' => $payment->subtotal,
-            'admin_fee' => $payment->admin_fee,
-            'status' => $payment->status,
-        ];
-        
-        return view('payment.success', compact('payment', 'paymentData'));
-        
-    } catch (\Exception $e) {
-        Log::error('❌ Error loading success page:', [
-            'payment_id' => $paymentId,
-            'error' => $e->getMessage()
-        ]);
-        
-        return redirect()->route('dashboard')
-            ->with('error', 'Payment not found');
     }
-}
 }

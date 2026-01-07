@@ -65,7 +65,7 @@
     z-index: 1;
 }
 
-/* MAIN EMISSION CARD */
+/* MAIN EMISSION */
 .main-emission {
     text-align: center;
     padding: 50px 40px;
@@ -311,6 +311,101 @@
     font-weight: 700;
 }
 
+/* PAYMENT SECTION */
+.payment-section {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    border: 2px solid #10b981;
+}
+
+.payment-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #065f46;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.payment-description {
+    color: #047857;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.payment-button-container {
+    margin-bottom: 20px;
+}
+
+.btn-payment {
+    padding: 18px 40px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-payment.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.btn-payment.btn-success:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+    color: white;
+}
+
+.btn-payment.btn-outline-success {
+    background: white;
+    color: #059669;
+    border: 3px solid #10b981;
+}
+
+.btn-payment.btn-outline-success:hover {
+    background: #f0fdf4;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+    color: #059669;
+}
+
+.powered-by {
+    padding-top: 20px;
+    border-top: 2px solid #a7f3d0;
+}
+
+.powered-by-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.powered-text {
+    color: #059669;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.powered-logo {
+    height: 30px;
+    filter: grayscale(0);
+}
+
 /* ACTION BUTTONS */
 .action-buttons {
     display: flex;
@@ -405,6 +500,20 @@
         grid-template-columns: 1fr;
     }
 
+    .payment-section {
+        padding: 30px 20px;
+    }
+
+    .payment-title {
+        font-size: 1.5rem;
+    }
+
+    .btn-payment {
+        width: 100%;
+        padding: 16px 30px;
+        font-size: 1rem;
+    }
+
     .action-buttons {
         flex-direction: column;
         padding: 30px 20px;
@@ -453,7 +562,9 @@
                         <span class="scope-name">Emisi Langsung</span>
                     </div>
                     <div class="scope-emission">{{ number_format($calculation->scope1_total / 1000, 2) }}</div>
-                    <div class="scope-percentage">Ton CO₂e ({{ number_format(($calculation->scope1_total / $calculation->total_emission) * 100, 1) }}%)</div>
+                    <div class="scope-percentage">
+                        Ton CO₂e ({{ $calculation->total_emission > 0 ? number_format(($calculation->scope1_total / $calculation->total_emission) * 100, 1) : 0 }}%)
+                    </div>
                     
                     @if($calculation->scope1_data)
                     <div class="scope-details">
@@ -578,6 +689,41 @@
                     <li>Set target pengurangan emisi 20-30% dalam 3-5 tahun ke depan</li>
                 </ul>
             </div>
+
+            <!-- PAYMENT SECTION -->
+            <!-- PAYMENT SECTION -->
+<div class="payment-section">
+    <h3 class="payment-title">
+        <i class="bi bi-credit-card-fill"></i>
+        Kompensasi Karbon
+    </h3>
+    <p class="payment-description">
+        Ambil langkah nyata untuk mengurangi dampak emisi karbon perusahaan Anda. 
+        Lakukan pembayaran kompensasi karbon dan berkontribusi pada program penanaman pohon dan energi terbarukan.
+    </p>
+    
+@auth
+    <a href="{{ route('payment.create', ['calculation' => $calculation->id]) }}" class="btn-payment btn-success">
+        <i class="bi bi-credit-card"></i>
+        Proceed to Payment
+    </a>
+@endauth
+
+@guest
+    <a href="{{ route('payment.create', ['calculation' => $calculation->id]) }}" class="btn-payment btn-outline-success">
+        <i class="bi bi-lock-fill"></i>
+        Login to Proceed Payment
+    </a>
+@endguest
+
+    <!-- Powered By -->
+    <div class="powered-by">
+        <div class="powered-by-inner">
+            <span class="powered-text">Powered by</span>
+            <img src="/images/nullicarbon.png" alt="NulliCarbon" class="powered-logo">
+        </div>
+    </div>
+</div>
         </div>
 
         <!-- ACTION BUTTONS -->
@@ -601,14 +747,14 @@
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-// Get data from HTML data attributes - NO Blade syntax in JavaScript!
+// Get data from HTML data attributes
 const canvas = document.getElementById('emissionChart');
 const scope1Total = parseFloat(canvas.dataset.scope1);
 const scope2Total = parseFloat(canvas.dataset.scope2);
 const scope3Total = parseFloat(canvas.dataset.scope3);
 const totalEmission = parseFloat(canvas.dataset.total);
 
-// BUAT CHART
+// Create Chart
 const ctx = canvas.getContext('2d');
 const emissionChart = new Chart(ctx, {
     type: 'doughnut',

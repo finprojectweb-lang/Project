@@ -69,6 +69,15 @@ class CorporateCalculatorController extends Controller
         $scope3Total = $this->calculateScope3($request->scope3 ?? []);
         
         $totalEmission = $scope1Total + $scope2Total + $scope3Total;
+        
+        // ✅ VALIDASI: Check if total emission is zero
+        if ($totalEmission <= 0) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['emission' => 'Total emisi tidak boleh 0. Mohon masukkan minimal satu data konsumsi yang lebih dari 0.'])
+                ->with('error', 'Total emisi tidak boleh 0. Mohon masukkan minimal satu data konsumsi.');
+        }
+        
         $compensationCost = ($totalEmission / 1000) * $this->compensationRate;
 
         $calculation = CorporateCalculation::create([

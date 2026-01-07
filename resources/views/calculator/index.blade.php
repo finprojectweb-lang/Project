@@ -64,29 +64,6 @@
     box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
 }
 
-.toggle-btn.disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-.toggle-btn.disabled:hover {
-    transform: none;
-}
-
-.coming-soon-badge {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: linear-gradient(135deg, #f59e0b, #d97706);
-    color: white;
-    font-size: 0.65rem;
-    padding: 3px 8px;
-    border-radius: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
-}
-
 /* CALCULATOR GRIDS */
 .calc-section {
     display: none;
@@ -204,26 +181,179 @@
 .indigo { background: linear-gradient(135deg, #818cf8, #4338ca); }
 .amber  { background: linear-gradient(135deg, #fbbf24, #d97706); }
 
-/* COMING SOON CARD */
-.eco-card.coming-soon {
-    cursor: not-allowed;
-    opacity: 0.7;
-    pointer-events: none;
+/* CORPORATE SECTION STYLES */
+.corporate-hero {
+    text-align: center;
+    margin-bottom: 50px;
 }
 
-.eco-card.coming-soon::after {
-    content: 'Coming Soon';
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(10px);
-    color: white;
-    font-size: 0.7rem;
-    padding: 4px 12px;
-    border-radius: 12px;
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #059669;
+    margin-bottom: 40px;
+}
+
+.action-card {
+    max-width: 800px;
+    margin: 0 auto 50px;
+    background: white;
+    border-radius: 20px;
+    padding: 50px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.action-card h2 {
+    margin-bottom: 20px;
+    color: #064e3b;
+    font-size: 1.8rem;
     font-weight: 700;
-    letter-spacing: 0.5px;
+}
+
+.action-card p {
+    color: #64748b;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.btn-start {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-start:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+    color: white;
+}
+
+.calculations-list {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.list-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #064e3b;
+}
+
+.calculation-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.calculation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.calc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 20px;
+}
+
+.calc-company {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.calc-date {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.calc-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.stat-label {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.calc-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.btn-view {
+    padding: 10px 20px;
+    background: #10b981;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-view:hover {
+    background: #059669;
+    color: white;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 16px;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.empty-text {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 30px;
 }
 
 /* TABLET */
@@ -231,6 +361,10 @@
     .eco-grid {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 28px;
+    }
+    
+    .calc-stats {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -260,11 +394,6 @@
         font-size: 0.95rem;
     }
     
-    .coming-soon-badge {
-        font-size: 0.6rem;
-        padding: 2px 6px;
-    }
-    
     .section-label h3 {
         font-size: 1.5rem;
     }
@@ -282,6 +411,23 @@
         width: 70px;
         height: 70px;
         font-size: 2.2rem;
+    }
+    
+    .action-card {
+        padding: 30px 20px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .btn-start {
+        padding: 16px 32px;
+        font-size: 1rem;
+    }
+    
+    .calc-stats {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -315,10 +461,9 @@
             <i class="bi bi-person-fill"></i>
             <span>Personal</span>
         </button>
-        <button class="toggle-btn disabled" onclick="showComingSoon(event)">
+        <button class="toggle-btn" onclick="switchCalc('corporate')">
             <i class="bi bi-building"></i>
             <span>Corporate</span>
-            <span class="coming-soon-badge">SOON</span>
         </button>
     </div>
 
@@ -364,69 +509,79 @@
         </div>
     </div>
 
-    <!-- CORPORATE CALCULATOR (Coming Soon) -->
+    <!-- CORPORATE CALCULATOR -->
     <div id="corporate-calc" class="calc-section">
-        <div class="section-label">
-            <h3>Corporate Carbon Footprint</h3>
-            <p>Measure your organization's environmental impact - Coming Soon!</p>
+        <div class="corporate-hero">
+            <h3 class="section-label h3" style="font-size: 1.8rem; font-weight: 700; color: #064e3b; margin-bottom: 8px;">🌍 Kalkulator Emisi Karbon Korporat</h3>
+            <p class="hero-subtitle">Hitung jejak karbon perusahaan Anda dan berkontribusi pada masa depan yang lebih hijau</p>
         </div>
-        
-        <div class="eco-grid">
-            <div class="eco-card teal coming-soon">
-                <div class="eco-icon">
-                    <i class="bi bi-building"></i>
-                </div>
-                <h4>Facilities</h4>
-                <span>Office & Building Energy</span>
+
+        <div class="action-card">
+            <h2>Mulai Perhitungan Baru</h2>
+            <p>Hitung emisi karbon dari semua aktivitas perusahaan Anda dalam 3 scope emisi</p>
+            <a href="{{ route('calc.corporate.create') }}" class="btn-start">
+                <i class="bi bi-calculator"></i>
+                Mulai Perhitungan
+            </a>
+        </div>
+
+        @if(isset($calculations) && $calculations->count() > 0)
+        <div class="calculations-list">
+            <div class="list-header">
+                <h2 class="list-title">Perhitungan Terakhir</h2>
             </div>
 
-            <div class="eco-card indigo coming-soon">
-                <div class="eco-icon">
-                    <i class="bi bi-truck"></i>
+            @foreach($calculations as $calc)
+            <div class="calculation-card">
+                <div class="calc-header">
+                    <div>
+                        <h3 class="calc-company">{{ $calc->company_name }}</h3>
+                        <p class="calc-date">{{ $calc->created_at->format('d M Y, H:i') }}</p>
+                    </div>
                 </div>
-                <h4>Fleet & Logistics</h4>
-                <span>Transportation & Delivery</span>
-            </div>
 
-            <div class="eco-card amber coming-soon">
-                <div class="eco-icon">
-                    <i class="bi bi-gear-fill"></i>
+                <div class="calc-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">{{ number_format($calc->total_emission / 1000, 2) }}</div>
+                        <div class="stat-label">Ton CO₂e</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">{{ number_format($calc->scope1_total / 1000, 2) }}</div>
+                        <div class="stat-label">Scope 1</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">{{ number_format($calc->scope2_total / 1000, 2) }}</div>
+                        <div class="stat-label">Scope 2</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">{{ number_format($calc->scope3_total / 1000, 2) }}</div>
+                        <div class="stat-label">Scope 3</div>
+                    </div>
                 </div>
-                <h4>Operations</h4>
-                <span>Production & Manufacturing</span>
-            </div>
 
-            <div class="eco-card pink coming-soon">
-                <div class="eco-icon">
-                    <i class="bi bi-box-seam"></i>
+                <div class="calc-actions">
+                    <a href="{{ route('calc.corporate.result', $calc->id) }}" class="btn-view">
+                        <i class="bi bi-eye"></i> Lihat Detail
+                    </a>
                 </div>
-                <h4>Supply Chain</h4>
-                <span>Procurement & Suppliers</span>
             </div>
-
-            <div class="eco-card orange coming-soon">
-                <div class="eco-icon">
-                    <i class="bi bi-recycle"></i>
-                </div>
-                <h4>Waste</h4>
-                <span>Waste Management & Recycling</span>
-            </div>
-
-            <div class="eco-card purple coming-soon">
-                <div class="eco-icon">
-                    <i class="bi bi-people-fill"></i>
-                </div>
-                <h4>Employees</h4>
-                <span>Staff Commute & Travel</span>
+            @endforeach
+        </div>
+        @else
+        <div class="calculations-list">
+            <div class="empty-state">
+                <div class="empty-icon">📊</div>
+                <p class="empty-text">Belum ada perhitungan. Mulai perhitungan pertama Anda sekarang!</p>
             </div>
         </div>
+        @endif
     </div>
 </div>
 
 <script>
 function switchCalc(type) {
     // Update buttons
-    const buttons = document.querySelectorAll('.toggle-btn:not(.disabled)');
+    const buttons = document.querySelectorAll('.toggle-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     event.target.closest('.toggle-btn').classList.add('active');
     
@@ -435,16 +590,6 @@ function switchCalc(type) {
     sections.forEach(section => section.classList.remove('active'));
     
     document.getElementById(type + '-calc').classList.add('active');
-}
-
-function showComingSoon(event) {
-    event.preventDefault();
-    
-    // Optional: Show toast/alert notification
-    // Uncomment jika ingin tampilkan notifikasi
-    /*
-    alert('Corporate calculator coming soon! We are working hard to bring this feature to you.');
-    */
 }
 </script>
 

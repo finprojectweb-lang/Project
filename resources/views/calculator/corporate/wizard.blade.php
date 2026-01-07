@@ -6,6 +6,7 @@
     min-height: 100vh;
     background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
     padding: 40px 20px;
+    margin-top: 80px;
 }
 
 .wizard-card {
@@ -350,6 +351,21 @@
             @csrf
 
             <div class="wizard-body">
+
+                <div class="wizard-body">
+    {{-- ERROR ALERT --}}
+    @if($errors->any() || session('error'))
+    <div class="alert alert-danger" style="background: #fee2e2; border: 2px solid #ef4444; color: #991b1b; margin-bottom: 30px;">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <strong>Perhatian!</strong>
+        @if(session('error'))
+            {{ session('error') }}
+        @endif
+        @if($errors->has('emission'))
+            {{ $errors->first('emission') }}
+        @endif
+    </div>
+    @endif
                 <!-- STEP 1: COMPANY INFO -->
                 <div class="wizard-step active" data-step="1">
                     <h2 class="step-title">Informasi Perusahaan</h2>
