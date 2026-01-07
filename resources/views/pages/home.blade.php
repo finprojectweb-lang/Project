@@ -305,17 +305,17 @@
                         <!-- Badge -->
                         <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-3">
                             <i class="bi bi-calculator me-1"></i>
-                            Gratis & Mudah Digunakan
+                            Free & Easy to Use
                         </span>
                         
                         <!-- Heading -->
                         <h2 class="display-6 display-md-5 fw-bold mb-3">
-                            Kalkulator Jejak Karbon
+                            Carbon Footprint Calculator
                         </h2>
                         
                         <!-- Description -->
                         <p class="lead text-muted mb-4 fs-6 fs-md-5">
-                            Hitung dampak karbon dari aktivitas pribadi atau aktivitas bisnis Anda dengan mudah dan akurat menggunakan kalkulator kami yang telah disesuaikan dengan standar internasional.
+                            Calculate the carbon impact of your personal or business activities easily and accurately using our calculator, tailored to international standards.
                         </p>
                         
                         <!-- Features List -->
@@ -327,8 +327,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1 fs-6 fs-md-5">Pengukuran Akurat</h5>
-                                    <p class="text-muted mb-0 small">Menggunakan metodologi standar GHG Protocol untuk hasil yang tepat dan dapat dipertanggungjawabkan.</p>
+                                    <h5 class="mb-1 fs-6 fs-md-5">Accurate Measurements</h5>
+                                    <p class="text-muted mb-0 small">Using standard GHG Protocol methodology for accurate and accountable results.</p>
                                 </div>
                             </div>
                             
@@ -339,8 +339,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1 fs-6 fs-md-5">Hasil Instan</h5>
-                                    <p class="text-muted mb-0 small">Dapatkan laporan emisi karbon Anda dalam hitungan detik dengan visualisasi yang mudah dipahami.</p>
+                                    <h5 class="mb-1 fs-6 fs-md-5">Instant Results</h5>
+                                    <p class="text-muted mb-0 small">Get your carbon footprint report in seconds with easy-to-understand visualizations.</p>
                                 </div>
                             </div>
                             
@@ -351,8 +351,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1 fs-6 fs-md-5">Rekomendasi Kompensasi</h5>
-                                    <p class="text-muted mb-0 small">Terima saran proyek kompensasi karbon yang sesuai untuk menetralisir emisi perusahaan Anda.</p>
+                                    <h5 class="mb-1 fs-6 fs-md-5">Compensation Recommendations</h5>
+                                    <p class="text-muted mb-0 small">Receive recommendations for carbon offset projects tailored to neutralize your company's emissions.</p>
                                 </div>
                             </div>
                         </div>
@@ -361,10 +361,10 @@
                         <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3">
                             <a href="{{ route('calculator.index') }}" class="btn btn-success btn-lg px-4 w-100 w-sm-auto">
                                 <i class="bi bi-calculator me-2"></i>
-                                Mulai Hitung Sekarang
+                                Start Calculating Now
                             </a>
                             <a href="#cara-kerja" class="btn btn-outline-secondary btn-lg px-4 w-100 w-sm-auto">
-                                Cara Kerja
+                                How It Works
                             </a>
                         </div>
                     </div>
@@ -389,7 +389,7 @@
                                     <div class="col-6">
                                         <div class="bg-light rounded-3 p-2 p-md-3">
                                             <h3 class="fw-bold mb-0 text-success fs-4 fs-md-3">1,500+</h3>
-                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Perusahaan Terdaftar</small>
+                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Companies Registered</small>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -402,7 +402,7 @@
                                 
                                 <p class="text-muted mb-0 small">
                                     <i class="bi bi-shield-check text-success me-2"></i>
-                                    Terverifikasi & Terpercaya
+                                    Verified & Trusted
                                 </p>
                             </div>
                         </div>
@@ -416,8 +416,8 @@
     <section id="cara-kerja" class="py-4 py-md-5">
         <div class="container px-3 px-md-0">
             <div class="text-center mb-4 mb-md-5">
-                <h2 class="fw-bold mb-3 fs-3 fs-md-2">Cara Kerja Kalkulator</h2>
-                <p class="lead text-muted fs-6 fs-md-5">Tiga langkah mudah untuk menghitung jejak karbon Anda</p>
+                <h2 class="fw-bold mb-3 fs-3 fs-md-2">How the Calculator Works</h2>
+                <p class="lead text-muted fs-6 fs-md-5">Three simple steps to calculate your carbon footprint</p>
             </div>
             
             <div class="row g-3 g-md-4">
@@ -428,7 +428,7 @@
                                 <span class="display-6 display-md-4 fw-bold text-success">1</span>
                             </div>
                             <h4 class="mb-3 fs-5 fs-md-4">Input Data</h4>
-                            <p class="text-muted small">Masukkan data aktivitas bisnis Anda seperti konsumsi energi, transportasi, dan limbah.</p>
+                            <p class="text-muted small">Enter your business activity data such as energy consumption, transportation, and waste.</p>
                         </div>
                     </div>
                 </div>
@@ -439,8 +439,8 @@
                             <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
                                 <span class="display-6 display-md-4 fw-bold text-success">2</span>
                             </div>
-                            <h4 class="mb-3 fs-5 fs-md-4">Analisis Otomatis</h4>
-                            <p class="text-muted small">Sistem kami menghitung total emisi karbon berdasarkan standar internasional.</p>
+                            <h4 class="mb-3 fs-5 fs-md-4">Automatic Analysis</h4>
+                            <p class="text-muted small">Our system calculates your total carbon emissions based on international standards.</p>
                         </div>
                     </div>
                 </div>
@@ -451,8 +451,8 @@
                             <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
                                 <span class="display-6 display-md-4 fw-bold text-success">3</span>
                             </div>
-                            <h4 class="mb-3 fs-5 fs-md-4">Dapatkan Laporan</h4>
-                            <p class="text-muted small">Terima laporan lengkap dan rekomendasi proyek kompensasi yang tepat.</p>
+                            <h4 class="mb-3 fs-5 fs-md-4">Get Your Report</h4>
+                            <p class="text-muted small">Receive a complete report and precise compensation project recommendations.</p>
                         </div>
                     </div>
                 </div>
