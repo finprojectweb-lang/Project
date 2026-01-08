@@ -473,7 +473,7 @@
                     <!-- Button jika belum login -->
                     <div class="navbar-buttons d-none d-lg-flex">
                         <a href="/login" class="btn-navbar btn-signup">Sign up</a>
-                        <a href="#" class="btn-navbar btn-contact">Contact</a>
+                        <a href="/contactus" class="btn-navbar btn-contact">Contact</a>
                     </div>
                 @endauth
 
