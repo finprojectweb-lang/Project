@@ -628,7 +628,7 @@
                         One simple step today for a greener future for the earth.
                         Count your footprint, choose your project, and make your impact.
                     </p>
-                    <button class="btn btn-outline-dark steps-btn">Get In Touch</button>
+                    <button class="btn btn-outline-dark steps-btn"> <a href="/calculator" style="text-decoration: none; color: fee2e2;">Get In Touch</a></button>
 
                     <!-- Gambar Tengah Bawah -->
                     <div class="mt-4 d-flex justify-content-center">

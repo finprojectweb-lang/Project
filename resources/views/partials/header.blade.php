@@ -130,21 +130,22 @@
 
         /* Styling untuk dropdown menu di navbar */
         .navbar-nav .dropdown-menu {
-            background: white;
-            border: 1px solid #e5e7eb;
+            background: linear-gradient(to right, #00d26a, rgba(0, 78, 146, 0.95));
+           
         }
 
         .navbar-nav .dropdown-menu li a {
             padding: 10px 20px;
-            color: #374151;
+            background: linear-gradient(to right, #00d26a, rgba(0, 78, 146, 0.95));
+            color: #fee2e2;
             text-decoration: none;
             display: block;
             transition: all 0.3s;
         }
 
         .navbar-nav .dropdown-menu li a:hover {
-            background: #f3f4f6;
-            color: #10b981;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            color: #fee2e2;
             padding-left: 25px;
         }
 

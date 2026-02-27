@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arima:wght@100..700&display=swap" rel="stylesheet">
 
-        <style>
+    <style>
         body {
             margin: 0;
             padding: 0;
@@ -64,7 +64,7 @@
                 opacity: 0;
             }
         }
-    </style>
+    </style> -->
 </head>
 
 <body>
