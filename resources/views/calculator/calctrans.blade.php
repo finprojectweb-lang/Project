@@ -272,7 +272,7 @@ body::-webkit-scrollbar {
                                 <img src="/images/icons/motorcycle.png" alt="Motorcycle" class="vehicle-icon">
                                 <span>Motorcycle</span>
                             </div>
-                            <div class="avg-text">Average Distance per Day</div>
+                            <div class="avg-text">Average Distance per Week</div>
                         </label>
                         <input type="number" class="form-control calc" id="motorcycle" placeholder="Type here">
                     </div>
@@ -286,7 +286,7 @@ body::-webkit-scrollbar {
                                 <img src="/images/icons/car.png" alt="Car" class="vehicle-icon">
                                 <span>Car</span>
                             </div>
-                            <div class="avg-text">Average Distance per Day</div>
+                            <div class="avg-text">Average Distance per Week</div>
                         </label>
                         <input type="number" class="form-control calc" id="car" placeholder="Type here">
                     </div>
@@ -300,7 +300,7 @@ body::-webkit-scrollbar {
                                 <img src="/images/icons/bus.png" alt="Bus" class="vehicle-icon">
                                 <span>Bus</span>
                             </div>
-                            <div class="avg-text">Average Distance per Day</div>
+                            <div class="avg-text">Average Distance per Week</div>
                         </label>
                         <input type="number" class="form-control calc" id="bus" placeholder="Type here">
                     </div>
@@ -314,7 +314,7 @@ body::-webkit-scrollbar {
                                 <img src="/images/icons/train.png" alt="Train" class="vehicle-icon">
                                 <span>Train Route</span>
                             </div>
-                            <div class="avg-text">Average Distance per Day</div>
+                            <div class="avg-text">Average Distance per Week</div>
                         </label>
                         <select id="trainRoute" class="form-select">
                             <option value="">-- Select Train Route --</option>
@@ -335,7 +335,7 @@ body::-webkit-scrollbar {
                                 <img src="/images/icons/taxi.png" alt="Taxi" class="vehicle-icon">
                                 <span>Taxi</span>
                             </div>
-                            <div class="avg-text">Average Distance per Day</div>
+                            <div class="avg-text">Average Distance per Week</div>
                         </label>
                         <input type="number" class="form-control calc" id="taxi" placeholder="Type here">
                     </div>
@@ -349,7 +349,7 @@ body::-webkit-scrollbar {
                                 <img src="/images/icons/airplane.png" alt="Plane" class="vehicle-icon">
                                 <span>Flight Route</span>
                             </div>
-                            <div class="avg-text">Average Distance per Day</div>
+                            <div class="avg-text">Average Distance per Week</div>
                         </label>
                         <select id="planeRoute" class="form-select">
                             <option value="">-- Select Flight Route --</option>
@@ -437,19 +437,20 @@ body::-webkit-scrollbar {
         calculateCarbon();
     });
 
-    // Calculate carbon and price
+    // Calculate carbon and price (per minggu)
     function calculateCarbon(){
         let total = 0;
         const details = {};
         
         for(const id in factors){
             const val = parseFloat(document.getElementById(id).value) || 0;
+            // val sudah merupakan jarak per minggu, langsung dikalikan faktor emisi
             const emission = val * factors[id];
             total += emission;
             
             if(val > 0) {
                 details[id] = {
-                    distance: val,
+                    distancePerWeek: val,
                     emission: emission.toFixed(2)
                 };
             }
@@ -468,6 +469,7 @@ body::-webkit-scrollbar {
         // Store in sessionStorage for payment page
         sessionStorage.setItem('carbonData', JSON.stringify({
             type: 'transport',
+            period: 'weekly',
             total: total.toFixed(2),
             price: totalPriceValue,
             priceFormatted: formatRupiah(totalPriceValue),

@@ -32,11 +32,15 @@
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Calculation Period</span>
-                            <span class="detail-value">{{ $period ?? 'Monthly' }}</span>
+                            <span class="detail-value">{{ $period ?? 'Weekly' }}</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">Offset Rate</span>
                             <span class="detail-value">Rp {{ number_format($rate ?? 15000, 0, ',', '.') }}/kg</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Tax Rate</span>
+                            <span class="detail-value">Rp {{ number_format($taxRate ?? 30, 0, ',', '.') }}/kg</span>
                         </div>
                     </div>
 
@@ -48,6 +52,10 @@
                             <span class="total-value">Rp {{ number_format($subtotal ?? 0, 0, ',', '.') }}</span>
                         </div>
                         <div class="total-row">
+                            <span class="total-label">Tax (Rp {{ number_format($taxRate ?? 30, 0, ',', '.') }}/kg × {{ number_format($carbonAmount ?? 0, 2) }} kg)</span>
+                            <span class="total-value">Rp {{ number_format($tax ?? 0, 0, ',', '.') }}</span>
+                        </div>
+                        <div class="total-row">
                             <span class="total-label">Admin Fee</span>
                             <span class="total-value">Rp {{ number_format($adminFee ?? 5000, 0, ',', '.') }}</span>
                         </div>
@@ -57,11 +65,19 @@
                         </div>
                     </div>
 
+                    <!-- Program Distribution Breakdown -->
+                    <div id="programBreakdown" class="program-breakdown" style="display:none;">
+                        <div class="breakdown-title">
+                            <span>💸</span> Dana Terdistribusi
+                        </div>
+                        <div id="breakdownList" class="breakdown-list"></div>
+                    </div>
+
                     <div class="impact-info" id="impactInfo">
                         <div class="impact-icon">🌱</div>
                         <div class="impact-text">
                             <strong>Select a program to see environmental impact</strong>
-                            <p>Choose your preferred carbon offset program below</p>
+                            <p>You can choose multiple programs — the cost will be split evenly</p>
                         </div>
                     </div>
                 </div>
@@ -71,61 +87,88 @@
             <div class="form-section">
                 <form action="{{ route('payment.process') }}" method="POST" class="payment-form" id="paymentForm">
                     @csrf
-                    <input type="hidden" name="carbon_amount" value="{{ $carbonAmount ?? 0 }}">
-                    <input type="hidden" name="total_amount" value="{{ $totalAmount ?? 0 }}">
-                    <input type="hidden" name="calculator_type" value="{{ $calculatorType ?? 'general' }}">
+                    <input type="hidden" name="carbon_amount"    value="{{ $carbonAmount ?? 0 }}">
+                    <input type="hidden" name="total_amount"     value="{{ $totalAmount ?? 0 }}">
+                    <input type="hidden" name="tax"              value="{{ $tax ?? 0 }}">
+                    <input type="hidden" name="calculator_type"  value="{{ $calculatorType ?? 'general' }}">
 
                     <!-- Carbon Offset Program -->
                     <div class="form-group-wrapper">
                         <h3 class="form-section-title">Choose Carbon Offset Program *</h3>
-                        <p class="section-description">Select the environmental project you'd like to support</p>
+                        <p class="section-description">
+                            Select one or more programs — your payment will be <strong>split evenly</strong> across all selected programs
+                        </p>
                         
                         <div class="program-options">
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="water_turbine" data-impact="water_turbine">
+                                <input type="checkbox" name="offset_program[]" value="water_turbine" data-impact="water_turbine" data-label="Water Turbine Development" data-icon="💧">
                                 <div class="program-card">
+                                    <div class="program-check">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </div>
                                     <div class="program-icon">💧</div>
                                     <div class="program-content">
                                         <h4>Water Turbine Development</h4>
                                         <p>Build micro-hydro turbines to generate clean renewable energy for rural communities</p>
                                         <div class="program-badge">Renewable Energy</div>
                                     </div>
+                                    <div class="program-split-badge" id="split-water_turbine" style="display:none;"></div>
                                 </div>
                             </label>
 
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="mangrove" data-impact="mangrove">
+                                <input type="checkbox" name="offset_program[]" value="mangrove" data-impact="mangrove" data-label="Mangrove Planting" data-icon="🌿">
                                 <div class="program-card">
+                                    <div class="program-check">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </div>
                                     <div class="program-icon">🌿</div>
                                     <div class="program-content">
                                         <h4>Mangrove Planting</h4>
                                         <p>Plant and protect mangrove forests that absorb CO₂ and protect coastal ecosystems</p>
                                         <div class="program-badge">Forest Conservation</div>
                                     </div>
+                                    <div class="program-split-badge" id="split-mangrove" style="display:none;"></div>
                                 </div>
                             </label>
 
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="waste_recycle" data-impact="waste_recycle">
+                                <input type="checkbox" name="offset_program[]" value="waste_recycle" data-impact="waste_recycle" data-label="Waste Recycling Program" data-icon="♻️">
                                 <div class="program-card">
+                                    <div class="program-check">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </div>
                                     <div class="program-icon">♻️</div>
                                     <div class="program-content">
                                         <h4>Waste Recycling Program</h4>
                                         <p>Support waste management facilities that reduce landfill emissions and promote circular economy</p>
                                         <div class="program-badge">Waste Management</div>
                                     </div>
+                                    <div class="program-split-badge" id="split-waste_recycle" style="display:none;"></div>
                                 </div>
                             </label>
 
                             <label class="program-option">
-                                <input type="radio" name="offset_program" value="coral_reef" data-impact="coral_reef">
+                                <input type="checkbox" name="offset_program[]" value="coral_reef" data-impact="coral_reef" data-label="Coral Reef Restoration" data-icon="🪸">
                                 <div class="program-card">
+                                    <div class="program-check">
+                                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </div>
                                     <div class="program-icon">🪸</div>
                                     <div class="program-content">
                                         <h4>Coral Reef Restoration</h4>
                                         <p>Restore and protect coral reefs that support marine biodiversity and absorb carbon</p>
                                         <div class="program-badge">Ocean Conservation</div>
                                     </div>
+                                    <div class="program-split-badge" id="split-coral_reef" style="display:none;"></div>
                                 </div>
                             </label>
                         </div>
@@ -349,13 +392,40 @@
 .total-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 0;
+    border-bottom: 1px solid #f0f5ec;
+}
+
+.total-row:last-child {
+    border-bottom: none;
+}
+
+.total-label {
+    color: #6b7c5a;
+    font-size: 14px;
+}
+
+.total-value {
+    color: #2d3e1f;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Tax row styling */
+.tax-row .total-label {
+    color: #997a00;
+}
+
+.tax-row .total-value {
+    color: #997a00;
 }
 
 .final-total {
     margin-top: 12px;
-    padding-top: 16px;
-    border-top: 2px solid #556B2F;
+    padding-top: 16px !important;
+    border-top: 2px solid #556B2F !important;
+    border-bottom: none !important;
 }
 
 .final-total .total-label {
@@ -370,13 +440,62 @@
     color: #556B2F;
 }
 
+/* Program Breakdown */
+.program-breakdown {
+    background: linear-gradient(135deg, #f0f7eb 0%, #e3f0d9 100%);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+}
+
+.breakdown-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2d3e1f;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.breakdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+.breakdown-item-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #2d3e1f;
+    font-weight: 500;
+}
+
+.breakdown-item-right {
+    font-size: 13px;
+    font-weight: 700;
+    color: #556B2F;
+}
+
 .impact-info {
     background: linear-gradient(135deg, #f0f7eb 0%, #e3f0d9 100%);
     border-radius: 12px;
     padding: 20px;
     display: flex;
     gap: 16px;
-    margin-top: 24px;
     transition: all 0.3s ease;
 }
 
@@ -430,7 +549,7 @@
     margin-bottom: 8px;
 }
 
-/* Program Options */
+/* Program Options - Checkbox Style */
 .program-options {
     display: flex;
     flex-direction: column;
@@ -441,7 +560,7 @@
     cursor: pointer;
 }
 
-.program-option input[type="radio"] {
+.program-option input[type="checkbox"] {
     position: absolute;
     opacity: 0;
     pointer-events: none;
@@ -455,12 +574,45 @@
     border-radius: 14px;
     transition: all 0.3s ease;
     background: white;
+    position: relative;
+    align-items: flex-start;
 }
 
-.program-option input[type="radio"]:checked + .program-card {
+.program-check {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #c8d8b8;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    background: white;
+}
+
+.check-icon {
+    width: 13px;
+    height: 13px;
+    stroke: white;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.program-option input[type="checkbox"]:checked + .program-card {
     border-color: #556B2F;
     background: linear-gradient(135deg, rgba(85, 107, 47, 0.05) 0%, rgba(85, 107, 47, 0.02) 100%);
     box-shadow: 0 4px 12px rgba(85, 107, 47, 0.15);
+}
+
+.program-option input[type="checkbox"]:checked + .program-card .program-check {
+    background: #556B2F;
+    border-color: #556B2F;
+}
+
+.program-option input[type="checkbox"]:checked + .program-card .check-icon {
+    opacity: 1;
 }
 
 .program-card:hover {
@@ -508,6 +660,19 @@
     width: fit-content;
 }
 
+.program-split-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #556B2F;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -535,7 +700,6 @@
     box-shadow: 0 0 0 3px rgba(85, 107, 47, 0.1);
 }
 
-/* Payment Methods */
 .payment-methods {
     display: flex;
     flex-direction: column;
@@ -591,7 +755,6 @@
     font-size: 13px;
 }
 
-/* Checkbox */
 .checkbox-label {
     display: flex;
     align-items: flex-start;
@@ -610,12 +773,6 @@
     accent-color: #556B2F;
 }
 
-.checkbox-label a {
-    color: #556B2F;
-    text-decoration: underline;
-}
-
-/* Submit Button */
 .btn-submit {
     display: flex;
     align-items: center;
@@ -649,7 +806,6 @@
     color: #6b7c5a;
 }
 
-/* Responsive Design */
 @media (max-width: 968px) {
     .payment-content {
         grid-template-columns: 1fr;
@@ -687,6 +843,17 @@
         text-align: center;
     }
 
+    .program-check {
+        margin: 0 auto;
+    }
+
+    .program-split-badge {
+        position: static;
+        margin-top: 8px;
+        align-self: center;
+        display: inline-block;
+    }
+
     .program-icon {
         font-size: 40px;
     }
@@ -710,119 +877,150 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('paymentForm');
-    const programRadios = document.querySelectorAll('input[name="offset_program"]');
-    const impactInfo = document.getElementById('impactInfo');
+    const form               = document.getElementById('paymentForm');
+    const programCheckboxes  = document.querySelectorAll('input[name="offset_program[]"]');
+    const impactInfo         = document.getElementById('impactInfo');
+    const programBreakdown   = document.getElementById('programBreakdown');
+    const breakdownList      = document.getElementById('breakdownList');
+
+    const totalAmount  = parseFloat('{{ $totalAmount ?? 0 }}') || 0;
     const carbonAmount = parseFloat('{{ $carbonAmount ?? 0 }}') || 0;
-    
-    // Impact data untuk setiap program
+
+    function formatRupiah(number) {
+        return 'Rp ' + Math.round(number).toLocaleString('id-ID');
+    }
+
     const impactData = {
         water_turbine: {
             icon: '💧',
-            title: 'Water Turbine Development Impact',
-            description: 'Your contribution will help build ' + Math.round(carbonAmount / 500) + ' micro-hydro turbine(s), providing clean energy to approximately ' + Math.round(carbonAmount / 10) + ' households in rural areas.'
+            title: 'Water Turbine Development',
+            getDescription: (splitCarbon) =>
+                'Membantu membangun ' + Math.max(1, Math.round(splitCarbon / 500)) +
+                ' turbin mikro-hidro, menyediakan energi bersih untuk sekitar ' +
+                Math.max(1, Math.round(splitCarbon / 10)) + ' rumah tangga.'
         },
         mangrove: {
             icon: '🌿',
-            title: 'Mangrove Planting Impact',
-            description: 'Your contribution will plant approximately ' + Math.round(carbonAmount / 5) + ' mangrove trees, which will absorb CO₂ for decades and protect ' + Math.round(carbonAmount / 50) + ' meters of coastline.'
+            title: 'Mangrove Planting',
+            getDescription: (splitCarbon) =>
+                'Menanam sekitar ' + Math.max(1, Math.round(splitCarbon / 5)) +
+                ' pohon mangrove yang akan menyerap CO₂ selama puluhan tahun dan melindungi ' +
+                Math.max(1, Math.round(splitCarbon / 50)) + ' meter garis pantai.'
         },
         waste_recycle: {
             icon: '♻️',
-            title: 'Waste Recycling Impact',
-            description: 'Your contribution will help recycle approximately ' + Math.round(carbonAmount * 2) + ' kg of waste, preventing methane emissions and supporting ' + Math.round(carbonAmount / 100) + ' waste collection workers.'
+            title: 'Waste Recycling',
+            getDescription: (splitCarbon) =>
+                'Membantu mendaur ulang sekitar ' + Math.max(1, Math.round(splitCarbon * 2)) +
+                ' kg sampah dan mendukung ' + Math.max(1, Math.round(splitCarbon / 100)) + ' pekerja pengumpul sampah.'
         },
         coral_reef: {
             icon: '🪸',
-            title: 'Coral Reef Restoration Impact',
-            description: 'Your contribution will restore approximately ' + Math.round(carbonAmount / 10) + ' coral fragments, covering ' + Math.round(carbonAmount / 20) + 'm² of reef area and supporting marine biodiversity.'
+            title: 'Coral Reef Restoration',
+            getDescription: (splitCarbon) =>
+                'Merestorasi sekitar ' + Math.max(1, Math.round(splitCarbon / 10)) +
+                ' fragmen karang, mencakup ' + Math.max(1, Math.round(splitCarbon / 20)) + ' m² area terumbu karang.'
         }
     };
-    
-    // Update impact info ketika program dipilih
-    programRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            const impact = this.dataset.impact;
-            const data = impactData[impact];
-            
-            if (data) {
-                // Fade out effect
-                impactInfo.style.opacity = '0';
-                
-                setTimeout(() => {
-                    // Update content
-                    impactInfo.innerHTML = 
-                        '<div class="impact-icon">' + data.icon + '</div>' +
-                        '<div class="impact-text">' +
-                            '<strong>' + data.title + '</strong>' +
-                            '<p>' + data.description + '</p>' +
-                        '</div>';
-                    
-                    // Fade in effect
-                    impactInfo.style.opacity = '1';
-                }, 200);
+
+    function updateUI() {
+        const checked     = [...programCheckboxes].filter(cb => cb.checked);
+        const count       = checked.length;
+        const splitAmount = count > 0 ? totalAmount / count : 0;
+        const splitCarbon = count > 0 ? carbonAmount / count : 0;
+
+        // Update split badge di setiap program card
+        programCheckboxes.forEach(cb => {
+            const badge = document.getElementById('split-' + cb.value);
+            if (cb.checked && count > 0) {
+                badge.textContent = formatRupiah(splitAmount);
+                badge.style.display = 'block';
+            } else {
+                badge.style.display = 'none';
             }
         });
-    });
-    
-    // Form validation
+
+        // Update breakdown
+        if (count > 0) {
+            programBreakdown.style.display = 'block';
+            breakdownList.innerHTML = checked.map(cb => {
+                const data = impactData[cb.value];
+                return `
+                    <div class="breakdown-item">
+                        <div class="breakdown-item-left">
+                            <span>${data.icon}</span>
+                            <span>${data.title}</span>
+                        </div>
+                        <div class="breakdown-item-right">${formatRupiah(splitAmount)}</div>
+                    </div>`;
+            }).join('');
+        } else {
+            programBreakdown.style.display = 'none';
+        }
+
+        // Update impact info
+        impactInfo.style.opacity = '0';
+        setTimeout(() => {
+            if (count === 0) {
+                impactInfo.innerHTML = `
+                    <div class="impact-icon">🌱</div>
+                    <div class="impact-text">
+                        <strong>Select a program to see environmental impact</strong>
+                        <p>You can choose multiple programs — the cost will be split evenly</p>
+                    </div>`;
+            } else {
+                const impactHTML = checked.map(cb => {
+                    const data = impactData[cb.value];
+                    return `
+                        <div style="margin-bottom:${count > 1 ? '12px' : '0'}">
+                            <strong>${data.icon} ${data.title}</strong>
+                            <p>${data.getDescription(splitCarbon)}</p>
+                        </div>`;
+                }).join('');
+
+                impactInfo.innerHTML = `
+                    <div class="impact-icon" style="display:${count > 1 ? 'none' : 'block'}">
+                        ${count === 1 ? impactData[checked[0].value].icon : ''}
+                    </div>
+                    <div class="impact-text">${impactHTML}</div>`;
+            }
+            impactInfo.style.opacity = '1';
+        }, 150);
+    }
+
+    programCheckboxes.forEach(cb => cb.addEventListener('change', updateUI));
+
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         let isValid = true;
-        let errors = [];
-        
-        // Check offset program
-        const offsetProgram = document.querySelector('input[name="offset_program"]:checked');
-        if (!offsetProgram) {
-            isValid = false;
-            errors.push('Please select a Carbon Offset Program');
-        }
-        
-        // Check name
+        let errors  = [];
+
+        const checkedPrograms = [...programCheckboxes].filter(cb => cb.checked);
+        if (checkedPrograms.length === 0) { isValid = false; errors.push('Please select at least one Carbon Offset Program'); }
+
         const name = document.getElementById('name').value.trim();
-        if (!name) {
-            isValid = false;
-            errors.push('Please enter your Full Name');
-        }
-        
-        // Check email
+        if (!name) { isValid = false; errors.push('Please enter your Full Name'); }
+
         const email = document.getElementById('email').value.trim();
         if (!email) {
-            isValid = false;
-            errors.push('Please enter your Email Address');
+            isValid = false; errors.push('Please enter your Email Address');
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            isValid = false;
-            errors.push('Please enter a valid Email Address');
+            isValid = false; errors.push('Please enter a valid Email Address');
         }
-        
-        // Check phone
+
         const phone = document.getElementById('phone').value.trim();
-        if (!phone) {
-            isValid = false;
-            errors.push('Please enter your Phone Number');
-        }
-        
-        // Check payment method
+        if (!phone) { isValid = false; errors.push('Please enter your Phone Number'); }
+
         const paymentMethod = document.querySelector('input[name="payment_method"]:checked');
-        if (!paymentMethod) {
-            isValid = false;
-            errors.push('Please select a Payment Method');
-        }
-        
-        // Check agreement
+        if (!paymentMethod) { isValid = false; errors.push('Please select a Payment Method'); }
+
         const agreement = document.querySelector('input[name="agreement"]');
-        if (!agreement.checked) {
-            isValid = false;
-            errors.push('Please agree to the Terms & Conditions');
-        }
-        
-        // Show errors or submit
+        if (!agreement.checked) { isValid = false; errors.push('Please agree to the Terms & Conditions'); }
+
         if (!isValid) {
             alert('Please complete the following:\n\n• ' + errors.join('\n• '));
-            
-            // Focus on first error field
-            if (!offsetProgram) {
+            if (checkedPrograms.length === 0) {
                 document.querySelector('.program-options').scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else if (!name) {
                 document.getElementById('name').focus();
@@ -830,14 +1028,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('email').focus();
             } else if (!phone) {
                 document.getElementById('phone').focus();
-            } else if (!agreement.checked) {
-                agreement.focus();
             }
-            
             return false;
         }
-        
-        // Submit form jika valid
+
         form.submit();
     });
 });
