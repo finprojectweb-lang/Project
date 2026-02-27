@@ -512,23 +512,23 @@
     <!-- CORPORATE CALCULATOR -->
     <div id="corporate-calc" class="calc-section">
         <div class="corporate-hero">
-            <h3 class="section-label h3" style="font-size: 1.8rem; font-weight: 700; color: #064e3b; margin-bottom: 8px;">🌍 Kalkulator Emisi Karbon Korporat</h3>
-            <p class="hero-subtitle">Hitung jejak karbon perusahaan Anda dan berkontribusi pada masa depan yang lebih hijau</p>
+            <h3 class="section-label h3" style="font-size: 1.8rem; font-weight: 700; color: #064e3b; margin-bottom: 8px;">🌍 Corporate Carbon Emissions Calculator</h3>
+            <p class="hero-subtitle">Calculate your company's carbon footprint and contribute to a greener future</p>
         </div>
 
         <div class="action-card">
-            <h2>Mulai Perhitungan Baru</h2>
-            <p>Hitung emisi karbon dari semua aktivitas perusahaan Anda dalam 3 scope emisi</p>
+            <h2>Start a New Calculation</h2>
+            <p>Calculate carbon emissions from all your company's activities across 3 emission scopes</p>
             <a href="{{ route('calc.corporate.create') }}" class="btn-start">
                 <i class="bi bi-calculator"></i>
-                Mulai Perhitungan
+                Start Calculation
             </a>
         </div>
 
         @if(isset($calculations) && $calculations->count() > 0)
         <div class="calculations-list">
             <div class="list-header">
-                <h2 class="list-title">Perhitungan Terakhir</h2>
+                <h2 class="list-title">Final Reckoning</h2>
             </div>
 
             @foreach($calculations as $calc)
@@ -561,7 +561,7 @@
 
                 <div class="calc-actions">
                     <a href="{{ route('calc.corporate.result', $calc->id) }}" class="btn-view">
-                        <i class="bi bi-eye"></i> Lihat Detail
+                        <i class="bi bi-eye"></i> View Details
                     </a>
                 </div>
             </div>
@@ -571,7 +571,7 @@
         <div class="calculations-list">
             <div class="empty-state">
                 <div class="empty-icon">📊</div>
-                <p class="empty-text">Belum ada perhitungan. Mulai perhitungan pertama Anda sekarang!</p>
+                <p class="empty-text">No calculations yet. Start your first calculation now!</p>
             </div>
         </div>
         @endif
