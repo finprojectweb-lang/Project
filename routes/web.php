@@ -98,13 +98,24 @@ Route::get('/discover-us/partners', function () {
 // Di web.php, tambahkan route ini:
 
 Route::prefix('calculator/corporate')->name('calc.corporate.')->group(function () {
-    Route::get('/', [CorporateCalculatorController::class, 'index'])->name('index');
-    Route::get('/wizard', [CorporateCalculatorController::class, 'create'])->name('create');
-    Route::post('/calculate', [CorporateCalculatorController::class, 'calculate'])->name('calculate');
-    Route::get('/result/{id}', [CorporateCalculatorController::class, 'result'])->name('result');
+
+    // ── Public ──────────────────────────────────────────────────────────
+    Route::get('/',              [CorporateCalculatorController::class, 'index'])->name('index');
+    Route::get('/wizard',        [CorporateCalculatorController::class, 'create'])->name('create');
+    Route::post('/calculate',    [CorporateCalculatorController::class, 'calculate'])->name('calculate');
+    Route::get('/result/{id}',   [CorporateCalculatorController::class, 'result'])->name('result');
     Route::get('/export-pdf/{id}', [CorporateCalculatorController::class, 'exportPdf'])->name('export-pdf');
-    Route::get('/history', [CorporateCalculatorController::class, 'history'])->name('history')->middleware('auth');
-    Route::delete('/{id}', [CorporateCalculatorController::class, 'delete'])->name('delete');
+
+    // ── Monitoring (bisa guest via session, atau auth) ───────────────────
+    Route::get('/monitoring/{id}',         [CorporateCalculatorController::class, 'monitoring'])->name('monitoring');
+
+    // ── Realtime polling endpoint (JSON) ────────────────────────────────
+    // Di-hit oleh JavaScript setiap X detik untuk update progress
+    Route::get('/monitoring/{id}/progress', [CorporateCalculatorController::class, 'progressData'])->name('monitoring.progress');
+
+    // ── Auth only ────────────────────────────────────────────────────────
+    Route::get('/history',       [CorporateCalculatorController::class, 'history'])->name('history')->middleware('auth');
+    Route::delete('/{id}',       [CorporateCalculatorController::class, 'delete'])->name('delete');
 });
 
 /*

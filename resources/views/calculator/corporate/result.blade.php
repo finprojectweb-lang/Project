@@ -2,806 +2,642 @@
 
 @section('content')
 <style>
-.result-container {
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+
+* { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+:root {
+    --green-900: #064e3b;
+    --green-700: #047857;
+    --green-500: #10b981;
+    --green-400: #34d399;
+    --green-100: #d1fae5;
+    --green-50:  #ecfdf5;
+    --slate-900: #0f172a;
+    --slate-700: #334155;
+    --slate-500: #64748b;
+    --slate-300: #cbd5e1;
+    --slate-100: #f1f5f9;
+    --slate-50:  #f8fafc;
+    --red-500:   #ef4444;
+    --blue-500:  #3b82f6;
+    --purple-500:#a855f7;
+    --amber-500: #f59e0b;
+}
+
+.result-wrap {
     min-height: 100vh;
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-    padding: 60px 20px;
+    background: linear-gradient(160deg, #f0fdf4 0%, #dcfce7 40%, #ecfdf5 100%);
+    padding: 80px 20px 60px;
 }
 
-.result-card {
-    max-width: 1100px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.1);
-    overflow: hidden;
-}
+.result-shell { max-width: 1050px; margin: 0 auto; }
 
-/* HEADER */
-.result-header {
-    background: linear-gradient(135deg, #10b981, #059669);
+/* ══════════════════════════════
+   HERO HEADER
+══════════════════════════════ */
+.res-hero {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+    border-radius: 28px;
+    padding: 52px 44px;
     color: white;
-    padding: 50px 40px;
-    text-align: center;
     position: relative;
     overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 24px 64px rgba(6,78,59,.35);
 }
 
-.result-header::before {
+.res-hero::before {
     content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: pulse 15s ease-in-out infinite;
+    position: absolute; top: -80px; right: -80px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(52,211,153,.18) 0%, transparent 70%);
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.1) rotate(180deg); }
+.res-hero::after {
+    content: '';
+    position: absolute; bottom: -60px; left: 60px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,.12) 0%, transparent 70%);
 }
 
-.result-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
+.hero-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap; position: relative; z-index: 1;
 }
 
-.result-title {
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    position: relative;
-    z-index: 1;
+.hero-icon {
+    width: 72px; height: 72px; border-radius: 20px;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; margin-bottom: 20px;
 }
 
-.result-company {
-    font-size: 1.3rem;
-    opacity: 0.95;
-    position: relative;
-    z-index: 1;
+.hero-title {
+    font-size: 2.1rem; font-weight: 900; line-height: 1.15;
+    margin-bottom: 8px; letter-spacing: -.02em;
 }
 
-/* MAIN EMISSION */
-.main-emission {
-    text-align: center;
-    padding: 50px 40px;
-    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-    border-bottom: 3px solid #e2e8f0;
+.hero-company {
+    font-size: 1rem; opacity: .85; font-weight: 500;
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
 }
 
-.emission-value {
-    font-size: 4.5rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #10b981, #059669);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 10px;
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+.hero-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 13px;
+    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 100px; font-size: .76rem; font-weight: 600;
 }
 
-.emission-unit {
-    font-size: 1.3rem;
-    color: #64748b;
-    font-weight: 600;
+.hero-status {
+    text-align: right;
 }
 
-.emission-desc {
-    margin-top: 20px;
-    color: #64748b;
-    font-size: 1rem;
+.hero-status-label {
+    font-size: .72rem; opacity: .7; text-transform: uppercase; letter-spacing: .08em;
+    margin-bottom: 6px;
 }
 
-.compensation-box {
+.hero-emission-big {
+    font-size: 3rem; font-weight: 900; line-height: 1;
+    letter-spacing: -.03em;
+}
+
+.hero-emission-unit {
+    font-size: .85rem; opacity: .75; font-weight: 500; margin-top: 4px;
+}
+
+/* ══════════════════════════════
+   KOMPENSASI UTAMA
+══════════════════════════════ */
+.comp-main {
     background: white;
-    border: 3px solid #10b981;
-    border-radius: 16px;
-    padding: 25px;
-    margin-top: 30px;
-    display: inline-block;
-    min-width: 350px;
-}
-
-.compensation-label {
-    font-size: 0.9rem;
-    color: #64748b;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.compensation-value {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #10b981;
-}
-
-/* BREAKDOWN */
-.result-body {
-    padding: 50px 40px;
-}
-
-.section-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #064e3b;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.breakdown-grid {
+    border: 2px solid var(--green-100);
+    border-radius: 22px;
+    padding: 36px 40px;
+    margin-bottom: 24px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-bottom: 50px;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 32px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.06);
 }
 
-.scope-card {
+@media(max-width: 700px) {
+    .comp-main { grid-template-columns: 1fr; text-align: center; }
+    .comp-divider { display: none; }
+}
+
+.comp-main-label {
+    font-size: .75rem; font-weight: 700; color: var(--slate-500);
+    text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px;
+}
+
+.comp-main-val {
+    font-size: 2.6rem; font-weight: 900; color: var(--green-500);
+    letter-spacing: -.03em; line-height: 1;
+}
+
+.comp-main-sub { font-size: .82rem; color: var(--slate-500); margin-top: 6px; }
+
+.comp-divider {
+    width: 2px; height: 80px;
+    background: linear-gradient(180deg, transparent, var(--slate-300), transparent);
+}
+
+.comp-scheme-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 8px 16px; border-radius: 12px;
+    background: var(--green-50); border: 2px solid var(--green-100);
+    font-size: .82rem; font-weight: 700; color: var(--green-700);
+    margin-bottom: 10px;
+}
+
+.comp-installment {
+    font-size: 1.5rem; font-weight: 800; color: var(--slate-900);
+    margin-bottom: 4px; letter-spacing: -.02em;
+}
+
+.comp-per { font-size: .82rem; color: var(--slate-500); }
+
+/* ══════════════════════════════
+   DAMAGE SUMMARY CARDS
+══════════════════════════════ */
+.damage-row {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 14px;
+    margin-bottom: 24px;
+}
+
+@media(max-width: 640px) { .damage-row { grid-template-columns: 1fr; } }
+
+.dmg-card {
+    border-radius: 18px; padding: 22px 20px; position: relative; overflow: hidden;
+    border: 2px solid;
+}
+
+.dmg-card.land  { border-color: #bbf7d0; background: linear-gradient(135deg, #f0fdf4, #ecfdf5); }
+.dmg-card.air   { border-color: #bfdbfe; background: linear-gradient(135deg, #eff6ff, #f0f9ff); }
+.dmg-card.water { border-color: #ddd6fe; background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+
+.dmg-card-icon { font-size: 1.6rem; margin-bottom: 10px; display: block; }
+.dmg-card-name { font-size: .78rem; font-weight: 700; color: var(--slate-500); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 6px; }
+.dmg-card-level {
+    display: inline-block; padding: 4px 12px; border-radius: 100px;
+    font-size: .8rem; font-weight: 800;
+}
+
+.lvl-none   { background: #f1f5f9; color: #64748b; }
+.lvl-low    { background: #d1fae5; color: #065f46; }
+.lvl-medium { background: #fef3c7; color: #92400e; }
+.lvl-high   { background: #fee2e2; color: #991b1b; }
+
+.dmg-card-cost { font-size: 1.2rem; font-weight: 800; color: var(--slate-900); margin-top: 10px; }
+.dmg-card-cost-label { font-size: .72rem; color: var(--slate-500); margin-top: 2px; }
+
+/* ══════════════════════════════
+   ALLOCATION
+══════════════════════════════ */
+.alloc-panel {
+    background: white; border: 2px solid var(--slate-100);
+    border-radius: 22px; padding: 30px 34px; margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+}
+
+.panel-title-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.panel-title {
+    font-size: 1.1rem; font-weight: 800; color: var(--slate-900);
+    display: flex; align-items: center; gap: 10px;
+}
+
+.alloc-bar-container { margin-bottom: 18px; }
+.alloc-bar-row { display: flex; height: 10px; border-radius: 100px; overflow: hidden; margin-bottom: 12px; }
+.alloc-seg { transition: width 1s ease; }
+
+.alloc-legend { display: flex; flex-wrap: wrap; gap: 14px; }
+.alloc-leg-item { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--slate-700); }
+.alloc-leg-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.alloc-leg-pct { font-weight: 700; color: var(--slate-900); }
+
+/* ══════════════════════════════
+   RECOMMENDATIONS
+══════════════════════════════ */
+.reco-panel {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    border: 2px solid #fcd34d;
+    border-radius: 22px; padding: 30px 34px; margin-bottom: 24px;
+}
+
+.reco-title {
+    font-size: 1.1rem; font-weight: 800; color: #92400e;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+}
+
+.reco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width: 640px) { .reco-grid { grid-template-columns: 1fr; } }
+
+.reco-item {
+    background: white; border-radius: 14px;
+    padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start;
+    border: 1px solid #fde68a;
+}
+
+.reco-num {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: #f59e0b; color: white;
+    font-size: .72rem; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+}
+
+.reco-text { font-size: .84rem; color: #78350f; line-height: 1.6; }
+
+/* ══════════════════════════════
+   CTA SECTION
+══════════════════════════════ */
+.cta-section {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-bottom: 24px;
+}
+
+@media(max-width: 640px) { .cta-section { grid-template-columns: 1fr; } }
+
+.cta-card {
+    border-radius: 22px; padding: 32px 30px; text-align: center;
+    text-decoration: none; transition: all .25s; display: block;
+    border: 2px solid;
+}
+
+.cta-card.payment {
+    background: linear-gradient(135deg, #064e3b, #065f46);
+    border-color: #047857;
+    box-shadow: 0 12px 36px rgba(6,78,59,.3);
+}
+
+.cta-card.payment:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(6,78,59,.4);
+}
+
+.cta-card.monitoring {
     background: white;
-    border: 2px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 30px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    border-color: var(--green-400);
 }
 
-.scope-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    transition: width 0.3s ease;
+.cta-card.monitoring:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(16,185,129,.15);
+    background: var(--green-50);
 }
 
-.scope-card.scope1::before {
-    background: linear-gradient(180deg, #ef4444, #dc2626);
+.cta-icon { font-size: 2.4rem; margin-bottom: 14px; display: block; }
+
+.cta-title {
+    font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;
 }
 
-.scope-card.scope2::before {
-    background: linear-gradient(180deg, #3b82f6, #2563eb);
+.cta-card.payment .cta-title { color: white; }
+.cta-card.monitoring .cta-title { color: var(--slate-900); }
+
+.cta-desc {
+    font-size: .84rem; line-height: 1.6; margin-bottom: 18px;
 }
 
-.scope-card.scope3::before {
-    background: linear-gradient(180deg, #a855f7, #9333ea);
+.cta-card.payment .cta-desc { color: rgba(255,255,255,.75); }
+.cta-card.monitoring .cta-desc { color: var(--slate-500); }
+
+.cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 26px; border-radius: 12px;
+    font-size: .88rem; font-weight: 700; cursor: pointer;
+    border: none; text-decoration: none; transition: all .2s;
 }
 
-.scope-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,.1);
+.cta-card.payment .cta-btn {
+    background: white; color: var(--green-700);
 }
 
-.scope-card:hover::before {
-    width: 100%;
-    opacity: 0.05;
+.cta-card.payment .cta-btn:hover { background: var(--green-50); }
+
+.cta-card.monitoring .cta-btn {
+    background: var(--green-500); color: white;
 }
 
-.scope-card-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+.cta-card.monitoring .cta-btn:hover { background: var(--green-700); }
+
+/* guest CTA */
+.cta-card.guest {
+    background: var(--slate-50); border-color: var(--slate-300);
 }
 
-.scope-badge {
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: white;
+.cta-card.guest .cta-btn {
+    background: var(--slate-900); color: white;
 }
 
-.scope-badge.scope1 {
-    background: linear-gradient(135deg, #ef4444, #dc2626);
+/* ══════════════════════════════
+   ACTION ROW
+══════════════════════════════ */
+.action-row {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    background: white; border-radius: 18px; padding: 24px;
+    border: 2px solid var(--slate-100);
+    box-shadow: 0 4px 16px rgba(0,0,0,.04);
 }
 
-.scope-badge.scope2 {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+.btn-act {
+    flex: 1; min-width: 160px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 22px; border-radius: 12px;
+    font-size: .88rem; font-weight: 700; cursor: pointer;
+    border: 2px solid; text-decoration: none; transition: all .2s;
 }
 
-.scope-badge.scope3 {
-    background: linear-gradient(135deg, #a855f7, #9333ea);
+.btn-act.outline-green {
+    border-color: var(--green-500); color: var(--green-700); background: var(--green-50);
 }
 
-.scope-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1e293b;
+.btn-act.outline-green:hover { background: var(--green-100); }
+
+.btn-act.outline-slate {
+    border-color: var(--slate-300); color: var(--slate-700); background: white;
 }
 
-.scope-emission {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1e293b;
-    margin-bottom: 5px;
+.btn-act.outline-slate:hover { background: var(--slate-50); }
+
+/* ══════════════════════════════
+   POWERED BY
+══════════════════════════════ */
+.powered-bar {
+    text-align: center; padding: 20px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-size: .78rem; color: var(--slate-500); font-weight: 600;
+    margin-top: 10px;
 }
 
-.scope-percentage {
-    color: #64748b;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
+.powered-logo { height: 26px; }
 
-.scope-details {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 2px solid #f1f5f9;
-}
-
-.detail-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    font-size: 0.9rem;
-}
-
-.detail-label {
-    color: #64748b;
-}
-
-.detail-value {
-    font-weight: 600;
-    color: #1e293b;
-}
-
-/* CHART SECTION */
-.chart-container {
-    background: #f8fafc;
-    border-radius: 16px;
-    padding: 30px;
-    margin-bottom: 40px;
-}
-
-.chart-wrapper {
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-/* RECOMMENDATIONS */
-.recommendations {
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
-    border-radius: 16px;
-    padding: 35px;
-    margin-bottom: 40px;
-}
-
-.recommendation-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #92400e;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.recommendation-list {
-    list-style: none;
-    padding: 0;
-}
-
-.recommendation-list li {
-    padding: 12px 0;
-    padding-left: 35px;
-    position: relative;
-    color: #78350f;
-    line-height: 1.6;
-}
-
-.recommendation-list li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    top: 12px;
-    width: 24px;
-    height: 24px;
-    background: #f59e0b;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-}
-
-/* PAYMENT SECTION */
-.payment-section {
-    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-    border-radius: 16px;
-    padding: 40px;
-    margin-bottom: 40px;
-    text-align: center;
-    border: 2px solid #10b981;
-}
-
-.payment-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #065f46;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-}
-
-.payment-description {
-    color: #047857;
-    font-size: 1rem;
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-
-.payment-button-container {
-    margin-bottom: 20px;
-}
-
-.btn-payment {
-    padding: 18px 40px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-.btn-payment.btn-success {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-}
-
-.btn-payment.btn-success:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
-    color: white;
-}
-
-.btn-payment.btn-outline-success {
-    background: white;
-    color: #059669;
-    border: 3px solid #10b981;
-}
-
-.btn-payment.btn-outline-success:hover {
-    background: #f0fdf4;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
-    color: #059669;
-}
-
-.powered-by {
-    padding-top: 20px;
-    border-top: 2px solid #a7f3d0;
-}
-
-.powered-by-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.powered-text {
-    color: #059669;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.powered-logo {
-    height: 30px;
-    filter: grayscale(0);
-}
-
-/* ACTION BUTTONS */
-.action-buttons {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    padding: 40px;
-    background: #f8fafc;
-    border-top: 2px solid #e2e8f0;
-}
-
-.btn-action {
-    flex: 1;
-    min-width: 200px;
-    padding: 16px 28px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
-    color: white;
-}
-
-.btn-secondary {
-    background: white;
-    color: #059669;
-    border: 2px solid #10b981;
-}
-
-.btn-secondary:hover {
-    background: #f0fdf4;
-    transform: translateY(-2px);
-    color: #059669;
-}
-
-.btn-outline {
-    background: transparent;
-    color: #64748b;
-    border: 2px solid #e2e8f0;
-}
-
-.btn-outline:hover {
-    background: white;
-    border-color: #cbd5e1;
-    color: #475569;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .result-header {
-        padding: 40px 20px;
-    }
-
-    .result-title {
-        font-size: 1.8rem;
-    }
-
-    .result-company {
-        font-size: 1.1rem;
-    }
-
-    .emission-value {
-        font-size: 3rem;
-    }
-
-    .compensation-box {
-        min-width: auto;
-        width: 100%;
-    }
-
-    .result-body {
-        padding: 30px 20px;
-    }
-
-    .breakdown-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .payment-section {
-        padding: 30px 20px;
-    }
-
-    .payment-title {
-        font-size: 1.5rem;
-    }
-
-    .btn-payment {
-        width: 100%;
-        padding: 16px 30px;
-        font-size: 1rem;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-        padding: 30px 20px;
-    }
-
-    .btn-action {
-        width: 100%;
-    }
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media(max-width: 768px) {
+    .res-hero { padding: 36px 24px; }
+    .hero-title { font-size: 1.6rem; }
+    .hero-emission-big { font-size: 2.2rem; }
+    .comp-main { padding: 26px 22px; }
+    .alloc-panel, .reco-panel { padding: 24px 20px; }
+    .action-row { flex-direction: column; padding: 20px; }
+    .btn-act { width: 100%; }
 }
 </style>
 
-<div class="result-container">
-    <div class="result-card">
-        <!-- HEADER -->
-        <div class="result-header">
-            <div class="result-icon">🌍</div>
-            <h1 class="result-title">Hasil Perhitungan Emisi Karbon</h1>
-            <p class="result-company">{{ $calculation->company_name }}</p>
-        </div>
+{{--
+    ================================================================
+    PRICING LOGIC (in controller / computed here for reference):
+    Damage levels → multiplier per pillar
+        none   = 0
+        low    = Rp  250,000,000
+        medium = Rp  750,000,000
+        high   = Rp 1,750,000,000
 
-        <!-- MAIN EMISSION -->
-        <div class="main-emission">
-            <div class="emission-value">{{ number_format($calculation->total_emission / 1000, 2) }}</div>
-            <div class="emission-unit">Ton CO₂e per Tahun</div>
-            <p class="emission-desc">Total emisi karbon dari semua aktivitas perusahaan Anda di tahun {{ $calculation->calculation_year }}</p>
-            
-            <div class="compensation-box">
-                <div class="compensation-label">Biaya Kompensasi Karbon</div>
-                <div class="compensation-value">Rp {{ number_format($calculation->compensation_cost, 0, ',', '.') }}</div>
-            </div>
-        </div>
+    Payment scheme:
+        annual     → 1 × total
+        semi_annual→ 0.55 × total (per installment, 2×)
+        quarterly  → 0.30 × total (per installment, 4×)
+    ================================================================
+--}}
 
-        <!-- BODY -->
-        <div class="result-body">
-            <!-- BREAKDOWN BY SCOPE -->
-            <h2 class="section-title">
-                <i class="bi bi-pie-chart-fill" style="color: #10b981;"></i>
-                Rincian Emisi per Scope
-            </h2>
-            
-            <div class="breakdown-grid">
-                <!-- SCOPE 1 -->
-                <div class="scope-card scope1">
-                    <div class="scope-card-header">
-                        <span class="scope-badge scope1">SCOPE 1</span>
-                        <span class="scope-name">Emisi Langsung</span>
-                    </div>
-                    <div class="scope-emission">{{ number_format($calculation->scope1_total / 1000, 2) }}</div>
-                    <div class="scope-percentage">
-                        Ton CO₂e ({{ $calculation->total_emission > 0 ? number_format(($calculation->scope1_total / $calculation->total_emission) * 100, 1) : 0 }}%)
-                    </div>
-                    
-                    @if($calculation->scope1_data)
-                    <div class="scope-details">
-                        @foreach($calculation->scope1_data as $key => $value)
-                            @if($value > 0)
-                            <div class="detail-item">
-                                <span class="detail-label">
-                                    @if($key == 'diesel') Solar/Diesel
-                                    @elseif($key == 'gasoline') Bensin
-                                    @elseif($key == 'natural_gas') Gas Alam
-                                    @elseif($key == 'lpg') LPG
-                                    @endif
-                                </span>
-                                <span class="detail-value">{{ number_format($value, 0, ',', '.') }} 
-                                    @if($key == 'diesel' || $key == 'gasoline') L
-                                    @elseif($key == 'natural_gas') m³
-                                    @elseif($key == 'lpg') Kg
-                                    @endif
-                                </span>
-                            </div>
-                            @endif
-                        @endforeach
-                    </div>
-                    @endif
-                </div>
+@php
+    /* ── Damage Costs ───────────────────────── */
+    $damageCosts = [
+        'none'   => 0,
+        'low'    => 250_000_000,
+        'medium' => 750_000_000,
+        'high'   => 1_750_000_000,
+    ];
 
-                <!-- SCOPE 2 -->
-                <div class="scope-card scope2">
-                    <div class="scope-card-header">
-                        <span class="scope-badge scope2">SCOPE 2</span>
-                        <span class="scope-name">Emisi Energi</span>
-                    </div>
-                    <div class="scope-emission">{{ number_format($calculation->scope2_total / 1000, 2) }}</div>
-                    <div class="scope-percentage">Ton CO₂e ({{ number_format(($calculation->scope2_total / $calculation->total_emission) * 100, 1) }}%)</div>
-                    
-                    @if($calculation->scope2_data)
-                    <div class="scope-details">
-                        @foreach($calculation->scope2_data as $key => $value)
-                            @if($value > 0)
-                            <div class="detail-item">
-                                <span class="detail-label">Listrik PLN</span>
-                                <span class="detail-value">{{ number_format($value, 0, ',', '.') }} kWh</span>
-                            </div>
-                            @endif
-                        @endforeach
-                    </div>
-                    @endif
-                </div>
+    $damageData  = $calculation->damage_data ?? ['land'=>'none','air'=>'none','water'=>'none'];
+    $landLevel   = $damageData['land']  ?? 'none';
+    $airLevel    = $damageData['air']   ?? 'none';
+    $waterLevel  = $damageData['water'] ?? 'none';
 
-                <!-- SCOPE 3 -->
-                <div class="scope-card scope3">
-                    <div class="scope-card-header">
-                        <span class="scope-badge scope3">SCOPE 3</span>
-                        <span class="scope-name">Emisi Rantai Nilai</span>
-                    </div>
-                    <div class="scope-emission">{{ number_format($calculation->scope3_total / 1000, 2) }}</div>
-                    <div class="scope-percentage">Ton CO₂e ({{ number_format(($calculation->scope3_total / $calculation->total_emission) * 100, 1) }}%)</div>
-                    
-                    @if($calculation->scope3_data)
-                    <div class="scope-details">
-                        @foreach($calculation->scope3_data as $key => $value)
-                            @if($value > 0)
-                            <div class="detail-item">
-                                <span class="detail-label">
-                                    @if($key == 'flight_domestic_km') Penerbangan Domestik
-                                    @elseif($key == 'flight_international_km') Penerbangan Internasional
-                                    @elseif($key == 'shipping_ton_km') Pengiriman Barang
-                                    @elseif($key == 'employee_commute_km') Transport Karyawan
-                                    @endif
-                                </span>
-                                <span class="detail-value">{{ number_format($value, 0, ',', '.') }} 
-                                    @if(str_contains($key, 'ton_km')) Ton-Km
-                                    @else Km
-                                    @endif
-                                </span>
-                            </div>
-                            @endif
-                        @endforeach
-                    </div>
-                    @endif
-                </div>
-            </div>
+    $landCost    = $damageCosts[$landLevel]  ?? 0;
+    $airCost     = $damageCosts[$airLevel]   ?? 0;
+    $waterCost   = $damageCosts[$waterLevel] ?? 0;
+    $totalComp   = $calculation->compensation_cost ?? ($landCost + $airCost + $waterCost);
 
-            <!-- CHART -->
-            <div class="chart-container">
-                <h3 class="section-title" style="margin-bottom: 25px;">
-                    <i class="bi bi-bar-chart-fill" style="color: #10b981;"></i>
-                    Visualisasi Emisi
-                </h3>
-                <div class="chart-wrapper">
-                    <canvas id="emissionChart" 
-                            data-scope1="{{ $calculation->scope1_total }}"
-                            data-scope2="{{ $calculation->scope2_total }}"
-                            data-scope3="{{ $calculation->scope3_total }}"
-                            data-total="{{ $calculation->total_emission }}"></canvas>
-                </div>
-            </div>
+    /* ── Payment Scheme ─────────────────────── */
+    $scheme      = $calculation->payment_scheme ?? 'annual';
+    $schemeLabel = ['annual'=>'Tahunan','semi_annual'=>'Semesteran','quarterly'=>'Kuartalan'][$scheme] ?? 'Tahunan';
+    $schemeIcon  = ['annual'=>'🗓️','semi_annual'=>'📆','quarterly'=>'📅'][$scheme] ?? '🗓️';
+    $installments= ['annual'=>1,'semi_annual'=>2,'quarterly'=>4][$scheme] ?? 1;
+    $installRates= ['annual'=>1.0,'semi_annual'=>0.55,'quarterly'=>0.30];
+    $installAmt  = $totalComp * ($installRates[$scheme] ?? 1.0);
 
-            <!-- RECOMMENDATIONS -->
-            <div class="recommendations">
-                <h3 class="recommendation-title">
-                    <i class="bi bi-lightbulb-fill"></i>
-                    Rekomendasi Pengurangan Emisi
-                </h3>
-                <ul class="recommendation-list">
-                    @if($calculation->scope1_total > $calculation->scope2_total)
-                        <li>Pertimbangkan untuk menggunakan kendaraan listrik atau hybrid untuk mengurangi emisi Scope 1</li>
-                        <li>Lakukan maintenance rutin pada kendaraan dan mesin untuk efisiensi bahan bakar</li>
-                    @endif
-                    
-                    @if($calculation->scope2_total > 0)
-                        <li>Instalasi panel surya dapat mengurangi ketergantungan pada listrik PLN</li>
-                        <li>Gunakan peralatan hemat energi dan implementasikan kebijakan penghematan listrik</li>
-                    @endif
-                    
-                    @if($calculation->scope3_total > 0)
-                        <li>Dorong penggunaan transportasi umum atau carpool untuk karyawan</li>
-                        <li>Gunakan video conference untuk mengurangi perjalanan dinas</li>
-                    @endif
-                    
-                    <li>Lakukan audit energi berkala untuk identifikasi area yang perlu diperbaiki</li>
-                    <li>Set target pengurangan emisi 20-30% dalam 3-5 tahun ke depan</li>
-                </ul>
-            </div>
+    /* ── Level Labels ───────────────────────── */
+    $lvlLabel = ['none'=>'Tidak Ada','low'=>'Ringan','medium'=>'Sedang','high'=>'Berat'];
+    $lvlClass = ['none'=>'lvl-none','low'=>'lvl-low','medium'=>'lvl-medium','high'=>'lvl-high'];
 
-            <!-- PAYMENT SECTION -->
-            <!-- PAYMENT SECTION -->
-<div class="payment-section">
-    <h3 class="payment-title">
-        <i class="bi bi-credit-card-fill"></i>
-        Kompensasi Karbon
-    </h3>
-    <p class="payment-description">
-        Ambil langkah nyata untuk mengurangi dampak emisi karbon perusahaan Anda. 
-        Lakukan pembayaran kompensasi karbon dan berkontribusi pada program penanaman pohon dan energi terbarukan.
-    </p>
-    
-@auth
-    <a href="{{ route('payment.create', ['calculation' => $calculation->id]) }}" class="btn-payment btn-success">
-        <i class="bi bi-credit-card"></i>
-        Proceed to Payment
-    </a>
-@endauth
-
-@guest
-    <a href="{{ route('payment.create', ['calculation' => $calculation->id]) }}" class="btn-payment btn-outline-success">
-        <i class="bi bi-lock-fill"></i>
-        Login to Proceed Payment
-    </a>
-@endguest
-
-    <!-- Powered By -->
-    <div class="powered-by">
-        <div class="powered-by-inner">
-            <span class="powered-text">Powered by</span>
-            <img src="/images/nullicarbon.png" alt="NulliCarbon" class="powered-logo">
-        </div>
-    </div>
-</div>
-        </div>
-
-        <!-- ACTION BUTTONS -->
-        <div class="action-buttons">
-            <a href="{{ route('calc.corporate.export-pdf', $calculation->id) }}" class="btn-action btn-primary">
-                <i class="bi bi-download"></i>
-                Download Laporan PDF
-            </a>
-            <a href="{{ route('calc.corporate.create') }}" class="btn-action btn-secondary">
-                <i class="bi bi-calculator"></i>
-                Hitung Ulang
-            </a>
-            <a href="{{ route('calc.corporate.history') }}" class="btn-action btn-outline">
-                <i class="bi bi-clock-history"></i>
-                Riwayat Perhitungan
-            </a>
-        </div>
-    </div>
-</div>
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-// Get data from HTML data attributes
-const canvas = document.getElementById('emissionChart');
-const scope1Total = parseFloat(canvas.dataset.scope1);
-const scope2Total = parseFloat(canvas.dataset.scope2);
-const scope3Total = parseFloat(canvas.dataset.scope3);
-const totalEmission = parseFloat(canvas.dataset.total);
-
-// Create Chart
-const ctx = canvas.getContext('2d');
-const emissionChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-        labels: ['Scope 1', 'Scope 2', 'Scope 3'],
-        datasets: [{
-            data: [scope1Total, scope2Total, scope3Total],
-            backgroundColor: [
-                'rgba(239, 68, 68, 0.8)',
-                'rgba(59, 130, 246, 0.8)',
-                'rgba(168, 85, 247, 0.8)'
-            ],
-            borderColor: [
-                'rgba(239, 68, 68, 1)',
-                'rgba(59, 130, 246, 1)',
-                'rgba(168, 85, 247, 1)'
-            ],
-            borderWidth: 2
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: {
-                    padding: 20,
-                    font: {
-                        size: 14,
-                        weight: 600
-                    }
-                }
-            },
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        let label = context.label || '';
-                        let value = context.parsed;
-                        let percentage = ((value / totalEmission) * 100).toFixed(1);
-                        return label + ': ' + (value/1000).toFixed(2) + ' Ton CO₂e (' + percentage + '%)';
-                    }
-                }
-            }
-        }
+    /* ── Recommendations ────────────────────── */
+    $recos = [];
+    if ($landLevel !== 'none')  $recos[] = 'Implementasikan program revegetasi & reboisasi di area terdampak untuk memulihkan tutupan lahan.';
+    if ($landLevel === 'high')  $recos[] = 'Koordinasikan dengan KLHK untuk program pemulihan lahan kritis skala besar (> 10 ha).';
+    if ($airLevel !== 'none')   $recos[] = 'Pasang scrubber & filter partikulat pada cerobong asap untuk mengurangi emisi GRK secara signifikan.';
+    if ($airLevel === 'high')   $recos[] = 'Pertimbangkan transisi ke energi terbarukan (solar/biomassa) untuk menggantikan bahan bakar fosil.';
+    if ($waterLevel !== 'none') $recos[] = 'Bangun atau upgrade IPAL (Instalasi Pengolahan Air Limbah) sebelum periode audit berikutnya.';
+    if ($waterLevel === 'high') $recos[] = 'Lakukan pemantauan kualitas air sungai di hilir pabrik setiap bulan dan laporkan ke KLH.';
+    if (count($recos) < 4) {
+        $recos[] = 'Lakukan audit energi internal tahunan untuk identifikasi potensi efisiensi operasional.';
+        $recos[] = 'Tetapkan target pengurangan emisi 20-30% dalam roadmap 3–5 tahun ke depan.';
     }
-});
-</script>
+    $recos = array_slice($recos, 0, 6);
+@endphp
 
+<div class="result-wrap">
+<div class="result-shell">
+
+    {{-- ── HERO ── --}}
+    <div class="res-hero">
+        <div class="hero-top">
+            <div>
+                <div class="hero-icon">🌍</div>
+                <h1 class="hero-title">Hasil Perhitungan<br>Kompensasi Lingkungan</h1>
+                <div class="hero-company">
+                    🏭 {{ $calculation->company_name }}
+                </div>
+                <div class="hero-meta">
+                    <span class="hero-pill">🗂️ {{ $calculation->company_siup }}</span>
+                    <span class="hero-pill">📅 {{ $calculation->calculation_year }}</span>
+                    <span class="hero-pill">📍 {{ $calculation->company_location }}</span>
+                    <span class="hero-pill">🏗️ {{ $calculation->facility_count }} Fasilitas</span>
+                </div>
+            </div>
+            <div class="hero-status" style="text-align:right;position:relative;z-index:1;">
+                <div class="hero-status-label">Total Kompensasi</div>
+                <div class="hero-emission-big">Rp {{ number_format($totalComp, 0, ',', '.') }}</div>
+                <div class="hero-emission-unit">Biaya Offset Lingkungan {{ $calculation->calculation_year }}</div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ── KOMPENSASI UTAMA ── --}}
+    <div class="comp-main">
+        <div>
+            <div class="comp-main-label">Total Kompensasi Wajib</div>
+            <div class="comp-main-val">Rp {{ number_format($totalComp, 0, ',', '.') }}</div>
+            <div class="comp-main-sub">Dihitung berdasarkan 3 pilar dampak lingkungan</div>
+        </div>
+        <div class="comp-divider"></div>
+        <div>
+            <div class="comp-scheme-badge">{{ $schemeIcon }} {{ $schemeLabel }}</div>
+            <div class="comp-installment">Rp {{ number_format($installAmt, 0, ',', '.') }}</div>
+            <div class="comp-per">per termin × {{ $installments }}× setahun</div>
+        </div>
+    </div>
+
+    {{-- ── DAMAGE BREAKDOWN ── --}}
+    <div class="damage-row">
+        <div class="dmg-card land">
+            <span class="dmg-card-icon">🏔️</span>
+            <div class="dmg-card-name">Kerusakan Tanah</div>
+            <span class="dmg-card-level {{ $lvlClass[$landLevel] }}">{{ $lvlLabel[$landLevel] }}</span>
+            <div class="dmg-card-cost">
+                @if($landCost > 0) Rp {{ number_format($landCost, 0, ',', '.') }}
+                @else <span style="color:#94a3b8;">Rp 0</span>
+                @endif
+            </div>
+            <div class="dmg-card-cost-label">Kompensasi pilar tanah</div>
+        </div>
+        <div class="dmg-card air">
+            <span class="dmg-card-icon">💨</span>
+            <div class="dmg-card-name">Pencemaran Udara</div>
+            <span class="dmg-card-level {{ $lvlClass[$airLevel] }}">{{ $lvlLabel[$airLevel] }}</span>
+            <div class="dmg-card-cost">
+                @if($airCost > 0) Rp {{ number_format($airCost, 0, ',', '.') }}
+                @else <span style="color:#94a3b8;">Rp 0</span>
+                @endif
+            </div>
+            <div class="dmg-card-cost-label">Kompensasi pilar udara</div>
+        </div>
+        <div class="dmg-card water">
+            <span class="dmg-card-icon">💧</span>
+            <div class="dmg-card-name">Pencemaran Air</div>
+            <span class="dmg-card-level {{ $lvlClass[$waterLevel] }}">{{ $lvlLabel[$waterLevel] }}</span>
+            <div class="dmg-card-cost">
+                @if($waterCost > 0) Rp {{ number_format($waterCost, 0, ',', '.') }}
+                @else <span style="color:#94a3b8;">Rp 0</span>
+                @endif
+            </div>
+            <div class="dmg-card-cost-label">Kompensasi pilar air</div>
+        </div>
+    </div>
+
+    {{-- ── ALOKASI DANA ── --}}
+    <div class="alloc-panel">
+        <div class="panel-title-row">
+            <div class="panel-title">💰 Alokasi Dana Kompensasi</div>
+            <span style="font-size:.78rem;color:var(--slate-500);font-weight:600;">Total: Rp {{ number_format($totalComp,0,',','.') }}</span>
+        </div>
+        <div class="alloc-bar-container">
+            <div class="alloc-bar-row">
+                <div class="alloc-seg" style="width:40%;background:linear-gradient(90deg,#10b981,#059669);"></div>
+                <div class="alloc-seg" style="width:25%;background:linear-gradient(90deg,#3b82f6,#0ea5e9);"></div>
+                <div class="alloc-seg" style="width:25%;background:linear-gradient(90deg,#8b5cf6,#6366f1);"></div>
+                <div class="alloc-seg" style="width:10%;background:linear-gradient(90deg,#f59e0b,#f97316);"></div>
+            </div>
+            <div class="alloc-legend">
+                <div class="alloc-leg-item">
+                    <div class="alloc-leg-dot" style="background:#10b981;"></div>
+                    🌱 Reforestasi <span class="alloc-leg-pct">40%</span>
+                    <span style="color:var(--slate-500);">· Rp {{ number_format($totalComp*0.4,0,',','.') }}</span>
+                </div>
+                <div class="alloc-leg-item">
+                    <div class="alloc-leg-dot" style="background:#3b82f6;"></div>
+                    🔬 Monitoring <span class="alloc-leg-pct">25%</span>
+                    <span style="color:var(--slate-500);">· Rp {{ number_format($totalComp*0.25,0,',','.') }}</span>
+                </div>
+                <div class="alloc-leg-item">
+                    <div class="alloc-leg-dot" style="background:#8b5cf6;"></div>
+                    💧 Restorasi Air <span class="alloc-leg-pct">25%</span>
+                    <span style="color:var(--slate-500);">· Rp {{ number_format($totalComp*0.25,0,',','.') }}</span>
+                </div>
+                <div class="alloc-leg-item">
+                    <div class="alloc-leg-dot" style="background:#f59e0b;"></div>
+                    ⚙️ Maintenance <span class="alloc-leg-pct">10%</span>
+                    <span style="color:var(--slate-500);">· Rp {{ number_format($totalComp*0.1,0,',','.') }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ── REKOMENDASI ── --}}
+    @if(count($recos) > 0)
+    <div class="reco-panel">
+        <div class="reco-title">💡 Rekomendasi Tindakan Perbaikan</div>
+        <div class="reco-grid">
+            @foreach($recos as $i => $reco)
+            <div class="reco-item">
+                <div class="reco-num">{{ $i + 1 }}</div>
+                <div class="reco-text">{{ $reco }}</div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
+    {{-- ── CTA CARDS ── --}}
+    <div class="cta-section">
+        {{-- Payment --}}
+        @auth
+        <a href="{{ route('payment.create', ['calculation' => $calculation->id]) }}" class="cta-card payment">
+            <span class="cta-icon">💳</span>
+            <div class="cta-title">Lakukan Pembayaran</div>
+            <div class="cta-desc">Bayar kompensasi lingkungan Anda secara aman. Termin pertama: Rp {{ number_format($installAmt, 0, ',', '.') }}</div>
+            <span class="cta-btn">Bayar Sekarang →</span>
+        </a>
+        @endauth
+        @guest
+        <a href="{{ route('login') }}" class="cta-card payment guest" style="background:linear-gradient(135deg,#334155,#1e293b);border-color:#475569;">
+            <span class="cta-icon">🔒</span>
+            <div class="cta-title" style="color:white;">Login untuk Pembayaran</div>
+            <div class="cta-desc" style="color:rgba(255,255,255,.7);">Masuk ke akun perusahaan Anda untuk melanjutkan proses pembayaran kompensasi.</div>
+            <span class="cta-btn" style="background:white;color:#1e293b;">Login →</span>
+        </a>
+        @endguest
+
+        {{-- Monitoring --}}
+        <a href="{{ route('calc.corporate.monitoring', $calculation->id) }}" class="cta-card monitoring">
+            <span class="cta-icon">📊</span>
+            <div class="cta-title">Lihat Dashboard Monitoring</div>
+            <div class="cta-desc">Pantau progres program kompensasi, reforestasi, dan status pembayaran secara real-time.</div>
+            <span class="cta-btn">Buka Monitoring →</span>
+        </a>
+    </div>
+
+    {{-- ── POWERED BY ── --}}
+    <div class="powered-bar">
+        <span>Powered by</span>
+        <img src="/images/nullicarbon.png" alt="NulliCarbon" class="powered-logo">
+    </div>
+
+    {{-- ── ACTION ROW ── --}}
+    <div class="action-row">
+        <a href="{{ route('calc.corporate.export-pdf', $calculation->id) }}" class="btn-act outline-green">
+            ⬇ Download Laporan PDF
+        </a>
+        <a href="{{ route('calc.corporate.create') }}" class="btn-act outline-slate">
+            🔄 Hitung Ulang
+        </a>
+        <a href="{{ route('calc.corporate.history') }}" class="btn-act outline-slate">
+            📋 Riwayat Perhitungan
+        </a>
+    </div>
+
+</div>
+</div>
 @endsection
