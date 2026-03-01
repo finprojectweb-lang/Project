@@ -512,7 +512,7 @@
     <!-- CORPORATE CALCULATOR -->
     <div id="corporate-calc" class="calc-section">
         <div class="corporate-hero">
-            <h3 class="section-label h3" style="font-size: 1.8rem; font-weight: 700; color: #064e3b; margin-bottom: 8px;">🌍 Corporate Carbon Emissions Calculator</h3>
+            <h3 class="section-label h3" style="font-size: 1.8rem; font-weight: 700; color: #064e3b; margin-bottom: 8px;">Corporate Carbon Emissions Calculator</h3>
             <p class="hero-subtitle">Calculate your company's carbon footprint and contribute to a greener future</p>
         </div>
 

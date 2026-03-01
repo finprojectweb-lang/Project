@@ -10,7 +10,6 @@ return new class extends Migration
     {
         Schema::table('corporate_calculations', function (Blueprint $table) {
 
-            // Kolom perusahaan yang belum ada
             if (!Schema::hasColumn('corporate_calculations', 'company_siup')) {
                 $table->string('company_siup', 100)->nullable()->after('company_name');
             }
@@ -23,8 +22,6 @@ return new class extends Migration
             if (!Schema::hasColumn('corporate_calculations', 'company_location')) {
                 $table->string('company_location', 255)->nullable()->after('facility_count');
             }
-
-            // PIC columns
             if (!Schema::hasColumn('corporate_calculations', 'pic_name')) {
                 $table->string('pic_name', 255)->nullable()->after('company_location');
             }
@@ -37,8 +34,6 @@ return new class extends Migration
             if (!Schema::hasColumn('corporate_calculations', 'pic_phone')) {
                 $table->string('pic_phone', 30)->nullable()->after('pic_email');
             }
-
-            // Damage columns
             if (!Schema::hasColumn('corporate_calculations', 'damage_land')) {
                 $table->string('damage_land', 10)->default('none')->after('calculation_year');
             }
@@ -51,11 +46,6 @@ return new class extends Migration
             if (!Schema::hasColumn('corporate_calculations', 'damage_description')) {
                 $table->text('damage_description')->nullable()->after('damage_water');
             }
-            if (!Schema::hasColumn('corporate_calculations', 'damage_data')) {
-                $table->json('damage_data')->nullable()->after('damage_description');
-            }
-
-            // Payment columns
             if (!Schema::hasColumn('corporate_calculations', 'payment_scheme')) {
                 $table->string('payment_scheme', 20)->default('annual')->after('compensation_cost');
             }
@@ -74,7 +64,7 @@ return new class extends Migration
             $cols = [
                 'company_siup', 'company_affiliate', 'facility_count', 'company_location',
                 'pic_name', 'pic_position', 'pic_email', 'pic_phone',
-                'damage_land', 'damage_air', 'damage_water', 'damage_description', 'damage_data',
+                'damage_land', 'damage_air', 'damage_water', 'damage_description',
                 'payment_scheme', 'payment_cycles', 'compensation_per_cycle',
             ];
             foreach ($cols as $col) {

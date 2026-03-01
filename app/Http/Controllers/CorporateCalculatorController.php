@@ -11,18 +11,6 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class CorporateCalculatorController extends Controller
 {
-    private $emissionFactors = [
-        'diesel'               => 2.68,
-        'gasoline'             => 2.31,
-        'natural_gas'          => 1.96,
-        'lpg'                  => 1.51,
-        'electricity'          => 0.85,
-        'flight_domestic'      => 0.255,
-        'flight_international' => 0.195,
-        'shipping'             => 0.01,
-        'employee_commute'     => 0.12,
-    ];
-
     private $damageFactors = [
         'land'  => ['none' => 0, 'low' => 500,   'medium' => 3500,  'high' => 15000],
         'air'   => ['none' => 0, 'low' => 300,   'medium' => 2500,  'high' => 12000],
@@ -30,6 +18,13 @@ class CorporateCalculatorController extends Controller
     ];
 
     private $compensationRate = 150000;
+
+    private $damageCosts = [
+        'none'   => 0,
+        'low'    => 250_000_000,
+        'medium' => 750_000_000,
+        'high'   => 1_750_000_000,
+    ];
 
     private $restorationPrograms = [
         'land' => [
@@ -103,24 +98,29 @@ class CorporateCalculatorController extends Controller
     public function calculate(Request $request)
     {
         $validated = $request->validate([
-            'company_name'       => 'required|string|max:255',
-            'company_siup'       => 'required|string|max:100',
-            'company_email'      => 'required|email|max:255',
-            'company_phone'      => 'nullable|string|max:30',
-            'industry_type'      => 'required|string|max:100',
-            'company_affiliate'  => 'nullable|string|max:255',
-            'facility_count'     => 'required|integer|min:1',
-            'company_location'   => 'required|string|max:255',
-            'calculation_year'   => 'required|integer|min:2020|max:' . (date('Y') + 1),
-            'damage.land'        => 'required|in:none,low,medium,high',
-            'damage.air'         => 'required|in:none,low,medium,high',
-            'damage.water'       => 'required|in:none,low,medium,high',
-            'damage_description' => 'nullable|string|max:1000',
-            'payment_scheme'     => 'required|in:annual,semi_annual,quarterly',
+            'company_name'        => 'required|string|max:255',
+            'company_siup'        => 'required|string|max:100',
+            'company_email'       => 'required|email|max:255',
+            'company_phone'       => 'nullable|string|max:30',
+            'industry_type'       => 'required|string|max:100',
+            'company_affiliate'   => 'nullable|string|max:255',
+            'facility_count'      => 'required|integer|min:1',
+            'company_location'    => 'required|string|max:255',
+            'calculation_year'    => 'required|integer|min:2020|max:' . (date('Y') + 1),
+            'damage.land'         => 'required|in:none,low,medium,high',
+            'damage.air'          => 'required|in:none,low,medium,high',
+            'damage.water'        => 'required|in:none,low,medium,high',
+            'damage_description'  => 'nullable|string|max:1000',
+            // PIC fields — required dari wizard step 1
+            'pic_name'            => 'required|string|max:255',
+            'pic_position'        => 'required|string|max:255',
+            'pic_email'           => 'required|email|max:255',
+            'pic_phone'           => 'required|string|max:30',
         ]);
 
         $damage = $validated['damage'];
 
+        // Hitung emisi berdasarkan damage factors
         $emissionLand  = $this->damageFactors['land'][$damage['land']];
         $emissionAir   = $this->damageFactors['air'][$damage['air']];
         $emissionWater = $this->damageFactors['water'][$damage['water']];
@@ -135,13 +135,18 @@ class CorporateCalculatorController extends Controller
                 ->with('error', 'Total emisi tidak boleh 0. Mohon pilih setidaknya satu dampak lingkungan.');
         }
 
-        $compensationCost = ($totalEmission / 1000) * $this->compensationRate;
+        // Hitung compensation cost berdasarkan damage costs per pilar
+        $landCost  = $this->damageCosts[$damage['land']];
+        $airCost   = $this->damageCosts[$damage['air']];
+        $waterCost = $this->damageCosts[$damage['water']];
+        $compensationCost = $landCost + $airCost + $waterCost;
 
-        $cycles = match ($validated['payment_scheme']) {
-            'semi_annual' => 2,
-            'quarterly'   => 4,
-            default       => 1,
-        };
+        // Simpan damage_data sebagai JSON (digunakan oleh result view)
+        $damageData = [
+            'land'  => $damage['land'],
+            'air'   => $damage['air'],
+            'water' => $damage['water'],
+        ];
 
         $calculation = CorporateCalculation::create([
             'user_id'                => auth()->id(),
@@ -158,6 +163,12 @@ class CorporateCalculatorController extends Controller
             'damage_air'             => $damage['air'],
             'damage_water'           => $damage['water'],
             'damage_description'     => $validated['damage_description'] ?? null,
+            // PIC
+            'pic_name'               => $validated['pic_name'],
+            'pic_position'           => $validated['pic_position'],
+            'pic_email'              => $validated['pic_email'],
+            'pic_phone'              => $validated['pic_phone'],
+            // Scope data
             'scope1_data'            => json_encode($damage),
             'scope2_data'            => json_encode([]),
             'scope3_data'            => json_encode([]),
@@ -166,9 +177,10 @@ class CorporateCalculatorController extends Controller
             'scope3_total'           => 0,
             'total_emission'         => $totalEmission,
             'compensation_cost'      => $compensationCost,
-            'payment_scheme'         => $validated['payment_scheme'],
-            'payment_cycles'         => $cycles,
-            'compensation_per_cycle' => $compensationCost / $cycles,
+            // payment_scheme disimpan default 'annual', user pilih di halaman result
+            'payment_scheme'         => 'annual',
+            'payment_cycles'         => 1,
+            'compensation_per_cycle' => $compensationCost,
             'status'                 => 'pending_audit',
         ]);
 
@@ -181,7 +193,7 @@ class CorporateCalculatorController extends Controller
     }
 
     // -------------------------------------------------------------------------
-    // RESULT
+    // RESULT (sekarang merangkap halaman payment)
     // -------------------------------------------------------------------------
 
     public function result($id)
@@ -189,24 +201,7 @@ class CorporateCalculatorController extends Controller
         $calculation = CorporateCalculation::findOrFail($id);
         $this->authorizeAccess($calculation);
 
-        $levelLabels = [
-            'none'   => ['label' => 'Tidak Ada', 'color' => '#64748b', 'bg' => '#f1f5f9'],
-            'low'    => ['label' => 'Ringan',    'color' => '#065f46', 'bg' => '#d1fae5'],
-            'medium' => ['label' => 'Sedang',    'color' => '#92400e', 'bg' => '#fef3c7'],
-            'high'   => ['label' => 'Berat',     'color' => '#991b1b', 'bg' => '#fee2e2'],
-        ];
-
-        $paymentLabels = [
-            'annual'      => 'Tahunan',
-            'semi_annual' => 'Semesteran',
-            'quarterly'   => 'Kuartalan',
-        ];
-
-        $damageFactors = $this->damageFactors;
-
-        return view('calculator.corporate.result', compact(
-            'calculation', 'levelLabels', 'paymentLabels', 'damageFactors'
-        ));
+        return view('calculator.corporate.result', compact('calculation'));
     }
 
     // -------------------------------------------------------------------------
@@ -250,7 +245,7 @@ class CorporateCalculatorController extends Controller
     }
 
     // -------------------------------------------------------------------------
-    // PROGRESS DATA — JSON endpoint untuk realtime polling
+    // PROGRESS DATA — JSON endpoint
     // -------------------------------------------------------------------------
 
     public function progressData($id)
@@ -393,38 +388,5 @@ class CorporateCalculatorController extends Controller
         }
 
         return $programs;
-    }
-
-    private function calculateScope1($data): float
-    {
-        $total = 0;
-        foreach (['diesel', 'gasoline', 'natural_gas', 'lpg'] as $key) {
-            if (! empty($data[$key])) {
-                $total += (float) $data[$key] * ($this->emissionFactors[$key] ?? 0);
-            }
-        }
-        return $total;
-    }
-
-    private function calculateScope2($data): float
-    {
-        return (float) ($data['electricity'] ?? 0) * $this->emissionFactors['electricity'];
-    }
-
-    private function calculateScope3($data): float
-    {
-        $total = 0;
-        $map = [
-            'flight_domestic_km'      => 'flight_domestic',
-            'flight_international_km' => 'flight_international',
-            'shipping_ton_km'         => 'shipping',
-            'employee_commute_km'     => 'employee_commute',
-        ];
-        foreach ($map as $field => $factor) {
-            if (! empty($data[$field])) {
-                $total += (float) $data[$field] * $this->emissionFactors[$factor];
-            }
-        }
-        return $total;
     }
 }

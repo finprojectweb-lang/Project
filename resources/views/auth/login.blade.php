@@ -654,7 +654,7 @@
                 <div class="form-container">
                     <div class="form-tabs">
                         <button class="tab-btn active" onclick="switchTab('login')">Sign In</button>
-                        <button class="tab-btn" onclick="switchTab('register')">Sign Up</button>
+                        <button class="tab-btn " onclick="switchTab('register')">Sign Up</button>
                     </div>
 
                     <!-- Login Form -->
@@ -915,19 +915,16 @@
 
     <script>
         function switchTab(tab) {
-            // Update tab buttons
             const tabButtons = document.querySelectorAll('.tab-btn');
             tabButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Cari button yang sesuai dengan tab dan tambahkan active
-            tabButtons.forEach(btn => {
-                if ((tab === 'login' && btn.textContent.trim() === 'Masuk') ||
-                    (tab === 'register' && btn.textContent.trim() === 'Daftar')) {
-                    btn.classList.add('active');
-                }
-            });
 
-            // Update form content
+            // ✅ SESUDAH (pakai index saja, lebih robust)
+            if (tab === 'login') {
+                tabButtons[0].classList.add('active');
+            } else {
+                tabButtons[1].classList.add('active');
+            }
+
             const forms = document.querySelectorAll('.form-content');
             forms.forEach(form => form.classList.remove('active'));
             
