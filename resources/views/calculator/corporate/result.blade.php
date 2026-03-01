@@ -252,14 +252,6 @@
 .btn-submit:hover { transform:translateY(-2px); box-shadow:0 14px 32px rgba(6,78,59,.4); }
 .secure-note { text-align:center; font-size:.78rem; color:var(--s500); margin-top:12px; display:flex; align-items:center; justify-content:center; gap:5px; }
 
-/* Action row */
-.action-row { display:flex; gap:12px; flex-wrap:wrap; background:white; border-radius:18px; padding:22px; border:2px solid var(--s100); box-shadow:0 4px 16px rgba(0,0,0,.04); margin-top:24px; }
-.btn-act { flex:1; min-width:150px; display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 20px; border-radius:12px; font-size:.86rem; font-weight:700; cursor:pointer; border:2px solid; text-decoration:none; transition:all .2s; }
-.btn-act.g { border-color:var(--g500); color:var(--g700); background:var(--g50); }
-.btn-act.g:hover { background:var(--g100); }
-.btn-act.s { border-color:var(--s300); color:var(--s700); background:white; }
-.btn-act.s:hover { background:var(--s50); }
-
 .err-box { background:#fee2e2; border:2px solid #fca5a5; border-radius:13px; padding:14px 18px; margin-bottom:22px; font-size:.84rem; color:#dc2626; }
 .powered-bar { text-align:center; padding:20px; display:flex; align-items:center; justify-content:center; gap:10px; font-size:.78rem; color:var(--s500); font-weight:600; margin-top:10px; }
 .powered-logo { height:26px; }
@@ -269,8 +261,6 @@
     .hero-title { font-size:1.6rem; }
     .hero-total { font-size:2.2rem; }
     .form-panel { padding:22px 18px; }
-    .action-row { flex-direction:column; }
-    .btn-act { width:100%; }
 }
 </style>
 
@@ -357,7 +347,7 @@ var PHP = {
                 <div class="dmg-card-icon-wrap">
                     <span class="dmg-card-icon">🏔️</span>
                     <div>
-                        <div class="dmg-card-name">Kerusakan Tanah</div>
+                        <div class="dmg-card-name">Dampak Kerusakan Tanah</div>
                         <div class="dmg-card-sub">Degradasi lahan & deforestasi</div>
                     </div>
                 </div>
@@ -366,7 +356,6 @@ var PHP = {
             <div class="dmg-card-amount{{ $landCost === 0 ? ' dmg-card-amount-zero' : '' }}">
                 {{ $landCost > 0 ? 'Rp '.number_format($landCost,0,',','.') : 'Rp 0' }}
             </div>
-            <div class="dmg-card-label">Kompensasi pilar tanah</div>
         </div>
 
         <div class="dmg-card air">
@@ -374,7 +363,7 @@ var PHP = {
                 <div class="dmg-card-icon-wrap">
                     <span class="dmg-card-icon">💨</span>
                     <div>
-                        <div class="dmg-card-name">Pencemaran Udara</div>
+                        <div class="dmg-card-name">Dampak Pencemaran Udara</div>
                         <div class="dmg-card-sub">Emisi GRK & partikulat</div>
                     </div>
                 </div>
@@ -383,7 +372,6 @@ var PHP = {
             <div class="dmg-card-amount{{ $airCost === 0 ? ' dmg-card-amount-zero' : '' }}">
                 {{ $airCost > 0 ? 'Rp '.number_format($airCost,0,',','.') : 'Rp 0' }}
             </div>
-            <div class="dmg-card-label">Kompensasi pilar udara</div>
         </div>
 
         <div class="dmg-card water">
@@ -391,7 +379,7 @@ var PHP = {
                 <div class="dmg-card-icon-wrap">
                     <span class="dmg-card-icon">💧</span>
                     <div>
-                        <div class="dmg-card-name">Pencemaran Air</div>
+                        <div class="dmg-card-name">Dampak Pencemaran Air</div>
                         <div class="dmg-card-sub">Limbah cair & kontaminasi</div>
                     </div>
                 </div>
@@ -400,7 +388,6 @@ var PHP = {
             <div class="dmg-card-amount{{ $waterCost === 0 ? ' dmg-card-amount-zero' : '' }}">
                 {{ $waterCost > 0 ? 'Rp '.number_format($waterCost,0,',','.') : 'Rp 0' }}
             </div>
-            <div class="dmg-card-label">Kompensasi pilar air</div>
         </div>
     </div>
 
@@ -497,9 +484,9 @@ var PHP = {
                         <div class="dmg-chip air"><span class="dmg-chip-icon">💨</span><div class="dmg-chip-name">Udara</div><span class="dmg-chip-lv {{ $lvlClass[$airLvl] }}">{{ $lvlLabel[$airLvl] }}</span></div>
                         <div class="dmg-chip water"><span class="dmg-chip-icon">💧</span><div class="dmg-chip-name">Air</div><span class="dmg-chip-lv {{ $lvlClass[$waterLvl] }}">{{ $lvlLabel[$waterLvl] }}</span></div>
                     </div>
-                    @if($landCost > 0)<div class="cost-row"><span class="cost-label">🏔️ Kompensasi Tanah</span><span class="cost-val">Rp {{ number_format($landCost,0,',','.') }}</span></div>@endif
-                    @if($airCost  > 0)<div class="cost-row"><span class="cost-label">💨 Kompensasi Udara</span><span class="cost-val">Rp {{ number_format($airCost,0,',','.') }}</span></div>@endif
-                    @if($waterCost> 0)<div class="cost-row"><span class="cost-label">💧 Kompensasi Air</span><span class="cost-val">Rp {{ number_format($waterCost,0,',','.') }}</span></div>@endif
+                    @if($landCost > 0)<div class="cost-row"><span class="cost-label">🏔️ Kompensasi Kerusakan Tanah</span><span class="cost-val">Rp {{ number_format($landCost,0,',','.') }}</span></div>@endif
+                    @if($airCost  > 0)<div class="cost-row"><span class="cost-label">💨 Kompensasi Pencemaran Udara</span><span class="cost-val">Rp {{ number_format($airCost,0,',','.') }}</span></div>@endif
+                    @if($waterCost> 0)<div class="cost-row"><span class="cost-label">💧 Kompensasi Pencemaran Air</span><span class="cost-val">Rp {{ number_format($waterCost,0,',','.') }}</span></div>@endif
                     <div class="cost-row"><span class="cost-label">⚙️ Maintenance (10% — fixed)</span><span class="cost-val">Rp {{ number_format($maintAmt,0,',','.') }}</span></div>
                     <div class="cost-total-row">
                         <span class="cost-total-label">Total Kompensasi</span>
@@ -648,19 +635,12 @@ var PHP = {
                 </label>
 
                 <button type="submit" class="btn-submit">
-                    <span>🌿 Konfirmasi & Bayar Termin Pertama</span>
+                    <span>🌿 Konfirmasi & Lihat Ringkasan Pembayaran</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
                 <div class="secure-note">🔒 Data terenkripsi · Diverifikasi KLH · Sertifikat diterbitkan pasca-lunas</div>
             </form>
         </div>
-    </div>
-
-    <div class="action-row">
-        <a href="{{ route('calc.corporate.export-pdf', $calculation->id) }}" class="btn-act g">⬇ Download PDF</a>
-        <a href="{{ route('calc.corporate.monitoring', $calculation->id) }}" class="btn-act g">📊 Monitoring</a>
-        <a href="{{ route('calc.corporate.create') }}" class="btn-act s">🔄 Hitung Ulang</a>
-        <a href="{{ route('calc.corporate.history') }}" class="btn-act s">📋 Riwayat</a>
     </div>
 
     <div class="powered-bar">
@@ -832,4 +812,4 @@ var PHP = {
 })();
 </script>
 
-@endsection 
+@endsection
