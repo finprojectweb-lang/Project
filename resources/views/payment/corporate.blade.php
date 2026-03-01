@@ -26,6 +26,17 @@
 .success-meta  { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; position:relative; z-index:1; }
 .success-pill  { display:inline-flex; align-items:center; gap:5px; padding:6px 14px; background:rgba(255,255,255,.13); border:1px solid rgba(255,255,255,.22); border-radius:100px; font-size:.78rem; font-weight:600; }
 
+/* ── DATE BANNER ── */
+.date-banner {
+    display:flex; align-items:center; justify-content:center; gap:20px;
+    flex-wrap:wrap;
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+    border-radius:14px; padding:12px 20px; margin-top:16px;
+    position:relative; z-index:1;
+}
+.date-item { display:flex; align-items:center; gap:7px; font-size:.8rem; font-weight:600; }
+.date-item-sep { opacity:.4; font-size:.9rem; }
+
 .section-header { display:flex; align-items:center; gap:14px; margin:28px 0 18px; }
 .section-line   { flex:1; height:2px; background:linear-gradient(90deg,var(--g100),transparent); border-radius:2px; }
 .section-title  { font-size:1rem; font-weight:900; color:var(--g900); white-space:nowrap; display:flex; align-items:center; gap:9px; }
@@ -40,6 +51,9 @@
 .detail-item  { background:var(--s50); border:2px solid var(--s100); border-radius:14px; padding:14px 18px; }
 .detail-label { font-size:.68rem; font-weight:700; color:var(--s500); text-transform:uppercase; letter-spacing:.07em; margin-bottom:5px; }
 .detail-val   { font-size:.92rem; font-weight:700; color:var(--s900); }
+.detail-item.highlight { border-color:var(--g100); background:var(--g50); }
+.detail-item.highlight .detail-label { color:var(--g700); }
+.detail-item.highlight .detail-val   { color:var(--g700); }
 
 .dmg-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
 @media(max-width:480px) { .dmg-row { grid-template-columns:1fr; } }
@@ -121,13 +135,13 @@
     .card-body { padding:18px; }
     .action-row { flex-direction:column; }
     .btn-act { width:100%; }
+    .date-banner { gap:12px; }
 }
 </style>
 
 @php
     $calc = $calculation;
 
-    /* Ambil data payment dari session */
     $pay = session('payment_review_' . $calc->id, []);
 
     $totalComp  = $pay['total_amount']    ?? $calc->compensation_cost ?? 0;
@@ -174,10 +188,18 @@
 
     $calcYear = $calc->calculation_year ?? date('Y');
 
+    /* ── Tanggal ── */
+    $createdAt  = $calc->created_at ? $calc->created_at->locale('id')->translatedFormat('d F Y, H:i') : '—';
+    $updatedAt  = $calc->updated_at ? $calc->updated_at->locale('id')->translatedFormat('d F Y, H:i') : '—';
+    /* Anggap updated_at = tanggal bayar jika status sudah active */
+    $paidAt     = ($calc->status === 'active' && $calc->updated_at)
+                    ? $calc->updated_at->locale('id')->translatedFormat('d F Y, H:i')
+                    : null;
+
     $termins = [];
     for ($i = 0; $i < $instCount; $i++) {
         $addMonths = ($scheme === 'quarterly') ? $i * 3 : (($scheme === 'semi_annual') ? $i * 6 : $i * 12);
-        $termins[] = \Carbon\Carbon::create($calcYear, 1, 15)->addMonths($addMonths)->format('d M Y');
+        $termins[] = \Carbon\Carbon::create($calcYear, 1, 15)->addMonths($addMonths)->locale('id')->translatedFormat('d F Y');
     }
 
     $programMeta = [
@@ -196,6 +218,7 @@
 <div class="review-wrap">
 <div class="review-shell">
 
+    {{-- ── HERO ── --}}
     <div class="success-hero">
         <div class="success-icon">✅</div>
         <h1 class="success-title">Pembayaran Berhasil Dikonfirmasi!</h1>
@@ -206,6 +229,21 @@
             <span class="success-pill">🗂️ {{ $calc->company_siup }}</span>
             <span class="success-pill">💰 Rp {{ number_format($totalComp,0,',','.') }}</span>
             <span class="success-pill">{{ $schemeIcons[$scheme] ?? '🗓️' }} Skema {{ $schemeLabels[$scheme] ?? 'Tahunan' }}</span>
+        </div>
+
+        {{-- ── DATE BANNER ── --}}
+        <div class="date-banner">
+            <div class="date-item">
+                <span>📝</span>
+                <span>Dibuat: <strong>{{ $createdAt }}</strong></span>
+            </div>
+            @if($paidAt)
+            <span class="date-item-sep">·</span>
+            <div class="date-item">
+                <span>✅</span>
+                <span>Dibayar: <strong>{{ $paidAt }}</strong></span>
+            </div>
+            @endif
         </div>
     </div>
 
@@ -229,6 +267,22 @@
                 @endif
                 @if($calc->company_affiliate)
                 <div class="detail-item"><div class="detail-label">Afiliasi / Grup</div><div class="detail-val">{{ $calc->company_affiliate }}</div></div>
+                @endif
+                {{-- ── TANGGAL ── --}}
+                <div class="detail-item highlight">
+                    <div class="detail-label">📝 Tanggal Dibuat</div>
+                    <div class="detail-val">{{ $createdAt }}</div>
+                </div>
+                @if($paidAt)
+                <div class="detail-item highlight">
+                    <div class="detail-label">✅ Tanggal Dibayar</div>
+                    <div class="detail-val">{{ $paidAt }}</div>
+                </div>
+                @else
+                <div class="detail-item">
+                    <div class="detail-label">🔄 Terakhir Diperbarui</div>
+                    <div class="detail-val">{{ $updatedAt }}</div>
+                </div>
                 @endif
             </div>
         </div>

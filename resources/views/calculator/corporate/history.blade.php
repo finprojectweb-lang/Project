@@ -572,7 +572,7 @@
 
                 <!-- ACTIONS -->
                 <div class="hc-actions">
-                    <a href="{{ route('calc.corporate.result', $calc->id) }}" class="btn-act view">
+                    <a href="{{ route('payment.corporate.review', $calc->id) }}" class="btn-act view">
                         <i class="bi bi-eye-fill"></i> Lihat Hasil
                     </a>
                     <a href="{{ route('calc.corporate.monitoring', $calc->id) }}" class="btn-act monitoring">
