@@ -73,6 +73,10 @@ Route::get('/calculator/food', function () {
     return view('calculator.food');
 })->name('calc.food');
 
+Route::get('/home-perusahaan', function () {
+    return view('pages.homeperusahaan');
+})->name('homeperusahaan');
+
 Route::get('/calculator/expenditure', function () {
     return view('calculator.expenditure');
 })->name('calc.expenditure');
