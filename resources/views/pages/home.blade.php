@@ -295,6 +295,171 @@
         </div>
     </section>
 
+    <!-- Carbon Calculator Section -->
+    <section class="py-4 py-md-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Column - Content -->
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="pe-lg-4 px-3 px-md-0">
+                        <!-- Badge -->
+                        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-3">
+                            <i class="bi bi-calculator me-1"></i>
+                            Free & Easy to Use
+                        </span>
+                        
+                        <!-- Heading -->
+                        <h2 class="display-6 display-md-5 fw-bold mb-3">
+                            Carbon Footprint Calculator
+                        </h2>
+                        
+                        <!-- Description -->
+                        <p class="lead text-muted mb-4 fs-6 fs-md-5">
+                            Calculate the carbon impact of your personal or business activities easily and accurately using our calculator, tailored to international standards.
+                        </p>
+                        
+                        <!-- Features List -->
+                        <div class="mb-4">
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-success bg-opacity-10 rounded-circle p-2" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="bi bi-check-circle-fill text-success fs-6"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1 fs-6 fs-md-5">Accurate Measurements</h5>
+                                    <p class="text-muted mb-0 small">Using standard GHG Protocol methodology for accurate and accountable results.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-success bg-opacity-10 rounded-circle p-2" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="bi bi-speedometer2 text-success fs-6"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1 fs-6 fs-md-5">Instant Results</h5>
+                                    <p class="text-muted mb-0 small">Get your carbon footprint report in seconds with easy-to-understand visualizations.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-success bg-opacity-10 rounded-circle p-2" style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="bi bi-graph-up-arrow text-success fs-6"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1 fs-6 fs-md-5">Compensation Recommendations</h5>
+                                    <p class="text-muted mb-0 small">Receive recommendations for carbon offset projects tailored to neutralize your company's emissions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA Button -->
+                        <div class="d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-3">
+                            <a href="{{ route('calculator.index') }}" class="btn btn-success btn-lg px-4 w-100 w-sm-auto">
+                                <i class="bi bi-calculator me-2"></i>
+                                Start Calculating Now
+                            </a>
+                            <a href="#cara-kerja" class="btn btn-outline-secondary btn-lg px-4 w-100 w-sm-auto">
+                                How It Works
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Visual/Icon -->
+                <div class="col-lg-6 px-3 px-md-0">
+                    <div class="position-relative">
+                        <!-- Background decoration -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-success bg-opacity-10 rounded-4 d-none d-md-block" style="transform: rotate(-3deg);"></div>
+                        
+                        <!-- Main card -->
+                        <div class="card border-0 shadow-lg position-relative">
+                            <div class="card-body p-4 p-md-5 text-center">
+                                <!-- Icon illustration -->
+                                <div class="mb-3 mb-md-4">
+                                    <i class="bi bi-cloud-check display-3 display-md-1 text-success"></i>
+                                </div>
+                                
+                                <!-- Stats -->
+                                <div class="row g-2 g-md-3 mb-3 mb-md-4">
+                                    <div class="col-6">
+                                        <div class="bg-light rounded-3 p-2 p-md-3">
+                                            <h3 class="fw-bold mb-0 text-success fs-4 fs-md-3">1,500+</h3>
+                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Companies Registered</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="bg-light rounded-3 p-2 p-md-3">
+                                            <h3 class="fw-bold mb-0 text-success fs-4 fs-md-3">50K+</h3>
+                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Ton CO₂ Dioffset</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-muted mb-0 small">
+                                    <i class="bi bi-shield-check text-success me-2"></i>
+                                    Verified & Trusted
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Optional: How It Works Section -->
+    <section id="cara-kerja" class="py-4 py-md-5">
+        <div class="container px-3 px-md-0">
+            <div class="text-center mb-4 mb-md-5">
+                <h2 class="fw-bold mb-3 fs-3 fs-md-2">How the Calculator Works</h2>
+                <p class="lead text-muted fs-6 fs-md-5">Three simple steps to calculate your carbon footprint</p>
+            </div>
+            
+            <div class="row g-3 g-md-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-3 p-md-4">
+                            <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <span class="display-6 display-md-4 fw-bold text-success">1</span>
+                            </div>
+                            <h4 class="mb-3 fs-5 fs-md-4">Input Data</h4>
+                            <p class="text-muted small">Enter your business activity data such as energy consumption, transportation, and waste.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-3 p-md-4">
+                            <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <span class="display-6 display-md-4 fw-bold text-success">2</span>
+                            </div>
+                            <h4 class="mb-3 fs-5 fs-md-4">Automatic Analysis</h4>
+                            <p class="text-muted small">Our system calculates your total carbon emissions based on international standards.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100 text-center">
+                        <div class="card-body p-3 p-md-4">
+                            <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <span class="display-6 display-md-4 fw-bold text-success">3</span>
+                            </div>
+                            <h4 class="mb-3 fs-5 fs-md-4">Get Your Report</h4>
+                            <p class="text-muted small">Receive a complete report and precise compensation project recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="partners-section text-center">
         <h3 class="partners-title mb-4">Partners</h3>
 
@@ -463,7 +628,7 @@
                         One simple step today for a greener future for the earth.
                         Count your footprint, choose your project, and make your impact.
                     </p>
-                    <button class="btn btn-outline-dark steps-btn">Get In Touch</button>
+                    <button class="btn btn-outline-dark steps-btn"> <a href="/calculator" style="text-decoration: none; color: fee2e2;">Get In Touch</a></button>
 
                     <!-- Gambar Tengah Bawah -->
                     <div class="mt-4 d-flex justify-content-center">

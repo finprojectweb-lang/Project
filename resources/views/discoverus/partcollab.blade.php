@@ -117,7 +117,7 @@
     }
 
     .hero-badge::before {
-        content: '🤝';
+        content: '';
         font-size: 1.2rem;
     }
 

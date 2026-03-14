@@ -116,7 +116,7 @@
     }
 
     .hero-badge::before {
-        content: '🌱';
+        content: '';
         font-size: 1.2rem;
     }
 
@@ -495,7 +495,7 @@
     }
 
     .cta-badge::before {
-        content: '🤝';
+        content: '';
         font-size: 1rem;
     }
 

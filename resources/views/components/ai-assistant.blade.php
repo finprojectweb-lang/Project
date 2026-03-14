@@ -23,7 +23,11 @@
                     <i class="bi bi-leaf"></i>
                 </div>
                 <div>
+<<<<<<< HEAD
                     <div style="font-weight: 700; font-size: 16px;">NulliCarbon AI</div>
+=======
+                    <div style="font-weight: 700; font-size: 16px;">NulliCarbon Chat Bot</div>
+>>>>>>> ce80adbd55c18b99528a91b343f83a04920de435
                     <div class="chat-status">Online • Siap Membantu</div>
                 </div>
             </div>

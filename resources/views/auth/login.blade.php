@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - NulliCarbon</title>
+    <title>@yield('title', 'NulliCarbon')</title>
+    <link rel="icon" href="{{ asset('images/daunjatuh.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -653,7 +654,7 @@
                 <div class="form-container">
                     <div class="form-tabs">
                         <button class="tab-btn active" onclick="switchTab('login')">Sign In</button>
-                        <button class="tab-btn" onclick="switchTab('register')">Sign Up</button>
+                        <button class="tab-btn " onclick="switchTab('register')">Sign Up</button>
                     </div>
 
                     <!-- Login Form -->
@@ -914,19 +915,16 @@
 
     <script>
         function switchTab(tab) {
-            // Update tab buttons
             const tabButtons = document.querySelectorAll('.tab-btn');
             tabButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Cari button yang sesuai dengan tab dan tambahkan active
-            tabButtons.forEach(btn => {
-                if ((tab === 'login' && btn.textContent.trim() === 'Masuk') ||
-                    (tab === 'register' && btn.textContent.trim() === 'Daftar')) {
-                    btn.classList.add('active');
-                }
-            });
 
-            // Update form content
+            // ✅ SESUDAH (pakai index saja, lebih robust)
+            if (tab === 'login') {
+                tabButtons[0].classList.add('active');
+            } else {
+                tabButtons[1].classList.add('active');
+            }
+
             const forms = document.querySelectorAll('.form-content');
             forms.forEach(form => form.classList.remove('active'));
             
