@@ -26,18 +26,22 @@ class SocialAuthController extends Controller
         // Cari user berdasarkan email
         $user = User::where('email', $googleUser->getEmail())->first();
 
-        // Kalau belum ada → DAFTARKAN
+        // Kalau belum ada -> DAFTARKAN sebagai akun individu
+        // (login Google saat ini belum punya langkah pemilihan tipe akun,
+        // jadi user baru dari Google selalu dibuat sebagai 'individu')
         if (!$user) {
             $user = User::create([
                 'name' => $googleUser->getName(),
                 'email' => $googleUser->getEmail(),
                 'password' => bcrypt(Str::random(16)),
                 'email_verified_at' => now(),
+                'account_type' => 'individu',
             ]);
         }
 
         Auth::login($user);
 
-        return redirect('/');
+        // Redirect: individu -> home, perusahaan -> homeperusahaan
+        return redirect()->route($user->homeRouteName());
     }
 }

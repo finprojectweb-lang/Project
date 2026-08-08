@@ -452,6 +452,57 @@
             }
         }
 
+        /* Account Type Toggle (Individu / Perusahaan) */
+        .type-toggle {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: #f3f4f6;
+            padding: 5px;
+            border-radius: 25px 0 25px 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .type-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 9px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 20px 0 20px 0;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #6b7280;
+        }
+
+        .type-btn:hover {
+            color: #10b981;
+        }
+
+        .type-btn.active {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
+        }
+
+        .type-btn i {
+            font-size: 13px;
+        }
+
+        .company-fields {
+            display: none;
+        }
+
+        .company-fields.show {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -662,6 +713,16 @@
                         <h3>Welcome Back!</h3>
                         <p class="subtitle">Sign in to your account to continue</p>
 
+                        <!-- Toggle Tipe Akun: Individu / Perusahaan -->
+                        <div class="type-toggle">
+                            <button type="button" class="type-btn {{ old('account_type', 'individu') == 'individu' ? 'active' : '' }}" id="login-type-individu" onclick="switchLoginType('individu')">
+                                <i class="fas fa-user"></i> Individu
+                            </button>
+                            <button type="button" class="type-btn {{ old('account_type') == 'perusahaan' ? 'active' : '' }}" id="login-type-perusahaan" onclick="switchLoginType('perusahaan')">
+                                <i class="fas fa-building"></i> Perusahaan
+                            </button>
+                        </div>
+
                         <!-- Notifikasi Success -->
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -690,11 +751,13 @@
 
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="account_type" id="login-account-type" value="{{ old('account_type', 'individu') }}">
+
                             <div class="form-group">
-                                <label class="form-label">Email</label>
+                                <label class="form-label" id="login-email-label">Email</label>
                                 <div class="input-group">
                                     <i class="fas fa-envelope"></i>
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
+                                    <input type="email" name="email" id="login-email-input" class="form-control @error('email') is-invalid @enderror" 
                                            placeholder="nama@email.com" value="{{ old('email') }}" required>
                                 </div>
                             </div>
@@ -743,6 +806,16 @@
                         <h3>Create New Account</h3>
                         <p class="subtitle">Join our mission for a greener and more sustainable future</p>
 
+                        <!-- Toggle Tipe Akun: Individu / Perusahaan -->
+                        <div class="type-toggle">
+                            <button type="button" class="type-btn {{ old('account_type', 'individu') == 'individu' ? 'active' : '' }}" id="register-type-individu" onclick="switchRegisterType('individu')">
+                                <i class="fas fa-user"></i> Individu
+                            </button>
+                            <button type="button" class="type-btn {{ old('account_type') == 'perusahaan' ? 'active' : '' }}" id="register-type-perusahaan" onclick="switchRegisterType('perusahaan')">
+                                <i class="fas fa-building"></i> Perusahaan
+                            </button>
+                        </div>
+
                         <!-- Notifikasi Error -->
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -757,8 +830,10 @@
 
                         <form action="{{ route('register') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="account_type" id="register-account-type" value="{{ old('account_type', 'individu') }}">
+
                             <div class="form-group">
-                                <label class="form-label">Full Name</label>
+                                <label class="form-label" id="register-name-label">{{ old('account_type') == 'perusahaan' ? 'Nama Penanggung Jawab (PIC)' : 'Full Name' }}</label>
                                 <div class="input-group">
                                     <i class="fas fa-user"></i>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" 
@@ -766,8 +841,26 @@
                                 </div>
                             </div>
 
+                            <div class="form-group company-fields {{ old('account_type') == 'perusahaan' ? 'show' : '' }}">
+                                <label class="form-label">Nama Perusahaan</label>
+                                <div class="input-group">
+                                    <i class="fas fa-building"></i>
+                                    <input type="text" name="company_name" id="company_name" class="form-control @error('company_name') is-invalid @enderror" 
+                                           placeholder="PT Contoh Sejahtera" value="{{ old('company_name') }}" {{ old('account_type') == 'perusahaan' ? 'required' : '' }}>
+                                </div>
+                            </div>
+
+                            <div class="form-group company-fields {{ old('account_type') == 'perusahaan' ? 'show' : '' }}">
+                                <label class="form-label">NPWP / No. Registrasi Usaha</label>
+                                <div class="input-group">
+                                    <i class="fas fa-id-card"></i>
+                                    <input type="text" name="company_npwp" id="company_npwp" class="form-control @error('company_npwp') is-invalid @enderror" 
+                                           placeholder="00.000.000.0-000.000" value="{{ old('company_npwp') }}" {{ old('account_type') == 'perusahaan' ? 'required' : '' }}>
+                                </div>
+                            </div>
+
                             <div class="form-group">
-                                <label class="form-label">Email</label>
+                                <label class="form-label" id="register-email-label">Email</label>
                                 <div class="input-group">
                                     <i class="fas fa-envelope"></i>
                                     <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
@@ -915,7 +1008,7 @@
 
     <script>
         function switchTab(tab) {
-            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabButtons = document.querySelectorAll('.form-tabs .tab-btn');
             tabButtons.forEach(btn => btn.classList.remove('active'));
 
             // ✅ SESUDAH (pakai index saja, lebih robust)
@@ -932,6 +1025,50 @@
                 document.getElementById('login-form').classList.add('active');
             } else {
                 document.getElementById('register-form').classList.add('active');
+            }
+        }
+
+        // Toggle tipe akun untuk form Sign In (Individu / Perusahaan)
+        function switchLoginType(type) {
+            document.getElementById('login-account-type').value = type;
+            document.getElementById('login-type-individu').classList.toggle('active', type === 'individu');
+            document.getElementById('login-type-perusahaan').classList.toggle('active', type === 'perusahaan');
+
+            const emailLabel = document.getElementById('login-email-label');
+            const emailInput = document.getElementById('login-email-input');
+            if (type === 'perusahaan') {
+                emailLabel.textContent = 'Email Perusahaan';
+                emailInput.placeholder = 'perusahaan@email.com';
+            } else {
+                emailLabel.textContent = 'Email';
+                emailInput.placeholder = 'nama@email.com';
+            }
+        }
+
+        // Toggle tipe akun untuk form Sign Up (Individu / Perusahaan)
+        function switchRegisterType(type) {
+            document.getElementById('register-account-type').value = type;
+            document.getElementById('register-type-individu').classList.toggle('active', type === 'individu');
+            document.getElementById('register-type-perusahaan').classList.toggle('active', type === 'perusahaan');
+
+            const companyFields = document.querySelectorAll('#register-form .company-fields');
+            const nameLabel = document.getElementById('register-name-label');
+            const emailLabel = document.getElementById('register-email-label');
+            const companyNameInput = document.getElementById('company_name');
+            const npwpInput = document.getElementById('company_npwp');
+
+            if (type === 'perusahaan') {
+                companyFields.forEach(field => field.classList.add('show'));
+                nameLabel.textContent = 'Nama Penanggung Jawab (PIC)';
+                emailLabel.textContent = 'Email Perusahaan';
+                companyNameInput.setAttribute('required', 'required');
+                npwpInput.setAttribute('required', 'required');
+            } else {
+                companyFields.forEach(field => field.classList.remove('show'));
+                nameLabel.textContent = 'Full Name';
+                emailLabel.textContent = 'Email';
+                companyNameInput.removeAttribute('required');
+                npwpInput.removeAttribute('required');
             }
         }
 
@@ -965,6 +1102,11 @@
                     switchTab('register');
                 }
             }
+
+            // Sinkronkan label & field tambahan sesuai account_type yang tersimpan di hidden input
+            // (nilainya sudah di-set oleh Blade lewat old('account_type', 'individu') di atas)
+            switchLoginType(document.getElementById('login-account-type').value);
+            switchRegisterType(document.getElementById('register-account-type').value);
         });
     </script>
 </body>

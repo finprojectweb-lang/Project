@@ -30,21 +30,24 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
-            
+
+            $authUser = Auth::user();
+
             // Cek apakah ada intended URL (URL yang dicoba diakses sebelum login)
             if ($request->session()->has('url.intended')) {
                 $intendedUrl = $request->session()->get('url.intended');
                 $request->session()->forget('url.intended');
-                return redirect($intendedUrl)->with('success', 'Selamat datang, ' . Auth::user()->name . '!');
+                return redirect($intendedUrl)->with('success', 'Selamat datang, ' . $authUser->name . '!');
             }
-            
+
             // Cek apakah ada parameter redirect dari query string
             if ($request->has('redirect')) {
-                return redirect($request->input('redirect'))->with('success', 'Selamat datang, ' . Auth::user()->name . '!');
+                return redirect($request->input('redirect'))->with('success', 'Selamat datang, ' . $authUser->name . '!');
             }
-            
-            // Default redirect ke home jika tidak ada intended URL
-            return redirect()->route('home')->with('success', 'Selamat datang, ' . Auth::user()->name . '!');
+
+            // Default redirect: individu -> home, perusahaan -> homeperusahaan
+            return redirect()->route($authUser->homeRouteName())
+                ->with('success', 'Selamat datang, ' . $authUser->name . '!');
         }
 
         return back()->withErrors([

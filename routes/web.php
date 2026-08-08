@@ -64,7 +64,6 @@ Route::prefix('calculator/corporate')->name('calc.corporate.')->group(function (
 Route::post('/payment/corporate/process', [PaymentCorporateController::class, 'process'])
     ->name('payment.process');
 
-<<<<<<< HEAD
 // Halaman Informasi
 Route::get('/aboutus', function () {
     return view('pages.aboutus');
@@ -139,13 +138,13 @@ Route::get('/discover-us/ourvalues', function () {
 Route::get('/discover-us/partners', function () {
     return view('discoverus.partcollab');
 })->name('partners');
-=======
+
 // Halaman review hasil pembayaran (views/payment/corporate.blade.php)
 Route::get('/payment/corporate/{id}/review', function ($id) {
     $calculation = \App\Models\CorporateCalculation::findOrFail($id);
     return view('payment.corporate', compact('calculation'));
 })->name('payment.corporate.review');
->>>>>>> ce80adbd55c18b99528a91b343f83a04920de435
+
 
 /*
 |--------------------------------------------------------------------------

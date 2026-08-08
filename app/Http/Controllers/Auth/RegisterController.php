@@ -17,6 +17,9 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'terms' => 'accepted',
+            'account_type' => 'nullable|in:individu,perusahaan',
+            'company_name' => 'required_if:account_type,perusahaan|nullable|string|max:255',
+            'company_npwp' => 'required_if:account_type,perusahaan|nullable|string|max:50',
         ], [
             'name.required' => 'Nama lengkap harus diisi.',
             'email.required' => 'Email harus diisi.',
@@ -26,17 +29,25 @@ class RegisterController extends Controller
             'password.min' => 'Password minimal 8 karakter.',
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
             'terms.accepted' => 'Anda harus menyetujui syarat dan ketentuan.',
+            'company_name.required_if' => 'Nama perusahaan harus diisi.',
+            'company_npwp.required_if' => 'NPWP / No. Registrasi Usaha harus diisi.',
         ]);
+
+        $accountType = $validated['account_type'] ?? 'individu';
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'account_type' => $accountType,
+            'company_name' => $validated['company_name'] ?? null,
+            'company_npwp' => $validated['company_npwp'] ?? null,
         ]);
 
         Auth::login($user);
 
-        // Redirect ke home (bukan dashboard)
-        return redirect()->route('home')->with('success', 'Akun berhasil dibuat! Selamat datang, ' . $user->name . '!');
+        // Redirect: individu -> home, perusahaan -> homeperusahaan
+        return redirect()->route($user->homeRouteName())
+            ->with('success', 'Akun berhasil dibuat! Selamat datang, ' . $user->name . '!');
     }
 }

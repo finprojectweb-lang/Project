@@ -87,7 +87,6 @@
     document.addEventListener("DOMContentLoaded", runReveal);
     document.addEventListener("scroll", runReveal);
     </script>
-<<<<<<< HEAD
 <script>
 function runReveal() {
   document.querySelectorAll(".reveal").forEach(el => {
@@ -98,9 +97,6 @@ function runReveal() {
 document.addEventListener("DOMContentLoaded", runReveal);
 document.addEventListener("scroll", runReveal);
 </script>
-=======
->>>>>>> ce80adbd55c18b99528a91b343f83a04920de435
-
     @include('components.ai-assistant')
 </body>
 

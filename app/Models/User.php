@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'account_type',
+        'company_name',
+        'company_npwp',
     ];
 
     /**
@@ -42,6 +45,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Cek apakah user adalah akun perusahaan.
+     */
+    public function isCompany(): bool
+    {
+        return $this->account_type === 'perusahaan';
+    }
+
+    /**
+     * Ambil nama route home sesuai tipe akun user (individu / perusahaan).
+     */
+    public function homeRouteName(): string
+    {
+        return $this->isCompany() ? 'homeperusahaan' : 'home';
+    }
 
     /**
      * Get all carbon calculations for the user
